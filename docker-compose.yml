@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: events_sync
+      POSTGRES_USER: events_user
+      POSTGRES_PASSWORD: fake_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U events_user -d events_sync"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  events-sync:
+    build: .
+    environment:
+      DATABASE_URL: "postgres://events_user:fake_pass@postgres:5432/events_sync?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config.json:/root/config.json
+      - ./migrations:/root/migrations
+    command: ["./events-sync"]
+
+  web:
+    build: .
+    environment:
+      DATABASE_URL: "postgres://events_user:fake_pass@postgres:5432/events_sync?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./migrations:/root/migrations:ro
+    ports:
+      - "8080:8080"
+    command: ["./web"]
+
+volumes:
+  postgres_data:

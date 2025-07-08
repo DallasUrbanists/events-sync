@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Sync - Event Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        .status-pending { @apply bg-yellow-100 text-yellow-800 border-yellow-200; }
+        .status-reviewed { @apply bg-green-100 text-green-800 border-green-200; }
+        .status-rejected { @apply bg-red-100 text-red-800 border-red-200; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div x-data="eventManager()" x-init="loadEvents(); loadStats()" class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Events Sync Manager</h1>
+            <p class="text-gray-600">Manage and review future events from multiple organizations</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-yellow-100 rounded-lg">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Pending</p>
+                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.pending || 0"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-green-100 rounded-lg">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Reviewed</p>
+                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.reviewed || 0"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-red-100 rounded-lg">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Rejected</p>
+                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.rejected || 0"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900">Events</h2>
+                    <p class="text-sm text-gray-600" x-text="`${totalEvents} total events`"></p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="hideSingleEvents" x-model="hideSingleEvents" @change="filterEvents()" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                        <label for="hideSingleEvents" class="text-sm font-medium text-gray-700">Hide days with only one event</label>
+                    </div>
+                    <div class="flex gap-2">
+                        <button @click="loadEvents()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            Refresh
+                        </button>
+                        <select x-model="statusFilter" @change="filterEvents()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">All Statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="reviewed">Reviewed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div x-show="loading" class="text-center py-12">
+            <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-blue-600">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading events...
+            </div>
+        </div>
+
+        <!-- Events List -->
+        <div x-show="!loading" x-cloak>
+            <template x-for="dateGroup in filteredEvents" :key="dateGroup.date">
+                <div class="bg-white rounded-lg shadow mb-6 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900" x-text="formatDate(dateGroup.date)"></h3>
+                        <p class="text-sm text-gray-600" x-text="`${dateGroup.events.length} events`"></p>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <template x-for="event in dateGroup.events" :key="event.uid">
+                            <div class="p-6 hover:bg-gray-50 transition-colors">
+                                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <h4 class="text-lg font-medium text-gray-900" x-text="event.summary"></h4>
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                                                  :class="getStatusClass(event.review_status)"
+                                                  x-text="event.review_status"></span>
+                                        </div>
+                                        <div class="text-sm text-gray-600 space-y-1">
+                                            <p><strong>Organization:</strong> <span x-text="event.organization"></span></p>
+                                            <p><strong>Time:</strong> <span x-text="formatTime(event.start_time)"></span> - <span x-text="formatTime(event.end_time)"></span></p>
+                                            <template x-if="event.location">
+                                                <p><strong>Location:</strong> <span x-text="event.location"></span></p>
+                                            </template>
+                                            <template x-if="event.description">
+                                                <p><strong>Description:</strong> <span x-text="event.description"></span></p>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row gap-2">
+                                        <select :id="'status-' + event.uid" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="pending" :selected="event.review_status === 'pending'">Pending</option>
+                                            <option value="reviewed" :selected="event.review_status === 'reviewed'">Reviewed</option>
+                                            <option value="rejected" :selected="event.review_status === 'rejected'">Rejected</option>
+                                        </select>
+                                        <button @click="updateEventStatus(event.uid)"
+                                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <div x-show="filteredEvents.length === 0 && !loading" class="text-center py-12">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">No events found</h3>
+                <p class="mt-1 text-sm text-gray-500" x-text="statusFilter ? `No ${statusFilter} events found` : 'No events available'"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
