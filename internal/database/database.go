@@ -10,7 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// DB wraps the database connection
 type DB struct {
 	*sqlx.DB
 }

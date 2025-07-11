@@ -2,11 +2,12 @@ package event
 
 import (
 	"fmt"
+	"io"
+	"net/http"
 	"strings"
 	"time"
 )
 
-// Event represents a calendar event
 type Event struct {
 	Organization string    `json:"organization"`
 	UID          string    `json:"uid"`
@@ -21,7 +22,6 @@ type Event struct {
 	Transparency string    `json:"transparency"`
 }
 
-// ParseICS parses an ICS file content and returns a slice of events
 func ParseICS(content string, organization string) ([]Event, error) {
 	var events []Event
 	lines := strings.Split(content, "\n")
@@ -32,20 +32,17 @@ func ParseICS(content string, organization string) ([]Event, error) {
 	var inMultiLineValue bool
 
 	for i, line := range lines {
-		// Check if this is a continuation line (starts with space or tab)
 		isContinuation := strings.HasPrefix(line, " ") || strings.HasPrefix(line, "\t")
 
-		// If we're in a multi-line value and this is a continuation line
 		if inMultiLineValue && isContinuation {
-			// Add the continuation content (without the leading space/tab)
 			currentValue += line[1:]
 			continue
 		}
 
 		// If we're in a multi-line value but this is not a continuation line,
-		// we've reached the end of the multi-line value
+		// we've reached the end of the multi-line value. Process it, then continue
+		// processing the current line
 		if inMultiLineValue && !isContinuation {
-			// Process the completed key-value pair
 			if currentKey != "" && currentEvent != nil {
 				processEventField(currentEvent, currentKey, currentValue)
 			}
@@ -54,12 +51,31 @@ func ParseICS(content string, organization string) ([]Event, error) {
 			inMultiLineValue = false
 		}
 
-		// Skip empty lines
 		if strings.TrimSpace(line) == "" {
 			continue
 		}
 
-		// Parse new line
+		if strings.TrimSpace(line) == "BEGIN:VEVENT" {
+			currentEvent = &Event{Organization: organization}
+			continue
+		}
+
+		if strings.TrimSpace(line) == "END:VEVENT" {
+			if currentEvent != nil {
+				// Process any remaining key-value pair
+				if currentKey != "" {
+					processEventField(currentEvent, currentKey, currentValue)
+				}
+				events = append(events, *currentEvent)
+				currentEvent = nil
+			}
+			currentKey = ""
+			currentValue = ""
+			inMultiLineValue = false
+
+			continue
+		}
+
 		if strings.Contains(line, ":") {
 			parts := strings.SplitN(line, ":", 2)
 			if len(parts) == 2 {
@@ -80,29 +96,8 @@ func ParseICS(content string, organization string) ([]Event, error) {
 				currentValue = ""
 			}
 		}
-
-		// Start new event
-		if strings.TrimSpace(line) == "BEGIN:VEVENT" {
-			currentEvent = &Event{Organization: organization}
-		}
-
-		// End event
-		if strings.TrimSpace(line) == "END:VEVENT" {
-			if currentEvent != nil {
-				// Process any remaining key-value pair
-				if currentKey != "" {
-					processEventField(currentEvent, currentKey, currentValue)
-				}
-				events = append(events, *currentEvent)
-				currentEvent = nil
-			}
-			currentKey = ""
-			currentValue = ""
-			inMultiLineValue = false
-		}
 	}
 
-	// Process any remaining key-value pair at the end
 	if currentKey != "" && currentEvent != nil {
 		processEventField(currentEvent, currentKey, currentValue)
 	}
@@ -110,7 +105,6 @@ func ParseICS(content string, organization string) ([]Event, error) {
 	return events, nil
 }
 
-// processEventField processes a single field and sets it on the event
 func processEventField(event *Event, key, value string) {
 	if event == nil {
 		return
@@ -175,4 +169,50 @@ func parseDateTime(value string) (time.Time, error) {
 	}
 
 	return time.Time{}, fmt.Errorf("unable to parse date: %s", value)
+}
+
+func FetchAndParseEvents(url string, organization string) ([]Event, error) {
+	fmt.Printf("Fetching ICS file from: %s\n", url)
+
+	content, err := fetchICS(url)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching ICS: %v", err)
+	}
+
+	events, err := ParseICS(content, organization)
+	if err != nil {
+		return nil, fmt.Errorf("error parsing ICS: %v", err)
+	}
+
+	return events, nil
+}
+
+func fetchICS(url string) (string, error) {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return "", fmt.Errorf("error creating request: %v", err)
+	}
+
+	// Add headers to mimic a browser request
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+	req.Header.Set("Accept", "text/calendar,text/plain,*/*")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("error making request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("HTTP error: %d", resp.StatusCode)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", fmt.Errorf("error reading response body: %v", err)
+	}
+
+	return string(body), nil
 }

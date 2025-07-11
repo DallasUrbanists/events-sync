@@ -24,10 +24,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - ./config.json:/root/config.json
-      - ./migrations:/root/migrations
-    command: ["./events-sync"]
+    command: ["/root/bin/events-sync"]
 
   web:
     build: .
@@ -36,11 +33,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - ./migrations:/root/migrations:ro
     ports:
       - "8080:8080"
-    command: ["./web"]
+    command: ["/root/bin/web"]
 
 volumes:
   postgres_data:

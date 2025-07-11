@@ -10,13 +10,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Server wraps the HTTP server and database
 type Server struct {
 	db     *database.DB
 	router *mux.Router
 }
 
-// EventResponse represents an event in the API response
 type EventResponse struct {
 	ID           int       `json:"id"`
 	UID          string    `json:"uid"`
@@ -31,13 +29,11 @@ type EventResponse struct {
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 
-// EventsByDate groups events by date
 type EventsByDate struct {
 	Date   string           `json:"date"`
 	Events []EventResponse  `json:"events"`
 }
 
-// UpdateStatusRequest represents a status update request
 type UpdateStatusRequest struct {
 	Status string `json:"status"`
 }
@@ -60,7 +56,7 @@ func (s *Server) setupRoutes() {
 	s.router.HandleFunc("/api/events/stats", s.getEventStats).Methods("GET")
 
 	// Serve static files (HTML, CSS, JS)
-	s.router.PathPrefix("/").Handler(http.FileServer(http.Dir("web-static")))
+	s.router.PathPrefix("/").Handler(http.FileServer(http.Dir("web")))
 }
 
 // getEvents returns all events grouped by date

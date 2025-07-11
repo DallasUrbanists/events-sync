@@ -26,14 +26,12 @@ func main() {
 		}
 	}
 
-	// Connect to database
 	db, err := sql.Open("postgres", *dbURL)
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer db.Close()
 
-	// Test connection
 	if err := db.Ping(); err != nil {
 		log.Fatalf("Failed to ping database: %v", err)
 	}

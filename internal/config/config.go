@@ -6,12 +6,10 @@ import (
 	"os"
 )
 
-// Config represents the configuration file structure
 type Config struct {
 	Organizations map[string]string `json:"organizations"`
 }
 
-// LoadConfig loads the configuration from config.json
 func LoadConfig() (*Config, error) {
 	file, err := os.Open("config.json")
 	if err != nil {
