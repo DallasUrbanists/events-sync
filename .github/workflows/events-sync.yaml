@@ -1,0 +1,34 @@
+name: Scheduled Events Sync
+
+on:
+  schedule:
+    - cron: '0 6,18 * * *'  # 6 AM and 6 PM UTC
+
+jobs:
+  sync-events:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Install Go dependencies
+        run: go mod download
+
+      - name: Build events sync worker
+        run: make build-events-sync-worker
+
+      - name: Run events sync (DEV)
+        env:
+          DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+        run: ./bin/events-sync
+
+      - name: Run events sync (PROD)
+        env:
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+        run: ./bin/events-sync
