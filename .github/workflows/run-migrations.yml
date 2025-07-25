@@ -1,0 +1,34 @@
+name: Migrate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-migrations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Install Go dependencies
+        run: go mod download
+
+      - name: Set DATABASE_URL to DEV
+        if: github.event_name == 'push'
+        run: echo "DATABASE_URL=${{ secrets.DEV_DATABASE_URL }}" >> $GITHUB_ENV
+
+      - name: Set DATABASE_URL to PROD
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "DATABASE_URL=${{ secrets.PROD_DATABASE_URL }}" >> $GITHUB_ENV
+
+      - name: Run migrations
+        run: make migrations
