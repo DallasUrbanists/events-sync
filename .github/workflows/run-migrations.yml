@@ -31,4 +31,4 @@ jobs:
         run: echo "DATABASE_URL=${{ secrets.PROD_DATABASE_URL }}" >> $GITHUB_ENV
 
       - name: Run migrations
-        run: make migrations
+        run: make migrate
