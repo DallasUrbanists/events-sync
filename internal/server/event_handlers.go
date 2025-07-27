@@ -19,13 +19,13 @@ type EventResponse struct {
 	Location     *string   `json:"location"`
 	StartTime    time.Time `json:"start_time"`
 	EndTime      time.Time `json:"end_time"`
-	ReviewStatus string    `json:"review_status"`
+	Rejected     bool      `json:"rejected"`
 	CreatedAt    time.Time `json:"created_at"`
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 
-type UpdateStatusRequest struct {
-	Status string `json:"status"`
+type UpdateRejectedRequest struct {
+	Rejected bool `json:"rejected"`
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +47,7 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			Location:     event.Location,
 			StartTime:    event.StartTime,
 			EndTime:      event.EndTime,
-			ReviewStatus: event.ReviewStatus,
+			Rejected:     event.Rejected,
 			CreatedAt:    event.CreatedAt,
 			UpdatedAt:    event.UpdatedAt,
 		}
@@ -61,20 +61,14 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 func (s *Server) updateEventStatus(w http.ResponseWriter, r *http.Request) {
 	uid := r.PathValue("uid")
 
-	var req UpdateStatusRequest
+	var req UpdateRejectedRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	// Validate status
-	if req.Status != "pending" && req.Status != "reviewed" && req.Status != "rejected" {
-		http.Error(w, "Invalid status. Must be 'pending', 'reviewed', or 'rejected'", http.StatusBadRequest)
-		return
-	}
-
-	if err := s.db.UpdateReviewStatus(uid, req.Status); err != nil {
-		http.Error(w, fmt.Sprintf("Failed to update status: %v", err), http.StatusInternalServerError)
+	if err := s.db.UpdateRejectedStatus(uid, req.Rejected); err != nil {
+		http.Error(w, fmt.Sprintf("Failed to update rejected status: %v", err), http.StatusInternalServerError)
 		return
 	}
 
@@ -84,16 +78,22 @@ func (s *Server) updateEventStatus(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 	stats := make(map[string]int)
-	statuses := []string{"pending", "reviewed", "rejected"}
 
-	for _, status := range statuses {
-		events, err := s.db.GetEventsByReviewStatus(status)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Failed to get events with status %s: %v", status, err), http.StatusInternalServerError)
-			return
-		}
-		stats[status] = len(events)
+	// Get rejected events
+	rejectedEvents, err := s.db.GetEventsByRejectedStatus(true)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Failed to get rejected events: %v", err), http.StatusInternalServerError)
+		return
 	}
+	stats["rejected"] = len(rejectedEvents)
+
+	// Get non-rejected events
+	nonRejectedEvents, err := s.db.GetEventsByRejectedStatus(false)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Failed to get non-rejected events: %v", err), http.StatusInternalServerError)
+		return
+	}
+	stats["approved"] = len(nonRejectedEvents)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(stats)
@@ -152,7 +152,7 @@ func generateICalContent(events []database.Event) string {
 
 	// Write each event
 	for _, event := range events {
-		if event.ReviewStatus == "rejected" {
+		if event.Rejected {
 			continue
 		}
 
@@ -181,8 +181,8 @@ func generateICalContent(events []database.Event) string {
 			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", escapeICalText(event.Organization)))
 		}
 
-		// Add review status as a custom property
-		builder.WriteString(fmt.Sprintf("X-REVIEW-STATUS:%s\r\n", event.ReviewStatus))
+		// Add rejected status as a custom property
+		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", event.Rejected))
 
 		// Add created and modified times if available
 		builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.CreatedAt.UTC().Format("20060102T150405Z")))

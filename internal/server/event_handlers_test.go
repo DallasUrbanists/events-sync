@@ -25,7 +25,7 @@ func TestGenerateICalContent(t *testing.T) {
 			Location:     &location1,
 			StartTime:    time.Date(2025, 1, 1, 12, 0, 0, 0, time.UTC),
 			EndTime:      time.Date(2025, 1, 1, 13, 0, 0, 0, time.UTC),
-			ReviewStatus: "pending",
+			Rejected:     false,
 			CreatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
 			UpdatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
 		},
@@ -38,7 +38,7 @@ func TestGenerateICalContent(t *testing.T) {
 			Location:     nil,
 			StartTime:    time.Date(2025, 1, 2, 14, 0, 0, 0, time.UTC),
 			EndTime:      time.Date(2025, 1, 2, 15, 0, 0, 0, time.UTC),
-			ReviewStatus: "reviewed",
+			Rejected:     false,
 			CreatedAt:    time.Date(2024, 12, 1, 11, 0, 0, 0, time.UTC),
 			UpdatedAt:    time.Date(2024, 12, 1, 11, 0, 0, 0, time.UTC),
 		},
@@ -51,7 +51,7 @@ func TestGenerateICalContent(t *testing.T) {
 			Location:     nil,
 			StartTime:    time.Date(2025, 1, 3, 16, 0, 0, 0, time.UTC),
 			EndTime:      time.Date(2025, 1, 3, 17, 0, 0, 0, time.UTC),
-			ReviewStatus: "rejected",
+			Rejected:     true,
 			CreatedAt:    time.Date(2024, 12, 1, 12, 0, 0, 0, time.UTC),
 			UpdatedAt:    time.Date(2024, 12, 1, 12, 0, 0, 0, time.UTC),
 		},
@@ -133,11 +133,11 @@ func TestGenerateICalContent(t *testing.T) {
 	if !strings.Contains(icalContent, "LOCATION:Test Location") {
 		t.Error("Missing first event location")
 	}
-	if !strings.Contains(icalContent, "X-REVIEW-STATUS:pending") {
-		t.Error("Missing first event review status")
+	if !strings.Contains(icalContent, "X-REJECTED:false") {
+		t.Error("Missing first event rejected status")
 	}
-	if !strings.Contains(icalContent, "X-REVIEW-STATUS:reviewed") {
-		t.Error("Missing second event review status")
+	if !strings.Contains(icalContent, "X-REJECTED:false") {
+		t.Error("Missing second event rejected status")
 	}
 
 	// Verify organization field format change
