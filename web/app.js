@@ -5,7 +5,7 @@ function eventManager() {
         groupedEvents: [],
         stats: {},
         loading: false,
-        statusFilter: 'pending',
+        statusFilter: '',
         hideSingleEvents: false,
 
         async loadEvents() {
@@ -76,9 +76,11 @@ function eventManager() {
         filterEvents() {
             let filtered = this.events;
 
-            // Apply status filter (default to pending)
-            if (this.statusFilter) {
-                filtered = filtered.filter(event => event.review_status === this.statusFilter);
+            // Apply status filter
+            if (this.statusFilter === 'approved') {
+                filtered = filtered.filter(event => !event.rejected);
+            } else if (this.statusFilter === 'rejected') {
+                filtered = filtered.filter(event => event.rejected);
             }
 
             // Group events by date
@@ -92,9 +94,8 @@ function eventManager() {
             this.filteredEvents = this.groupedEvents;
         },
 
-        async updateEventStatus(uid) {
-            const selectElement = document.getElementById(`status-${uid}`);
-            const newStatus = selectElement.value;
+        async updateEventStatus(uid, approved) {
+            const rejected = !approved;
 
             try {
                 const response = await fetch(`/api/events/${uid}/status`, {
@@ -102,7 +103,7 @@ function eventManager() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ status: newStatus })
+                    body: JSON.stringify({ rejected: rejected })
                 });
 
                 if (!response.ok) {
@@ -112,7 +113,7 @@ function eventManager() {
                 // Update the event in our local data
                 this.events.forEach(event => {
                     if (event.uid === uid) {
-                        event.review_status = newStatus;
+                        event.rejected = rejected;
                     }
                 });
 
@@ -121,10 +122,10 @@ function eventManager() {
                 this.loadStats();
 
                 // Show success message
-                this.showNotification('Status updated successfully!', 'success');
+                this.showNotification('Event status updated successfully!', 'success');
             } catch (error) {
                 console.error('Error updating status:', error);
-                this.showNotification('Failed to update status. Please try again.', 'error');
+                this.showNotification('Failed to update event status. Please try again.', 'error');
             }
         },
 
@@ -182,18 +183,7 @@ function eventManager() {
             });
         },
 
-        getStatusClass(status) {
-            switch (status) {
-                case 'pending':
-                    return 'status-pending';
-                case 'reviewed':
-                    return 'status-reviewed';
-                case 'rejected':
-                    return 'status-rejected';
-                default:
-                    return 'bg-gray-100 text-gray-800 border-gray-200';
-            }
-        },
+
 
         get totalEvents() {
             return this.events.length;

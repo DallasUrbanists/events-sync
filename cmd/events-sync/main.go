@@ -120,16 +120,21 @@ func databaseEventToEvent(dbEvent database.Event) event.Event {
 }
 
 func showReviewStatusSummary(db *database.DB) error {
-	fmt.Println("\n=== Review Status Summary ===")
+	fmt.Println("\n=== Rejected Status Summary ===")
 
-	statuses := []string{"pending", "reviewed", "rejected"}
-	for _, status := range statuses {
-		events, err := db.GetEventsByReviewStatus(status)
-		if err != nil {
-			return fmt.Errorf("failed to get events with status %s: %v", status, err)
-		}
-		fmt.Printf("%s: %d events\n", status, len(events))
+	// Get rejected events
+	rejectedEvents, err := db.GetEventsByRejectedStatus(true)
+	if err != nil {
+		return fmt.Errorf("failed to get rejected events: %v", err)
 	}
+	fmt.Printf("rejected: %d events\n", len(rejectedEvents))
+
+	// Get non-rejected events
+	nonRejectedEvents, err := db.GetEventsByRejectedStatus(false)
+	if err != nil {
+		return fmt.Errorf("failed to get non-rejected events: %v", err)
+	}
+	fmt.Printf("approved: %d events\n", len(nonRejectedEvents))
 
 	return nil
 }

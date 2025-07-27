@@ -21,20 +21,7 @@
         </div>
 
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="flex items-center">
-                    <div class="p-2 bg-yellow-100 rounded-lg">
-                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Pending</p>
-                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.pending || 0"></p>
-                    </div>
-                </div>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
                     <div class="p-2 bg-green-100 rounded-lg">
@@ -43,8 +30,8 @@
                         </svg>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Reviewed</p>
-                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.reviewed || 0"></p>
+                        <p class="text-sm font-medium text-gray-600">Approved</p>
+                        <p class="text-2xl font-semibold text-gray-900" x-text="stats.approved || 0"></p>
                     </div>
                 </div>
             </div>
@@ -83,9 +70,8 @@
                             Refresh
                         </button>
                         <select x-model="statusFilter" @change="filterEvents()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">All Statuses</option>
-                            <option value="pending">Pending</option>
-                            <option value="reviewed">Reviewed</option>
+                            <option value="">All Events</option>
+                            <option value="approved">Approved</option>
                             <option value="rejected">Rejected</option>
                         </select>
                     </div>
@@ -118,10 +104,20 @@
                                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                                     <div class="flex-1">
                                         <div class="flex items-start justify-between mb-2">
-                                            <h4 class="text-lg font-medium text-gray-900" x-text="event.summary"></h4>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
-                                                  :class="getStatusClass(event.review_status)"
-                                                  x-text="event.review_status"></span>
+                                            <h4 class="text-lg font-medium text-gray-900"
+                                                :class="{ 'italic': event.rejected }"
+                                                x-text="event.summary"></h4>
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox"
+                                                       :id="'checkbox-' + event.uid"
+                                                       :checked="!event.rejected"
+                                                       @change="updateEventStatus(event.uid, $event.target.checked)"
+                                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                                <label :for="'checkbox-' + event.uid" class="text-sm text-gray-600">
+                                                    <span x-show="!event.rejected">Approved</span>
+                                                    <span x-show="event.rejected" class="text-red-600">Rejected</span>
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="text-sm text-gray-600 space-y-1">
                                             <p><strong>Organization:</strong> <span x-text="event.organization"></span></p>
@@ -134,17 +130,7 @@
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="flex flex-col sm:flex-row gap-2">
-                                        <select :id="'status-' + event.uid" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                            <option value="pending" :selected="event.review_status === 'pending'">Pending</option>
-                                            <option value="reviewed" :selected="event.review_status === 'reviewed'">Reviewed</option>
-                                            <option value="rejected" :selected="event.review_status === 'rejected'">Rejected</option>
-                                        </select>
-                                        <button @click="updateEventStatus(event.uid)"
-                                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                            Update
-                                        </button>
-                                    </div>
+
                                 </div>
                             </div>
                         </template>

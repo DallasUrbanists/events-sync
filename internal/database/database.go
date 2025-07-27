@@ -28,7 +28,7 @@ type Event struct {
 	ModifiedTime *time.Time `db:"modified_time"`
 	Status       *string   `db:"status"`
 	Transparency *string   `db:"transparency"`
-	ReviewStatus string    `db:"review_status"`
+	Rejected     bool      `db:"rejected"`
 	CreatedAt    time.Time `db:"created_at"`
 	UpdatedAt    time.Time `db:"updated_at"`
 }
@@ -48,27 +48,27 @@ func Connect(connStr string) (*DB, error) {
 	return &DB{db}, nil
 }
 
-// UpsertEvent upserts an event, handling review status logic
+// UpsertEvent upserts an event, handling rejected status logic
 func (db *DB) UpsertEvent(e event.Event) error {
 	// Check if event exists
 	var existing Event
 	err := db.Get(&existing, "SELECT * FROM events WHERE uid = $1", e.UID)
 
 	if err == sql.ErrNoRows {
-		// New event - insert with pending status
+		// New event - insert with not rejected status
 		return db.insertEvent(e)
 	} else if err != nil {
 		return fmt.Errorf("failed to check existing event: %v", err)
 	}
 
-	// Event exists - check if it needs review status reset
-	reviewStatus := existing.ReviewStatus
+	// Event exists - check if it needs rejected status reset
+	rejected := existing.Rejected
 	if hasSignificantChanges(existing, e) {
-		reviewStatus = "pending"
+		rejected = false // Reset to not rejected when there are significant changes
 	}
 
 	// Update the event
-	return db.updateEvent(e, reviewStatus)
+	return db.updateEvent(e, rejected)
 }
 
 // insertEvent inserts a new event
@@ -77,7 +77,7 @@ func (db *DB) insertEvent(e event.Event) error {
 		INSERT INTO events (
 			uid, organization, summary, description, location,
 			start_time, end_time, created_time, modified_time,
-			status, transparency, review_status
+			status, transparency, rejected
 		) VALUES (
 			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
 		)
@@ -86,7 +86,7 @@ func (db *DB) insertEvent(e event.Event) error {
 	_, err := db.Exec(query,
 		e.UID, e.Organization, e.Summary, e.Description, e.Location,
 		e.StartTime, e.EndTime, e.Created, e.Modified,
-		e.Status, e.Transparency, "pending",
+		e.Status, e.Transparency, false,
 	)
 
 	if err != nil {
@@ -97,7 +97,7 @@ func (db *DB) insertEvent(e event.Event) error {
 }
 
 // updateEvent updates an existing event
-func (db *DB) updateEvent(e event.Event, reviewStatus string) error {
+func (db *DB) updateEvent(e event.Event, rejected bool) error {
 	query := `
 		UPDATE events SET
 			organization = $1,
@@ -110,14 +110,14 @@ func (db *DB) updateEvent(e event.Event, reviewStatus string) error {
 			modified_time = $8,
 			status = $9,
 			transparency = $10,
-			review_status = $11
+			rejected = $11
 		WHERE uid = $12
 	`
 
 	_, err := db.Exec(query,
 		e.Organization, e.Summary, e.Description, e.Location,
 		e.StartTime, e.EndTime, e.Created, e.Modified,
-		e.Status, e.Transparency, reviewStatus, e.UID,
+		e.Status, e.Transparency, rejected, e.UID,
 	)
 
 	if err != nil {
@@ -173,31 +173,31 @@ func (db *DB) GetUpcomingEvents() ([]Event, error) {
 	return events, nil
 }
 
-// GetEventsByReviewStatus retrieves events by review status
-func (db *DB) GetEventsByReviewStatus(status string) ([]Event, error) {
+// GetEventsByRejectedStatus retrieves events by rejected status
+func (db *DB) GetEventsByRejectedStatus(rejected bool) ([]Event, error) {
 	var events []Event
-	err := db.Select(&events, "SELECT * FROM events WHERE review_status = $1 ORDER BY start_time", status)
+	err := db.Select(&events, "SELECT * FROM events WHERE rejected = $1 ORDER BY start_time", rejected)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get events by review status: %v", err)
+		return nil, fmt.Errorf("failed to get events by rejected status: %v", err)
 	}
 	return events, nil
 }
 
-// UpdateReviewStatus updates the review status of an event
-func (db *DB) UpdateReviewStatus(uid string, status string) error {
-	_, err := db.Exec("UPDATE events SET review_status = $1 WHERE uid = $2", status, uid)
+// UpdateRejectedStatus updates the rejected status of an event
+func (db *DB) UpdateRejectedStatus(uid string, rejected bool) error {
+	_, err := db.Exec("UPDATE events SET rejected = $1 WHERE uid = $2", rejected, uid)
 	if err != nil {
-		return fmt.Errorf("failed to update review status: %v", err)
+		return fmt.Errorf("failed to update rejected status: %v", err)
 	}
 	return nil
 }
 
-// MarkPastEventsAsReviewed automatically marks all events in the past as reviewed
+// MarkPastEventsAsReviewed automatically marks all events in the past as not rejected
 func (db *DB) MarkPastEventsAsReviewed() error {
 	now := time.Now()
-	result, err := db.Exec("UPDATE events SET review_status = 'reviewed' WHERE end_time < $1 AND review_status = 'pending'", now)
+	result, err := db.Exec("UPDATE events SET rejected = false WHERE end_time < $1 AND rejected = true", now)
 	if err != nil {
-		return fmt.Errorf("failed to mark past events as reviewed: %v", err)
+		return fmt.Errorf("failed to mark past events as not rejected: %v", err)
 	}
 
 	rowsAffected, err := result.RowsAffected()
@@ -206,7 +206,7 @@ func (db *DB) MarkPastEventsAsReviewed() error {
 	}
 
 	if rowsAffected > 0 {
-		fmt.Printf("Marked %d past events as reviewed\n", rowsAffected)
+		fmt.Printf("Marked %d past events as not rejected\n", rowsAffected)
 	}
 
 	return nil
