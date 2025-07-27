@@ -118,7 +118,8 @@ function eventManager() {
         },
 
         formatDate(dateString) {
-            const date = new Date(dateString);
+            parts = dateString.split("-")
+            const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
             const today = new Date();
             const tomorrow = new Date(today);
             tomorrow.setDate(tomorrow.getDate() + 1);
