@@ -29,8 +29,5 @@ func main() {
 	}
 	defer db.Close()
 
-	srv := server.NewServer(db)
-	addr := ":" + *port
-	log.Printf("Starting web server on http://localhost%s", addr)
-	log.Fatal(srv.Start(addr))
+	log.Fatal(server.NewServer(db, server.NewAppOpts{Port: *port}).Server.ListenAndServe())
 }
