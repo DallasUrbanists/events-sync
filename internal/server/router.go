@@ -7,7 +7,7 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 
 	router.Handle("GET /", http.FileServer(http.Dir("web")))
 
-	router.HandleFunc("GET /api/events", s.getEvents)
+	router.HandleFunc("GET /api/events", s.getUpcomingEvents)
 	router.HandleFunc("PUT /api/events/{uid}/status", s.updateEventStatus)
 	router.HandleFunc("GET /api/events/stats", s.getEventStats)
 

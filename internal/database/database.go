@@ -164,6 +164,15 @@ func (db *DB) GetEvents() ([]Event, error) {
 	return events, nil
 }
 
+func (db *DB) GetUpcomingEvents() ([]Event, error) {
+	var events []Event
+	err := db.Select(&events, "SELECT * FROM events WHERE start_time > NOW() ORDER BY start_time")
+	if err != nil {
+		return nil, fmt.Errorf("failed to get events: %v", err)
+	}
+	return events, nil
+}
+
 // GetEventsByReviewStatus retrieves events by review status
 func (db *DB) GetEventsByReviewStatus(status string) ([]Event, error) {
 	var events []Event

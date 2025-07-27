@@ -2,6 +2,7 @@ function eventManager() {
     return {
         events: [],
         filteredEvents: [],
+        groupedEvents: [],
         stats: {},
         loading: false,
         statusFilter: 'pending',
@@ -36,23 +37,59 @@ function eventManager() {
             }
         },
 
+        groupEventsByDate(events) {
+            const eventsByDate = {};
+
+            for (const event of events) {
+                const date = new Date(event.start_time).toISOString().split('T')[0];
+                if (!eventsByDate[date]) {
+                    eventsByDate[date] = [];
+                }
+                eventsByDate[date].push(event);
+            }
+
+            // Convert to array and sort by date proximity to current date
+            const result = [];
+            for (const [date, dateEvents] of Object.entries(eventsByDate)) {
+                result.push({
+                    date: date,
+                    events: dateEvents
+                });
+            }
+
+            // Sort by date proximity (closest to current date first)
+            const nowDate = new Date().toISOString().split('T')[0];
+            result.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                const now = new Date(nowDate);
+
+                const diffA = Math.abs((dateA - now) / (1000 * 60 * 60 * 24));
+                const diffB = Math.abs((dateB - now) / (1000 * 60 * 60 * 24));
+
+                return diffA - diffB;
+            });
+
+            return result;
+        },
+
         filterEvents() {
             let filtered = this.events;
 
             // Apply status filter (default to pending)
             if (this.statusFilter) {
-                filtered = filtered.map(dateGroup => ({
-                    ...dateGroup,
-                    events: dateGroup.events.filter(event => event.review_status === this.statusFilter)
-                })).filter(dateGroup => dateGroup.events.length > 0);
+                filtered = filtered.filter(event => event.review_status === this.statusFilter);
             }
+
+            // Group events by date
+            this.groupedEvents = this.groupEventsByDate(filtered);
 
             // Apply single event filter
             if (this.hideSingleEvents) {
-                filtered = filtered.filter(dateGroup => dateGroup.events.length > 1);
+                this.groupedEvents = this.groupedEvents.filter(dateGroup => dateGroup.events.length > 1);
             }
 
-            this.filteredEvents = filtered;
+            this.filteredEvents = this.groupedEvents;
         },
 
         async updateEventStatus(uid) {
@@ -73,12 +110,10 @@ function eventManager() {
                 }
 
                 // Update the event in our local data
-                this.events.forEach(dateGroup => {
-                    dateGroup.events.forEach(event => {
-                        if (event.uid === uid) {
-                            event.review_status = newStatus;
-                        }
-                    });
+                this.events.forEach(event => {
+                    if (event.uid === uid) {
+                        event.review_status = newStatus;
+                    }
                 });
 
                 // Re-filter and reload stats
@@ -118,7 +153,7 @@ function eventManager() {
         },
 
         formatDate(dateString) {
-            parts = dateString.split("-")
+            const parts = dateString.split("-");
             const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
             const today = new Date();
             const tomorrow = new Date(today);
@@ -161,7 +196,7 @@ function eventManager() {
         },
 
         get totalEvents() {
-            return this.events.reduce((total, dateGroup) => total + dateGroup.events.length, 0);
+            return this.events.length;
         }
     };
 }
