@@ -184,6 +184,28 @@ func generateICalContent(events []database.Event) string {
 		// Add rejected status as a custom property
 		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", event.Rejected))
 
+		// Add sequence if greater than 0
+		if event.Sequence > 0 {
+			builder.WriteString(fmt.Sprintf("SEQUENCE:%d\r\n", event.Sequence))
+		}
+
+		// Add recurrence fields if present
+		if event.RecurrenceID != nil && *event.RecurrenceID != "" {
+			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", escapeICalText(*event.RecurrenceID)))
+		}
+
+		if event.RRule != nil && *event.RRule != "" {
+			builder.WriteString(fmt.Sprintf("RRULE:%s\r\n", *event.RRule))
+		}
+
+		if event.RDate != nil && *event.RDate != "" {
+			builder.WriteString(fmt.Sprintf("RDATE:%s\r\n", *event.RDate))
+		}
+
+		if event.ExDate != nil && *event.ExDate != "" {
+			builder.WriteString(fmt.Sprintf("EXDATE:%s\r\n", *event.ExDate))
+		}
+
 		// Add created and modified times if available
 		builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.CreatedAt.UTC().Format("20060102T150405Z")))
 		builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.UpdatedAt.UTC().Format("20060102T150405Z")))
