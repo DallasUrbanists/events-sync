@@ -26,4 +26,10 @@ go.work
 
 # End of https://www.toptal.com/developers/gitignore/api/go
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+# Note: env.example is committed to show the required environment variables
+
 bin
