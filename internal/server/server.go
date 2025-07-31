@@ -4,23 +4,45 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/dallasurbanists/events-sync/internal/config"
 	"github.com/dallasurbanists/events-sync/internal/database"
 )
 
 type Server struct {
-	db *database.DB
-	host string
-	port string
-	Server http.Server
+	db           *database.DB
+	config       *config.Config
+	discordConfig *config.DiscordConfig
+	jwtConfig    *config.JWTConfig
+	host         string
+	port         string
+	Server       http.Server
 }
 
 type NewAppOpts struct {
-	Host string
-	Port string
+	Host   string
+	Port   string
+	Config *config.Config
 }
 
-func NewServer (db *database.DB, o NewAppOpts) *Server {
-	s := &Server{db: db}
+func NewServer(db *database.DB, o NewAppOpts) (*Server, error) {
+	// Load Discord configuration from environment variables
+	discordConfig, err := config.LoadDiscordConfig()
+	if err != nil {
+		return nil, fmt.Errorf("failed to load Discord config: %v", err)
+	}
+
+	// Load JWT configuration from environment variables
+	jwtConfig, err := config.LoadJWTConfig()
+	if err != nil {
+		return nil, fmt.Errorf("failed to load JWT config: %v", err)
+	}
+
+	s := &Server{
+		db:            db,
+		config:        o.Config,
+		discordConfig: discordConfig,
+		jwtConfig:     jwtConfig,
+	}
 
 	addr := o.Host
 	if o.Port != "" {
@@ -28,9 +50,9 @@ func NewServer (db *database.DB, o NewAppOpts) *Server {
 	}
 
 	s.Server = http.Server{
-		Addr: addr,
+		Addr:    addr,
 		Handler: s.newConfiguredRouter(),
 	}
 
-	return s
+	return s, nil
 }

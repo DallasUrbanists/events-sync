@@ -28,6 +28,8 @@ services:
 
   web:
     build: .
+    env_file:
+      - .env
     environment:
       DATABASE_URL: "postgres://events_user:fake_pass@postgres:5432/events_sync?sslmode=disable"
     depends_on:

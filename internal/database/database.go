@@ -211,3 +211,32 @@ func (db *DB) MarkPastEventsAsReviewed() error {
 
 	return nil
 }
+
+// AuthenticatedDiscordUser represents an authenticated Discord user
+type AuthenticatedDiscordUser struct {
+	ID         int       `db:"id"`
+	DiscordID  string    `db:"discord_id"`
+	Username   string    `db:"username"`
+	CreatedAt  time.Time `db:"created_at"`
+	UpdatedAt  time.Time `db:"updated_at"`
+}
+
+// IsDiscordUserAuthenticated checks if a Discord user ID is in the authenticated users table
+func (db *DB) IsDiscordUserAuthenticated(discordID string) (bool, error) {
+	var count int
+	err := db.Get(&count, "SELECT COUNT(*) FROM authenticated_discord_users WHERE discord_id = $1", discordID)
+	if err != nil {
+		return false, fmt.Errorf("failed to check if Discord user is authenticated: %v", err)
+	}
+	return count > 0, nil
+}
+
+// GetDiscordUserByID retrieves a Discord user by their Discord ID
+func (db *DB) GetDiscordUserByID(discordID string) (*AuthenticatedDiscordUser, error) {
+	var user AuthenticatedDiscordUser
+	err := db.Get(&user, "SELECT * FROM authenticated_discord_users WHERE discord_id = $1", discordID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get Discord user: %v", err)
+	}
+	return &user, nil
+}
