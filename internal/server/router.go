@@ -15,20 +15,19 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 	router.Handle("GET /", s.authRedirect(s.serveIndex))
 	router.HandleFunc("GET /login", s.loginHandler)
 	router.HandleFunc("GET /logout", s.logoutHandler)
-	router.HandleFunc("GET /api/auth/discord/redirect", s.discordHandler)
-	router.HandleFunc("GET /api/events/ical", s.generateICal) // Public iCal endpoint
+	router.HandleFunc("GET /auth/discord/redirect", s.discordHandler)
+	router.HandleFunc("GET /ical", s.generateICal) // Public iCal endpoint
 
 	// Protected routes (authentication required)
-	private := http.NewServeMux()
-	private.HandleFunc("GET /api/events", s.getUpcomingEvents)
-	private.HandleFunc("PUT /api/events/{uid}/status", s.updateEventStatus)
-	private.HandleFunc("GET /api/events/stats", s.getEventStats)
 
 	ms := middleware.CreateMiddlewareStack(
 		s.AuthMiddleware,
 	)
 
-	router.Handle("/", ms(private))
+	router.Handle("GET /api/events", ms(http.HandlerFunc(s.getUpcomingEvents)))
+	router.Handle("PUT /api/events/{uid}/status", ms(http.HandlerFunc(s.updateEventStatus)))
+	router.Handle("GET /api/events/stats", ms(http.HandlerFunc(s.getEventStats)))
+
 	return router
 }
 
