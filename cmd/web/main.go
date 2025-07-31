@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/dallasurbanists/events-sync/internal/config"
 	"github.com/dallasurbanists/events-sync/internal/database"
 	"github.com/dallasurbanists/events-sync/internal/server"
 )
@@ -29,5 +30,19 @@ func main() {
 	}
 	defer db.Close()
 
-	log.Fatal(server.NewServer(db, server.NewAppOpts{Port: *port}).Server.ListenAndServe())
+	// Load configuration
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		log.Fatalf("Error loading config: %v", err)
+	}
+
+	srv, err := server.NewServer(db, server.NewAppOpts{
+		Port:   *port,
+		Config: cfg,
+	})
+	if err != nil {
+		log.Fatalf("Error creating server: %v", err)
+	}
+
+	log.Fatal(srv.Server.ListenAndServe())
 }
