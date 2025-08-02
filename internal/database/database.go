@@ -192,6 +192,11 @@ func hasSignificantChanges(existing Event, new event.Event) bool {
 		return true
 	}
 
+	// Check if the Sequence has been updated
+	if existing.Sequence < new.Sequence {
+		return true
+	}
+
 	// Check if time changed (within 1 minute tolerance)
 	if !existing.StartTime.Equal(new.StartTime) {
 		diff := existing.StartTime.Sub(new.StartTime)
