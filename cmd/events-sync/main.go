@@ -46,6 +46,11 @@ func main() {
 			}
 		}
 
+		// Delete events that are no longer in the source calendar
+		if err := db.DeleteEventsNotInSource(orgName, events); err != nil {
+			fmt.Printf("Error deleting events not in source for %s: %v\n", orgName, err)
+		}
+
 		allEvents = append(allEvents, events...)
 		fmt.Printf("Found %d events for %s\n", len(events), orgName)
 	}

@@ -275,6 +275,79 @@ func (db *DB) MarkPastEventsAsReviewed() error {
 	return nil
 }
 
+// DeleteEventsNotInSource deletes events for a specific organization that are not in the provided source events
+func (db *DB) DeleteEventsNotInSource(organization string, sourceEvents []event.Event) error {
+	// Create a map of source event UIDs for efficient lookup
+	sourceEventMap := make(map[string]bool)
+	for _, e := range sourceEvents {
+		fmt.Println(e.Summary)
+
+		key := e.UID
+		if e.RecurrenceID != "" {
+			key = e.UID + ":" + e.RecurrenceID
+		}
+		sourceEventMap[key] = true
+	}
+
+	// Get all events for this organization from the database
+	var dbEvents []Event
+	err := db.Select(&dbEvents, "SELECT * FROM events WHERE organization = $1", organization)
+	if err != nil {
+		return fmt.Errorf("failed to get events for organization %s: %v", organization, err)
+	}
+
+	// Find events to delete (those in DB but not in source)
+	var eventsToDelete []Event
+	for _, dbEvent := range dbEvents {
+		key := dbEvent.UID
+		if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
+			key = dbEvent.UID + ":" + *dbEvent.RecurrenceID
+		}
+
+		if !sourceEventMap[key] {
+			eventsToDelete = append(eventsToDelete, dbEvent)
+		}
+	}
+
+	// Delete events that are no longer in the source
+	if len(eventsToDelete) > 0 {
+		fmt.Printf("Deleting %d events for organization %s that are no longer in source calendar:\n", len(eventsToDelete), organization)
+
+		// Log summaries of events being deleted
+		for i, dbEvent := range eventsToDelete {
+			summary := dbEvent.Summary
+			if len(summary) > 50 {
+				summary = summary[:47] + "..."
+			}
+			fmt.Printf("  %d. %s (UID: %s)\n", i+1, summary, dbEvent.UID)
+		}
+
+		// Delete events by UID and recurrence_id
+		for _, dbEvent := range eventsToDelete {
+			key := dbEvent.UID
+			if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
+				key = dbEvent.UID + ":" + *dbEvent.RecurrenceID
+			}
+
+			if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
+				// Event with recurrence_id
+				_, err := db.Exec("DELETE FROM events WHERE uid = $1 AND recurrence_id = $2 AND organization = $3", dbEvent.UID, *dbEvent.RecurrenceID, organization)
+				if err != nil {
+					fmt.Printf("Error deleting event %s: %v\n", key, err)
+				}
+			} else {
+				// Event without recurrence_id
+				_, err := db.Exec("DELETE FROM events WHERE uid = $1 AND (recurrence_id = '' OR recurrence_id IS NULL) AND organization = $2", dbEvent.UID, organization)
+				if err != nil {
+					fmt.Printf("Error deleting event %s: %v\n", key, err)
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
 // AuthenticatedDiscordUser represents an authenticated Discord user
 type AuthenticatedDiscordUser struct {
 	ID         int       `db:"id"`

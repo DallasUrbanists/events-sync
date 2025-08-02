@@ -61,3 +61,4 @@ func TestUpsertEventWithRecurrence(t *testing.T) {
 	// 4. Test sequence-based updates
 	// 5. Test that lower sequence events are ignored
 }
+
