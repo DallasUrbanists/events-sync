@@ -280,8 +280,6 @@ func (db *DB) DeleteEventsNotInSource(organization string, sourceEvents []event.
 	// Create a map of source event UIDs for efficient lookup
 	sourceEventMap := make(map[string]bool)
 	for _, e := range sourceEvents {
-		fmt.Println(e.Summary)
-
 		key := e.UID
 		if e.RecurrenceID != "" {
 			key = e.UID + ":" + e.RecurrenceID
