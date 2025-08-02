@@ -28,6 +28,11 @@ type Event struct {
 	ModifiedTime *time.Time `db:"modified_time"`
 	Status       *string   `db:"status"`
 	Transparency *string   `db:"transparency"`
+	Sequence     int       `db:"sequence"`
+	RecurrenceID *string   `db:"recurrence_id"`
+	RRule        *string   `db:"rrule"`
+	RDate        *string   `db:"rdate"`
+	ExDate       *string   `db:"exdate"`
 	Rejected     bool      `db:"rejected"`
 	CreatedAt    time.Time `db:"created_at"`
 	UpdatedAt    time.Time `db:"updated_at"`
@@ -48,11 +53,19 @@ func Connect(connStr string) (*DB, error) {
 	return &DB{db}, nil
 }
 
-// UpsertEvent upserts an event, handling rejected status logic
+// UpsertEvent upserts an event, handling sequence-based logic and rejected status
 func (db *DB) UpsertEvent(e event.Event) error {
-	// Check if event exists
+	// Check if event exists with same UID and recurrence-ID
 	var existing Event
-	err := db.Get(&existing, "SELECT * FROM events WHERE uid = $1", e.UID)
+	var err error
+
+	if e.RecurrenceID != "" {
+		// Check for existing event with same UID and recurrence-ID
+		err = db.Get(&existing, "SELECT * FROM events WHERE uid = $1 AND recurrence_id = $2", e.UID, e.RecurrenceID)
+	} else {
+		// Check for existing event with same UID and empty recurrence-ID (represents NULL)
+		err = db.Get(&existing, "SELECT * FROM events WHERE uid = $1 AND recurrence_id = ''", e.UID)
+	}
 
 	if err == sql.ErrNoRows {
 		// New event - insert with not rejected status
@@ -61,14 +74,22 @@ func (db *DB) UpsertEvent(e event.Event) error {
 		return fmt.Errorf("failed to check existing event: %v", err)
 	}
 
-	// Event exists - check if it needs rejected status reset
-	rejected := existing.Rejected
-	if hasSignificantChanges(existing, e) {
-		rejected = false // Reset to not rejected when there are significant changes
+	// Event exists - check sequence number
+	if e.Sequence < existing.Sequence {
+		// New event has lower sequence, ignore it
+		return nil
+	} else if e.Sequence == existing.Sequence {
+		// Same sequence, check if it needs rejected status reset
+		rejected := existing.Rejected
+		if hasSignificantChanges(existing, e) {
+			rejected = false // Reset to not rejected when there are significant changes
+		}
+		// Update the event
+		return db.updateEvent(e, rejected)
+	} else {
+		// Higher sequence, always update
+		return db.updateEvent(e, false)
 	}
-
-	// Update the event
-	return db.updateEvent(e, rejected)
 }
 
 // insertEvent inserts a new event
@@ -77,16 +98,16 @@ func (db *DB) insertEvent(e event.Event) error {
 		INSERT INTO events (
 			uid, organization, summary, description, location,
 			start_time, end_time, created_time, modified_time,
-			status, transparency, rejected
+			status, transparency, sequence, recurrence_id, rrule, rdate, exdate, rejected
 		) VALUES (
-			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
 		)
 	`
 
 	_, err := db.Exec(query,
 		e.UID, e.Organization, e.Summary, e.Description, e.Location,
 		e.StartTime, e.EndTime, e.Created, e.Modified,
-		e.Status, e.Transparency, false,
+		e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, false,
 	)
 
 	if err != nil {
@@ -98,27 +119,64 @@ func (db *DB) insertEvent(e event.Event) error {
 
 // updateEvent updates an existing event
 func (db *DB) updateEvent(e event.Event, rejected bool) error {
-	query := `
-		UPDATE events SET
-			organization = $1,
-			summary = $2,
-			description = $3,
-			location = $4,
-			start_time = $5,
-			end_time = $6,
-			created_time = $7,
-			modified_time = $8,
-			status = $9,
-			transparency = $10,
-			rejected = $11
-		WHERE uid = $12
-	`
+	var query string
+	var args []interface{}
 
-	_, err := db.Exec(query,
-		e.Organization, e.Summary, e.Description, e.Location,
-		e.StartTime, e.EndTime, e.Created, e.Modified,
-		e.Status, e.Transparency, rejected, e.UID,
-	)
+	if e.RecurrenceID != "" {
+		query = `
+			UPDATE events SET
+				organization = $1,
+				summary = $2,
+				description = $3,
+				location = $4,
+				start_time = $5,
+				end_time = $6,
+				created_time = $7,
+				modified_time = $8,
+				status = $9,
+				transparency = $10,
+				sequence = $11,
+				recurrence_id = $12,
+				rrule = $13,
+				rdate = $14,
+				exdate = $15,
+				rejected = $16
+			WHERE uid = $17 AND recurrence_id = $18
+		`
+		args = []interface{}{
+			e.Organization, e.Summary, e.Description, e.Location,
+			e.StartTime, e.EndTime, e.Created, e.Modified,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID, e.RecurrenceID,
+		}
+	} else {
+		query = `
+			UPDATE events SET
+				organization = $1,
+				summary = $2,
+				description = $3,
+				location = $4,
+				start_time = $5,
+				end_time = $6,
+				created_time = $7,
+				modified_time = $8,
+				status = $9,
+				transparency = $10,
+				sequence = $11,
+				recurrence_id = $12,
+				rrule = $13,
+				rdate = $14,
+				exdate = $15,
+				rejected = $16
+			WHERE uid = $17 AND recurrence_id = ''
+		`
+		args = []interface{}{
+			e.Organization, e.Summary, e.Description, e.Location,
+			e.StartTime, e.EndTime, e.Created, e.Modified,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID,
+		}
+	}
+
+	_, err := db.Exec(query, args...)
 
 	if err != nil {
 		return fmt.Errorf("failed to update event: %v", err)
@@ -131,6 +189,11 @@ func (db *DB) updateEvent(e event.Event, rejected bool) error {
 func hasSignificantChanges(existing Event, new event.Event) bool {
 	// Check if title (summary) changed
 	if existing.Summary != new.Summary {
+		return true
+	}
+
+	// Check if the Sequence has been updated
+	if existing.Sequence < new.Sequence {
 		return true
 	}
 

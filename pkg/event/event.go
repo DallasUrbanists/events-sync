@@ -20,6 +20,11 @@ type Event struct {
 	Modified     time.Time `json:"modified"`
 	Status       string    `json:"status"`
 	Transparency string    `json:"transparency"`
+	Sequence     int       `json:"sequence"`
+	RecurrenceID string    `json:"recurrence_id"`
+	RRule        string    `json:"rrule"`
+	RDate        string    `json:"rdate"`
+	ExDate       string    `json:"exdate"`
 }
 
 func ParseICS(content string, organization string) ([]Event, error) {
@@ -142,6 +147,18 @@ func processEventField(event *Event, key, value string) {
 		event.Status = value
 	case "TRANSP":
 		event.Transparency = value
+	case "SEQUENCE":
+		if seq, err := parseSequence(value); err == nil {
+			event.Sequence = seq
+		}
+	case "RECURRENCE-ID":
+		event.RecurrenceID = value
+	case "RRULE":
+		event.RRule = value
+	case "RDATE":
+		event.RDate = value
+	case "EXDATE":
+		event.ExDate = value
 	}
 }
 
@@ -169,6 +186,16 @@ func parseDateTime(value string) (time.Time, error) {
 	}
 
 	return time.Time{}, fmt.Errorf("unable to parse date: %s", value)
+}
+
+// parseSequence parses the SEQUENCE field from ICS
+func parseSequence(value string) (int, error) {
+	var seq int
+	_, err := fmt.Sscanf(value, "%d", &seq)
+	if err != nil {
+		return 0, fmt.Errorf("unable to parse sequence: %s", value)
+	}
+	return seq, nil
 }
 
 func FetchAndParseEvents(url string, organization string) ([]Event, error) {

@@ -199,3 +199,130 @@ func TestEscapeICalText(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateICalContentWithRecurrence(t *testing.T) {
+	// Create sample events with recurrence fields
+	description1 := "Recurring test event"
+	location1 := "Test Location"
+	rrule1 := "FREQ=WEEKLY;COUNT=10"
+	recurrenceID1 := "20250108T120000Z"
+	sequence1 := 2
+
+	events := []database.Event{
+		{
+			ID:           1,
+			UID:          "recurring-event-1234@example.com",
+			Organization: "TestOrg",
+			Summary:      "Recurring Test Event",
+			Description:  &description1,
+			Location:     &location1,
+			StartTime:    time.Date(2025, 1, 1, 12, 0, 0, 0, time.UTC),
+			EndTime:      time.Date(2025, 1, 1, 13, 0, 0, 0, time.UTC),
+			Sequence:     sequence1,
+			RRule:        &rrule1,
+			Rejected:     false,
+			CreatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
+			UpdatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
+		},
+		{
+			ID:           2,
+			UID:          "recurring-event-1234@example.com",
+			Organization: "TestOrg",
+			Summary:      "Modified Recurring Event",
+			Description:  &description1,
+			Location:     &location1,
+			StartTime:    time.Date(2025, 1, 8, 12, 0, 0, 0, time.UTC),
+			EndTime:      time.Date(2025, 1, 8, 13, 0, 0, 0, time.UTC),
+			Sequence:     3,
+			RecurrenceID: &recurrenceID1,
+			Rejected:     false,
+			CreatedAt:    time.Date(2024, 12, 1, 11, 0, 0, 0, time.UTC),
+			UpdatedAt:    time.Date(2024, 12, 1, 11, 0, 0, 0, time.UTC),
+		},
+	}
+
+	// Generate iCal content
+	icalContent := generateICalContent(events)
+
+	// Verify recurrence fields are included
+	if !strings.Contains(icalContent, "SEQUENCE:2") {
+		t.Error("Missing SEQUENCE field for first event")
+	}
+	if !strings.Contains(icalContent, "RRULE:FREQ=WEEKLY;COUNT=10") {
+		t.Error("Missing RRULE field for first event")
+	}
+	if !strings.Contains(icalContent, "SEQUENCE:3") {
+		t.Error("Missing SEQUENCE field for second event")
+	}
+	if !strings.Contains(icalContent, "RECURRENCE-ID:20250108T120000Z") {
+		t.Error("Missing RECURRENCE-ID field for second event")
+	}
+
+	// Verify events are included
+	if !strings.Contains(icalContent, "UID:recurring-event-1234@example.com") {
+		t.Error("Missing recurring event UID")
+	}
+	if !strings.Contains(icalContent, "SUMMARY:Recurring Test Event") {
+		t.Error("Missing first event summary")
+	}
+	if !strings.Contains(icalContent, "SUMMARY:Modified Recurring Event") {
+		t.Error("Missing second event summary")
+	}
+}
+
+func TestICalEndpoint(t *testing.T) {
+	// Create a test database with some events
+	// This is a simplified test that just verifies the endpoint structure
+	// In a real scenario, you'd want to use a test database
+
+	// Create sample events with recurrence fields
+	description1 := "Recurring test event"
+	location1 := "Test Location"
+	rrule1 := "FREQ=WEEKLY;COUNT=10"
+
+	events := []database.Event{
+		{
+			ID:           1,
+			UID:          "recurring-event-1234@example.com",
+			Organization: "TestOrg",
+			Summary:      "Recurring Test Event",
+			Description:  &description1,
+			Location:     &location1,
+			StartTime:    time.Date(2025, 1, 1, 12, 0, 0, 0, time.UTC),
+			EndTime:      time.Date(2025, 1, 1, 13, 0, 0, 0, time.UTC),
+			Sequence:     2,
+			RRule:        &rrule1,
+			Rejected:     false,
+			CreatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
+			UpdatedAt:    time.Date(2024, 12, 1, 10, 0, 0, 0, time.UTC),
+		},
+	}
+
+	// Generate iCal content
+	icalContent := generateICalContent(events)
+
+	// Verify the content includes the recurrence fields
+	if !strings.Contains(icalContent, "SEQUENCE:2") {
+		t.Error("Missing SEQUENCE field")
+	}
+	if !strings.Contains(icalContent, "RRULE:FREQ=WEEKLY;COUNT=10") {
+		t.Error("Missing RRULE field")
+	}
+	if !strings.Contains(icalContent, "UID:recurring-event-1234@example.com") {
+		t.Error("Missing event UID")
+	}
+
+	// Verify the content has the correct iCal structure
+	if !strings.Contains(icalContent, "BEGIN:VCALENDAR") {
+		t.Error("Missing BEGIN:VCALENDAR")
+	}
+	if !strings.Contains(icalContent, "END:VCALENDAR") {
+		t.Error("Missing END:VCALENDAR")
+	}
+	if !strings.Contains(icalContent, "BEGIN:VEVENT") {
+		t.Error("Missing BEGIN:VEVENT")
+	}
+	if !strings.Contains(icalContent, "END:VEVENT") {
+		t.Error("Missing END:VEVENT")
+	}
+}
