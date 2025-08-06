@@ -18,7 +18,11 @@ services:
       retries: 5
 
   events-sync:
-    build: .
+    build: 
+      context: .
+      target: events-sync
+    env_file:
+      - .env
     environment:
       DATABASE_URL: "postgres://events_user:fake_pass@postgres:5432/events_sync?sslmode=disable"
     depends_on:
@@ -27,7 +31,9 @@ services:
     command: ["/root/bin/events-sync"]
 
   web:
-    build: .
+    build: 
+      context: .
+      target: web
     env_file:
       - .env
     environment:
