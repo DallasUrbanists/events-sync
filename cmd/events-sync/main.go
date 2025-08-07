@@ -9,6 +9,7 @@ import (
 
 	"github.com/dallasurbanists/events-sync/internal/config"
 	"github.com/dallasurbanists/events-sync/internal/database"
+	"github.com/dallasurbanists/events-sync/internal/importer"
 	"github.com/dallasurbanists/events-sync/pkg/event"
 )
 
@@ -29,24 +30,29 @@ func main() {
 		log.Fatalf("Error loading config: %v", err)
 	}
 
+	i := importer.RegisterImporters()
 	var allEvents []event.Event
-	for orgName, url := range cfg.Organizations {
+	for orgName, org := range cfg.Organizations {
 		fmt.Printf("Processing organization: %s\n", orgName)
 
-		events, err := event.FetchAndParseEvents(url, orgName)
+		var events []event.Event
+		var err error
+		if org.Importer != "ical" {
+			events, err = i[org.Importer](org.URL)
+		} else {
+			events, err = event.FetchAndParseEvents(org.URL, orgName)
+		}
 		if err != nil {
 			fmt.Printf("Error processing %s: %v\n", orgName, err)
 			continue
 		}
 
-		// Store events in database
 		for _, e := range events {
 			if err := db.UpsertEvent(e); err != nil {
 				fmt.Printf("Error storing event %s: %v\n", e.UID, err)
 			}
 		}
 
-		// Delete events that are no longer in the source calendar
 		if err := db.DeleteEventsNotInSource(orgName, events); err != nil {
 			fmt.Printf("Error deleting events not in source for %s: %v\n", orgName, err)
 		}
@@ -94,12 +100,12 @@ func main() {
 func databaseEventToEvent(dbEvent database.Event) event.Event {
 	e := event.Event{
 		Organization: dbEvent.Organization,
-		UID:         dbEvent.UID,
-		Summary:     dbEvent.Summary,
-		StartTime:   dbEvent.StartTime,
-		EndTime:     dbEvent.EndTime,
-		Created:     time.Time{},
-		Modified:    time.Time{},
+		UID:          dbEvent.UID,
+		Summary:      dbEvent.Summary,
+		StartTime:    dbEvent.StartTime,
+		EndTime:      dbEvent.EndTime,
+		Created:      time.Time{},
+		Modified:     time.Time{},
 	}
 
 	if dbEvent.Description != nil {

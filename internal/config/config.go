@@ -55,8 +55,6 @@ func LoadConfig() (*Config, error) {
 
 	envs := os.Environ()
 
-	fmt.Printf("Environment variables with prefix '%s':\n", prefix)
-
 	caser := cases.Title(language.English)
 	for _, env := range envs {
 		if strings.HasPrefix(env, prefix) {
