@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	_ "time/tzdata"
 )
 
 type Event struct {
@@ -27,8 +28,22 @@ type Event struct {
 	ExDate       string    `json:"exdate"`
 }
 
+type parseUtils struct {
+	defaultLoc *time.Location
+}
+
 func ParseICS(content string, organization string) ([]Event, error) {
 	var events []Event
+
+	defaultLoc, err := time.LoadLocation("America/Chicago")
+	if err != nil {
+		return nil, err
+	}
+
+	u := parseUtils{
+		defaultLoc: defaultLoc,
+	}
+
 	lines := strings.Split(content, "\n")
 
 	var currentEvent *Event
@@ -49,7 +64,7 @@ func ParseICS(content string, organization string) ([]Event, error) {
 		// processing the current line
 		if inMultiLineValue && !isContinuation {
 			if currentKey != "" && currentEvent != nil {
-				processEventField(currentEvent, currentKey, currentValue)
+				processEventField(currentEvent, u, currentKey, currentValue)
 			}
 			currentKey = ""
 			currentValue = ""
@@ -69,7 +84,7 @@ func ParseICS(content string, organization string) ([]Event, error) {
 			if currentEvent != nil {
 				// Process any remaining key-value pair
 				if currentKey != "" {
-					processEventField(currentEvent, currentKey, currentValue)
+					processEventField(currentEvent, u, currentKey, currentValue)
 				}
 				events = append(events, *currentEvent)
 				currentEvent = nil
@@ -95,7 +110,7 @@ func ParseICS(content string, organization string) ([]Event, error) {
 
 				// Single line value - process immediately
 				if currentEvent != nil {
-					processEventField(currentEvent, currentKey, currentValue)
+					processEventField(currentEvent, u, currentKey, currentValue)
 				}
 				currentKey = ""
 				currentValue = ""
@@ -104,21 +119,21 @@ func ParseICS(content string, organization string) ([]Event, error) {
 	}
 
 	if currentKey != "" && currentEvent != nil {
-		processEventField(currentEvent, currentKey, currentValue)
+		processEventField(currentEvent, u, currentKey, currentValue)
 	}
 
 	return events, nil
 }
 
-func processEventField(event *Event, key, value string) {
+func processEventField(event *Event, u parseUtils, key, value string) {
 	if event == nil {
 		return
 	}
 
-	// Remove any parameters from the key (e.g., "DTSTART;TZID=America/Chicago")
-	key = strings.Split(key, ";")[0]
+	keyParts := strings.Split(key, ";")
+	keyPrefix := keyParts[0]
 
-	switch key {
+	switch keyPrefix {
 	case "UID":
 		event.UID = value
 	case "SUMMARY":
@@ -128,19 +143,19 @@ func processEventField(event *Event, key, value string) {
 	case "LOCATION":
 		event.Location = value
 	case "DTSTART":
-		if t, err := parseDateTime(value); err == nil {
+		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
 			event.StartTime = t
 		}
 	case "DTEND":
-		if t, err := parseDateTime(value); err == nil {
+		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
 			event.EndTime = t
 		}
 	case "CREATED":
-		if t, err := parseDateTime(value); err == nil {
+		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
 			event.Created = t
 		}
 	case "LAST-MODIFIED":
-		if t, err := parseDateTime(value); err == nil {
+		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
 			event.Modified = t
 		}
 	case "STATUS":
@@ -163,12 +178,28 @@ func processEventField(event *Event, key, value string) {
 }
 
 // parseDateTime parses various date-time formats used in ICS files
-func parseDateTime(value string) (time.Time, error) {
-	// Remove any timezone info for now
-	value = strings.Split(value, "TZID=")[0]
-	value = strings.TrimSuffix(value, "Z")
+func parseDateTime(value string, u parseUtils, keyParams []string) (time.Time, error) {
+	utcFmt := "20060102T150405Z"
+	if strings.HasSuffix(strings.ToLower(value), "z") {
+		return time.Parse(utcFmt, value)
+	}
 
-	// Try different formats
+	var err error
+	var zeroTime time.Time
+
+	loc := u.defaultLoc
+
+	for _, keyParam := range keyParams {
+		if strings.HasPrefix(strings.ToLower(keyParam), "tzid=") {
+			locValue := strings.Split(keyParam, "=")[1]
+			loc, err = time.LoadLocation(locValue)
+			if err != nil {
+				return zeroTime, err
+			}
+			break
+		}
+	}
+
 	formats := []string{
 		"20060102T150405",
 		"20060102T1504",
@@ -180,7 +211,7 @@ func parseDateTime(value string) (time.Time, error) {
 	}
 
 	for _, format := range formats {
-		if t, err := time.Parse(format, value); err == nil {
+		if t, err := time.ParseInLocation(format, value, loc); err == nil {
 			return t, nil
 		}
 	}
