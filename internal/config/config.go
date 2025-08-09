@@ -57,6 +57,7 @@ func LoadConfig() (*Config, error) {
 
 	caser := cases.Title(language.English)
 	for _, env := range envs {
+		fmt.Println(env)
 		if strings.HasPrefix(env, prefix) {
 			parts := strings.SplitN(env, "=", 2)
 			if len(parts) == 2 {
