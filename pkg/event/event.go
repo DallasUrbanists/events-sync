@@ -44,7 +44,7 @@ func ParseICS(content string, organization string) ([]Event, error) {
 		defaultLoc: defaultLoc,
 	}
 
-	lines := strings.Split(content, "\n")
+	lines := strings.Split(content, "\r\n")
 
 	var currentEvent *Event
 	var currentValue string
