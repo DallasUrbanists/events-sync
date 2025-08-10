@@ -122,6 +122,11 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 func generateICalContent(events []database.Event) string {
 	var builder strings.Builder
 
+	loc, err := time.LoadLocation("America/Chicago")
+	if err != nil {
+			panic(err)
+	}
+
 	// Write iCal header
 	builder.WriteString("BEGIN:VCALENDAR\r\n")
 	builder.WriteString("VERSION:2.0\r\n")
@@ -158,11 +163,10 @@ func generateICalContent(events []database.Event) string {
 
 		builder.WriteString("BEGIN:VEVENT\r\n")
 
-		// Required fields
 		builder.WriteString(fmt.Sprintf("UID:%s\r\n", event.UID))
 		builder.WriteString(fmt.Sprintf("DTSTAMP:%s\r\n", time.Now().UTC().Format("20060102T150405Z")))
-		builder.WriteString(fmt.Sprintf("DTSTART:%s\r\n", event.StartTime.UTC().Format("20060102T150405Z")))
-		builder.WriteString(fmt.Sprintf("DTEND:%s\r\n", event.EndTime.UTC().Format("20060102T150405Z")))
+		builder.WriteString(fmt.Sprintf("DTSTART;TZID=America/Chicago:%s\r\n", event.StartTime.In(loc).Format("20060102T150405")))
+		builder.WriteString(fmt.Sprintf("DTEND;TZID=America/Chicago:%s\r\n", event.EndTime.In(loc).Format("20060102T150405")))
 
 		// Optional fields
 		if event.Summary != "" {
