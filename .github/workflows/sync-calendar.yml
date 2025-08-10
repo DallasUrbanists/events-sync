@@ -21,44 +21,49 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Install requests
+      run: pip install requests
+
     - name: Fetch calendar data with retry
       id: fetch-calendar
       run: |
+        python3 -c "
         import requests
         import time
         import sys
 
-        url = "http://events-sync.onrender.com/ical"
+        url = 'http://events-sync.onrender.com/ical'
         max_attempts = 30  # 5 minutes with 10-second intervals
         attempt = 0
 
         while attempt < max_attempts:
             try:
-                print(f"Attempt {attempt + 1}/{max_attempts}: Fetching calendar data...")
+                print(f'Attempt {attempt + 1}/{max_attempts}: Fetching calendar data...')
                 response = requests.get(url, timeout=30)
                 response.raise_for_status()
 
                 # Check if we got valid calendar data
                 content = response.text
                 if content.startswith('BEGIN:VCALENDAR') and content.endswith('END:VCALENDAR'):
-                    print("✅ Successfully fetched calendar data")
+                    print('✅ Successfully fetched calendar data')
                     with open('static/dallas-urbanists-events-v3.ics', 'w', encoding='utf-8') as f:
                         f.write(content)
                     break
                 else:
-                    print("❌ Response doesn't appear to be valid calendar data")
-                    raise Exception("Invalid calendar data")
+                    print('❌ Response doesn\'t appear to be valid calendar data')
+                    raise Exception('Invalid calendar data')
 
             except Exception as e:
                 attempt += 1
                 if attempt >= max_attempts:
-                    print(f"❌ Failed to fetch calendar data after {max_attempts} attempts")
-                    print(f"Last error: {e}")
+                    print(f'❌ Failed to fetch calendar data after {max_attempts} attempts')
+                    print(f'Last error: {e}')
                     sys.exit(1)
 
-                print(f"⚠️ Attempt failed: {e}")
-                print(f"Waiting 10 seconds before retry...")
+                print(f'⚠️ Attempt failed: {e}')
+                print('Waiting 10 seconds before retry...')
                 time.sleep(10)
+        "
 
     - name: Check for changes
       id: check-changes
