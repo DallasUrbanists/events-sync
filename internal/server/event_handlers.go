@@ -221,18 +221,18 @@ func generateICalContent(events []database.Event) string {
 
 // escapeICalText escapes special characters in iCal text fields
 func escapeICalText(text string) string {
-	// Replace backslashes with double backslashes
-	text = strings.ReplaceAll(text, "\\", "\\\\")
+	// // Replace backslashes with double backslashes
+	// text = strings.ReplaceAll(text, "\\", "\\\\")
 
-	// Replace semicolons with backslash-semicolon
-	text = strings.ReplaceAll(text, ";", "\\;")
+	// // Replace semicolons with backslash-semicolon
+	// text = strings.ReplaceAll(text, ";", "\\;")
 
-	// Replace commas with backslash-comma
-	text = strings.ReplaceAll(text, ",", "\\,")
+	// // Replace commas with backslash-comma
+	// text = strings.ReplaceAll(text, ",", "\\,")
 
-	// Replace newlines with \n
-	text = strings.ReplaceAll(text, "\n", "\\n")
-	text = strings.ReplaceAll(text, "\r", "\\r")
+	// // Replace newlines with \n
+	// text = strings.ReplaceAll(text, "\n", "\\n")
+	// text = strings.ReplaceAll(text, "\r", "\\r")
 
 	return text
 }
