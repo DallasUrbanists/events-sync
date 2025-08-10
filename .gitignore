@@ -33,4 +33,3 @@ go.work
 # Note: env.example is committed to show the required environment variables
 
 bin
-*.ics

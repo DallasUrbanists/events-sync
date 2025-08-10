@@ -1,0 +1,3428 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Dallas Urbanists//Events Sync//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Dallas Urbanists Synced Events (V3)
+X-WR-CALNAME:Dallas Urbanists Synced Events (V3)
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VTIMEZONE
+TZID:America/Chicago
+X-LIC-LOCATION:America/Chicago
+BEGIN:STANDARD
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+TZNAME:CST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+TZNAME:CDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:3kna8a3adscclj0f5nbnutjts0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240615T050000Z
+DTEND:20240616T050000Z
+SUMMARY:DATA June General Meeting (Not Really but it's the first ever meeting)
+LOCATION:Cole Park\, 4000 Cole Ave\, Dallas\, TX 75204\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4mveocho5fjb8qtd1lmpfea0hn@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240727T170000Z
+DTEND:20240727T200000Z
+SUMMARY:July 2024 General Meeting
+LOCATION:The Metropolitan On Main\, 2032 Main St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0j4dibbp6jjc5gatqkhipkcbpu@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240731T233000Z
+DTEND:20240801T013000Z
+SUMMARY:MLK Station - Canvassing
+LOCATION:Mlk Station\, Dallas\, TX 75215\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:53u5dm3vfnsgbgidpobv2lh929@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240804T140000Z
+DTEND:20240804T180000Z
+SUMMARY:Farmers Branch Trash Cleanup
+LOCATION:Farmers Branch Station\, 12800 Denton Dr\, Farmers Branch\, TX 75234\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:2
+CREATED:20250810T023801Z
+LAST-MODIFIED:20250810T062149Z
+END:VEVENT
+BEGIN:VEVENT
+UID:10ahnb6qeqbufa0r753oo65esk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240809T160000Z
+DTEND:20240809T173000Z
+SUMMARY:DFW Progressives - Connor Speaks Transit
+LOCATION:Zoom
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1rc3k3bubi45j8ndga7238v2ib@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240818T200000Z
+DTEND:20240818T220000Z
+SUMMARY:August 2024 General Meeting
+DESCRIPTION:Enter via Murphy Drive\, 6th floor\n\nJoin with Google Meet: https://meet.google.com/bej-jxcg-nob\nOr dial: (US) +1 904-580-4779 PIN: 503823788#\nMore phone numbers: https://tel.meet/bej-jxcg-nob?pin=7532692090050&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720\n\nJoin with Google Meet: https://meet.google.com/bej-jxcg-nob\nOr dial: (US) +1 904-580-4779 PIN: 503823788#\nMore phone numbers: https://tel.meet/bej-jxcg-nob?pin=7532692090050&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1200 Main St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1qt9apsq4bspn3asc8r8o33h0g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240827T223000Z
+DTEND:20240828T020000Z
+SUMMARY:DART Board Meeting
+DESCRIPTION:Public comments start at 6 pm\, but you must arrive early to register to speak. Once you give your public comment\, you are free to leave.\n\n\nWe need to tell DART we want more spending on frequency\, oppose the budget cuts\, express disdain for the resolutions to cut DART funding\, criticize the cities\, advocate for DART to FIGHT back against state/local action to cut their budget.\n\nEmphasize the importance of frequency improvements\, we want see more out of next years budget. We do NOT want DART to spend less money than they are able to. NO cuts to operating budget. \n\nBe supportive of transit/transit spending
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023801Z
+LAST-MODIFIED:20250810T062149Z
+END:VEVENT
+BEGIN:VEVENT
+UID:75jv2h0lq0f3e32ru88qmv4h6q@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240828T133000Z
+DTEND:20240828T193000Z
+SUMMARY:Dallas City Council Meeting
+DESCRIPTION:Speak in favor of DART funding\, say you are AGAINST state legislature action on DART funding. Advocate against transit cuts\, or revenue caps on DART<br><br>You need to register to speak before the meeting starts. You cannot register right now\, If you mark yourself interested I will remind you to register<br><br><a href="https://cityofdallas.legistar.com/MeetingDetail.aspx?LEGID=3448&amp\;GID=713&amp\;G=FA9AD36F-9FB5-4633-8A99-4487E4A1114C">https://cityofdallas.legistar.com/MeetingDetail.aspx?LEGID=3448&amp\;GID=713&amp\;G=FA9AD36F-9FB5-4633-8A99-4487E4A1114C</a><br><br>DEADLINE to register is usually 5pm day before the meeting
+LOCATION:Dallas City Hall\, 1500 Marilla St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:3
+CREATED:20250810T023801Z
+LAST-MODIFIED:20250810T062149Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4ocnsbt1prdau8af8l7j1mqnra@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240913T160000Z
+DTEND:20240913T170000Z
+SUMMARY:DFW Progressives - Monthly Call
+LOCATION:Zoom
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:22pv0m0973tml49g75qqcoag7p@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240915T210000Z
+DTEND:20240916T000000Z
+SUMMARY:Rowlett Canvassing
+LOCATION:Downtown Rowlett Station Park & Ride\, 5000 Martin Dr\, Rowlett\,TX 75088\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4o0389s6e4gnvbfk8uifu9dkg2@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240921T180000Z
+DTEND:20240921T210000Z
+SUMMARY:September General Meeting
+DESCRIPTION:5th Floor\, Hamon Training Room<br><br>Working Time - IncludesSetup/Teardown<br><br><br><ul><li>Saturday\, September 21\, 2024 from 1:30 - 3:30PM</li><li>J. Erik Jonsson Central Library at 1515 Young Street\, Dallas</li><li>Hamon Training Room\, 5th floor</li><li><i>Disclosure: This event is not sponsored by the Dallas Public Library</i></li><li><b>DATA Election Info</b><br><br>- Candidacy period<br>Sept 2 - Sept 10<br>- Early Voting<br>Sept 16 - Sept 20<br>- Voting<br>Sept 21\, 2:00 - 2:30PM<br>- Tabulation<br>Sept 21\, 2:45PM<br>- Results announced<br>Sept 21 2:50PM</li><li><a href="https://docs.google.com/document/d/1M7-IS2JjXPPeE9pMLfwlhCjHqUlHczwBEYSWs1e316k" class="pastedDriveLink-0"><u>Meeting agenda</u></a></li><li><a href="https://drive.google.com/file/d/1dBjeae9kadSivVdb90S0wb2eAitrLRNv" class="pastedDriveLink-1"><u>Meeting recording</u></a></li><li><a href="https://docs.google.com/document/d/1A6VkltTQvLb_tDSgPfe9DDb7Ee4JmDatXhn4AdVgb2M" class="pastedDriveLink-2"><u>Meeting transcript</u></a></li></ul>\n\nJoin with Google Meet: https://meet.google.com/uqv-oqxh-jxa\nOr dial: (US) +1 502-512-3184 PIN: 475552229#\nMore phone numbers: https://tel.meet/uqv-oqxh-jxa?pin=9477907812911&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:J. Erik Jonsson Central Library\, 1515 Young St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7tpbhqhh5mtot2ptv2oujvil3s@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240924T224500Z
+DTEND:20240925T020000Z
+SUMMARY:Speak at DART board meeting to support staff recommended budget
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3i2n3gsbiok5a1h50d92rkbl6g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20240930T050000Z
+DTEND:20241007T050000Z
+SUMMARY:Week without Driving
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_90d8d625-931d-43e1-8825-7179f8063fc2
+DTSTAMP:20250810T134515Z
+DTSTART:20241001T015800Z
+DTEND:20241007T015800Z
+SUMMARY:Week without driving
+DESCRIPTION:Dallas Week Without Driving Partner Organizations:
+Co-hosts: Dallas Bicycle Coalition, Better Block
+Partners: Feonix Mobility, Dallas Area Transit Alliance, DFW Urbanistas, Dallas Youth Commission, Dallas Disability Commission, and Dallas Neighbors for Housing
+How can you support?
+Sign up on the national site. Select elected official, transportation official, individual, or your appropriate role. 
+https://weekwithoutdriving.org/join/
+Participate by replacing as many car trips as possible with walking, transit, or biking. One trip or one day is a success. A perfect week is not the goal!
+Tag us on social media @betterblock and @dallasbicyclecoalition with the hashtag #WeekWithoutDriving and #WeekWithoutDrivingDallas
+Join us for Happy Hour on Friday, October 4 from 5-7 at Westlake Brewing!
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3t91lritrropqcb6t2juhjj9id@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241003T230000Z
+DTEND:20241004T010000Z
+SUMMARY:North Lake College Canvass
+LOCATION:Dallas College North Lake Campus\, 5001 N MacArthur Blvd\, Irving\, TX 75038\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6vfd7u26r2hm1vk5o1rpns533i@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241004T200000Z
+DTEND:20241004T230000Z
+SUMMARY:Plano and DART Cities discuss DART Cuts Legislative Strategy
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:79tjvloammtr9eqeehaptebp4e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241004T230000Z
+DTEND:20241005T030000Z
+SUMMARY:Week without Driving Social with DFW Urbanistas and Dallas BicycleCoalition 
+LOCATION:Westlake Brewing Company\, 2816 Commerce St\, Dallas\, TX 75226\,USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5cju8buhjipkcesnphkj1fb3cp@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241007T230000Z
+DTEND:20241008T010000Z
+SUMMARY:Downtown Plano Canvassing
+LOCATION:Downtown Plano\, 1021 E 15th St\, Plano\, TX 75074\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_557e9e0e-df33-40d0-b597-82bef75e5412
+DTSTAMP:20250810T134515Z
+DTSTART:20241008T010000Z
+DTEND:20241008T020000Z
+SUMMARY:Last Day to Register to Vote
+DESCRIPTION:https://www.dallascountyvotes.org/
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_f509ef62-8a78-4c92-8f3c-66aa7555801b
+DTSTAMP:20250810T134515Z
+DTSTART:20241012T150000Z
+DTEND:20241012T160000Z
+SUMMARY:October Social Ride
+DESCRIPTION:Details: Social Ride at 10am Lunch around 11:15 Four Corners Brewing 1311 S Ervay St Dallas, TX 75215
+
+LOCATION:Four Corners Brewing Company, 1311 S Ervay St, Dallas, TX 75215, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0p659do5rb81l58iaq0dmk9jtj@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241012T150000Z
+DTEND:20241012T200000Z
+SUMMARY:Fair Park Canvassing - I honestly don't know how we did this
+LOCATION:State Fair Of Texas\, Parry Ave &\, Exposition Ave\, Dallas\, TX 75210\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2fnmptr10bb7b1uve3ens1t9ps@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241015T170000Z
+DTEND:20241015T200000Z
+SUMMARY:NCTCOG Transportation Public Meeting
+LOCATION:North Central Texas Council of Governments\, 616 Six Flags Dr\, Arlington\, TX 76011\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3cdf1mqkuuelb6dmhhn1jh01dv@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241019T190000Z
+DTEND:20241019T210000Z
+SUMMARY:DATA October General Meeting (Livestream)
+DESCRIPTION:Join us for our general meeting at the Erik Johnson Central Library on the 5th floor in the Hamon Training Room<br><br><br><ul><li>Saturday\, October 19\, 2024 from 2:00 - 4:00PM</li><li>J. Erik Jonsson Central Library at 1515 Young Street\, Dallas</li><li>Hamon Training Room\, 5th floor</li><li><i>Disclosure: This event is not sponsored by the Dallas Public Library</i></li><li><a href="https://docs.google.com/document/d/e/2PACX-1vQnUY6UbuIx1m5rX8eJnzp6CRlEYEe4XXkBOPdsCoXm2fzrzSFfKORe3AhpTLyWiqrdfEwN-38xaT31/pub"><u>Agenda</u></a></li><li><a href="https://drive.google.com/file/d/1QlmEhxOhUI3ZMFiN32fOtvYGdXUSAhfI/view?usp=sharing" class="pastedDriveLink-0"><u>Recording</u></a></li><li><a href="https://docs.google.com/document/d/e/2PACX-1vR6a3KGKdJzVHfQwe5IC0m-tC9NG690ByBI335GlMU841QjZc_7Os1GfI5j-PgGIruZUjH6GPkRUtvz/pub"><u>Minutes</u></a></li><li><a href="https://docs.google.com/document/d/e/2PACX-1vSlLwpU4GrjALEvaYKLVMQjHAw2e7BbiXy_0gJVUY1k7UTEtq5_uyx-u1FtDvD05rL3WaUy7lAmbVQF/pub"><u>Transcript</u></a></li><li><a href="https://drive.google.com/file/d/16Z7G_uqV5-lwlsXk-auaGnW3RsK5D6Ao/view?usp=sharing" class="pastedDriveLink-1"><u>Slides</u></a></li></ul>\n\nJoin with Google Meet: https://meet.google.com/try-nwpa-zta\nOr dial: (US) +1 732-858-5831 PIN: 761796052#\nMore phone numbers: https://tel.meet/try-nwpa-zta?pin=8574206963286&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1515 Young St\, Dallas\, TX 75201
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0t0j5tf8lndv3vk30qi7m74mnb@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241019T213000Z
+DTEND:20241020T000000Z
+SUMMARY:After meeting social
+LOCATION:The Exchange Food Hall\, 211 S Akard St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_f7591709-cb04-4065-847f-03b40bfd20ec
+DTSTAMP:20250810T134515Z
+DTSTART:20241021T163000Z
+DTEND:20241021T173000Z
+SUMMARY:Early voting begins
+DESCRIPTION:https://www.dallascountyvotes.org/
+
+
+Voting Locations: 
+https://www.arcgis.com/apps/dashboards/b4061814603441eaa2f7489043e796f4
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023821Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_c98ea5eb-8f4c-4f58-9ab9-d6383569adee
+DTSTAMP:20250810T134515Z
+DTSTART:20241021T180000Z
+DTEND:20241021T190000Z
+SUMMARY:Bike Plan Presented to Transportation and Infrastructure Committee
+DESCRIPTION:Agenda: 
+https://cityofdallas.legistar.com/Calendar.aspx
+
+
+Watch online: 
+https://dallastx.new.swagit.com/views/113/city-council
+
+LOCATION:Dallas City Hall, 1500 Marilla St, Dallas, TX 75201, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_2c0cf91b-8468-467a-bfa4-823efb2f311b
+DTSTAMP:20250810T134515Z
+DTSTART:20241023T123000Z
+DTEND:20241023T133000Z
+SUMMARY:Bike to City Hall
+DESCRIPTION:In conjunction with CMs Moreno, Ridley, and Deputy Mayor Pro Tem Bazaldua, CM West is hosting the 2024 Bike to City Hall event on Wednesday October 23rd. The first event was held in 2011 and it has been an annual tradition since then to promote cycling as an innovative, viable means of affordable transportation. This year, CM West will be honoring iBike Rosemont!
+Schedule:
+Between 7:30AM – 7:45AM, Councilmembers and other bicyclists will meet at Pacific Plaza, 401 N Harwood.
+7:45AM – Group photo
+8:00AM, all bicyclists, escorted by DPD’s bike squad, ride out to City Hall Plaza (route is being reviewed).
+At 8:20AM, there will be a press event at City Hall Plaza
+
+LOCATION:Pacific Plaza 401 N Harwood St, Dallas, TX 75215, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_5e1b1a1f-7af6-43c9-94bd-bafb3106cf07
+DTSTAMP:20250810T134515Z
+DTSTART:20241026T160000Z
+DTEND:20241026T170000Z
+SUMMARY:Bike the Vote
+DESCRIPTION:Bike from Oak Cliff Cycles to the Oak Cliff Government Center to vote as a group.
+
+-Leave Oak Cliff Cycles (815 W Jefferson Blvd, Dallas, TX 75208) around 11:15 am.
+-Arrive at Oak Cliff Government Center (702 E Jefferson Blvd, Dallas, Texas, 75203) around 11:30am.
+-Bike to lunch after everyone is done!
+
+Voting Center Map: 
+https://www.arcgis.com/apps/dashboards/b4061814603441eaa2f7489043e796f4
+
+LOCATION:Oak Cliff Cycles 815 W Jefferson Blvd, Dallas, TX 75208, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:118b23bpg9a8eeo3os1ic06a7f@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241026T180000Z
+DTEND:20241026T210000Z
+SUMMARY:Downtown Series: Plano
+LOCATION:Downtown Plano\, 1021 E 15th St\, Plano\, TX 75074\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_8e5b8078-0eda-40bf-9973-252872c7b45d
+DTSTAMP:20250810T134515Z
+DTSTART:20241101T220000Z
+DTEND:20241101T230000Z
+SUMMARY:Maple Ave Public Meeting
+DESCRIPTION:Maple Ave Vision Zero Redesign Public Meeting- Come support design for new bike lanes! 
+Friday, Nov 1 5:00- 6:00pm 
+Reverchon Rec Center 3505 Maple Ave Dallas, TX 75219
+
+LOCATION:Reverchon Recreation Center, 3505 Maple Ave, Dallas, TX 75219, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_17bc9421-0391-4eed-9268-e3405c2e6bbd
+DTSTAMP:20250810T134515Z
+DTSTART:20241102T021400Z
+DTEND:20241102T031400Z
+SUMMARY:Last Day for Early Voting
+DESCRIPTION:https://www.dallascountyvotes.org/
+
+
+Voting Locations: 
+https://www.arcgis.com/apps/dashboards/b4061814603441eaa2f7489043e796f4
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:779etkf3hloami68mut71d6j46@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241102T160000Z
+DTEND:20241102T190000Z
+SUMMARY:DFW Urbanistas Festival at the Switchyard
+LOCATION:Downtown Carrollton\, Carrollton\, TX 75006\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_483709ab-c332-4981-948c-2276e9cfdffb
+DTSTAMP:20250810T134515Z
+DTSTART:20241106T031200Z
+DTEND:20241106T041200Z
+SUMMARY:Election Day!
+DESCRIPTION:https://www.dallascountyvotes.org/
+
+
+Voting Locations: 
+https://www.arcgis.com/apps/dashboards/b4061814603441eaa2f7489043e796f4
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:65j5k6onq1h1nj3cjaul0jo0fq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241111T170000Z
+DTEND:20241111T200000Z
+SUMMARY:DATA & CFBT - Tabling at UT Dallas
+LOCATION:The University of Texas at Dallas\, 800 W Campbell Rd\, Richardson\, TX 75080\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1mpsk74mvq3avi4hfg18e2kftc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241116T190000Z
+DTEND:20241116T220000Z
+SUMMARY:DATA General Meeting (Livestream)
+DESCRIPTION:<ul><li>Saturday\, November 16\, 2024 from 1:30PM - 4:00PM</li><li>J. Erik Jonsson Central Library at 1515 Young Street\, Dallas</li><li>Hamon Training Room\, 5th floor</li><li><i>Disclosure: This event is not sponsored by the Dallas Public Library</i></li><li><a href="https://docs.google.com/document/d/1St9CluXzDuQ0GcypXZreNAVkr2kL71O0qkOZV_6o3wk/edit?tab=t.0" class="pastedDriveLink-0"><u>Agenda</u></a></li><li><a href="https://drive.google.com/file/d/18SQQaRO3-QF_bM621SlqNByy5em8jchj/view" class="pastedDriveLink-1"><u>Recording</u></a></li><li><a href="https://docs.google.com/document/d/17ng6F8GmilgPP4dMpzQAqt-ygDfh6ZmBz_qVlgRd92g/edit?usp=sharing" class="pastedDriveLink-2"><u>Transcript</u></a></li><li><a href="https://drive.google.com/file/d/16Z7G_uqV5-lwlsXk-auaGnW3RsK5D6Ao/view?usp=sharing" class="pastedDriveLink-3"><u>Slides</u></a></li></ul>\n\nJoin with Google Meet: https://meet.google.com/xyo-qonb-saf\nOr dial: (US) +1 912-712-4130 PIN: 232092273#\nMore phone numbers: https://tel.meet/xyo-qonb-saf?pin=2395349898018&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:J. Erik Jonsson Central Library\, 1515 Young St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3rd4al2rpmfc0pfbi0ltr6ptn5@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241116T223000Z
+DTEND:20241117T020000Z
+SUMMARY:After Meeting Social
+LOCATION:The Exchange Food Hall\, 211 S Akard St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_3f038203-7606-4c02-937c-ed3cab520e52
+DTSTAMP:20250810T134515Z
+DTSTART:20241123T190000Z
+DTEND:20241124T020000Z
+SUMMARY:Deep Ellum Block Party (Roll Up Bike Meetup at 1pm/DBC Bike Valet Provided)
+DESCRIPTION:Deep Ellum is blocking off Elm Street for an all day party! Music, food, drinks, art, and fun all day in Deep Ellum!
+
+Roll up to the Block Party and we've got you covered. 
+RSVP here
+ to let us know you'll be there and to get a reminder the day before. The "roll up" or free meetup is for everyone that rolls through Deep Ellum. Whether you're on bike, skates, a scooter, or something in between, if it's people powered, we'd love to see you. Come join us at the bike valet station at Crowdus and Elm any time between 1-2pm and then leave your wheels safely with us and enjoy the block party.
+
+Dallas Bicycle Coalition is proud to introduce a bike valet in Deep Ellum, located in the parking lot at the corner of Elm and Crowdus. Limited volunteer shifts are available! Sign up here: 
+https://www.signupgenius.com/go/8050D4BA8AA23A2FE3-53093458-bike#/
+
+LOCATION:Deep Ellum
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3iiq0tvp5jdujchcib8i53s0sc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241123T200000Z
+DTEND:20241123T220000Z
+SUMMARY:Happy Hour with Transit Tangents
+LOCATION:Pegasus City Brewery\, 1508 Commerce St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1m35cos5u89kf9tfb0g8bo1tco@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241201T190000Z
+DTEND:20241201T213000Z
+SUMMARY:Stars Canvassing
+LOCATION:Victory\, Dallas\, TX 75207\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2kk0sva55gfkdfvt81reue5ftt@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241207T120000Z
+DTEND:20241207T170000Z
+SUMMARY:Dallas Holiday Parade - Volunteer with DART
+LOCATION:Dallas Downtown Historic District\, Dallas\, TX\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3qq7e199upgbnplpp3roul3jst@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241211T000000Z
+DTEND:20241211T020000Z
+SUMMARY:DART Board Meeting: Support Bus Procurement
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4habinh37bgtoncfcjtjsf5844@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241215T200000Z
+DTEND:20241215T230000Z
+SUMMARY:DATA Holiday Social
+LOCATION:Pegasus City Brewery\, 1508 Commerce St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062154Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5n56vptmnnq11ll2pqia376lk0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241218T190000Z
+DTEND:20241218T210000Z
+SUMMARY:DART Board Workshop - Governance
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023805Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7suboc2javt6v136771teu15tq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20241221T170000Z
+DTEND:20241221T190000Z
+SUMMARY:Trains at NorthPark
+LOCATION:The Trains at NorthPark\, 8687 N Central Expy\, Dallas\, TX 75225\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4aiej1j9s16feg640pvfn3t4jh@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250104T190000Z
+DTEND:20250104T220000Z
+SUMMARY:Plano Social
+LOCATION:1418 Coffee - Historic Downtown Plano\, TX\, 1418 K Ave\, Plano\,TX 75074\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:20u0a0fkevhasp2u33423onmja@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250108T190000Z
+DTEND:20250109T000000Z
+SUMMARY:DART Board Workshop - Plano Demands\, Part 1
+DESCRIPTION:<ul><li>Wednesday\, January 8\, 1:00PM</li><li>DART Headquarters at Akard Station\, 1401 Pacific Avenue</li><li>Workshop to address Plano's demands and potential governance changes</li><li><a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-01-08-special-called-meeting-of-the-committee-of-the-whole-agenda.pdf"><u>Agenda</u></a></li></ul>
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:532c3iqobo5ch27upmnl4p7u5t@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250110T190000Z
+DTEND:20250111T000000Z
+SUMMARY:DART Board Workshop - Plano Demands\, Part 2
+DESCRIPTION:<br>DART Board Workshop - Plano Demands\, Part 2<ul><li>Wednesday\, January 10\, 1:00PM</li><li>DART Headquarters at Akard Station\, 1401 Pacific Avenue</li><li>Workshop to address Plano's demands and potential governance changes</li><li><a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-01-10-special-called-meeting-of-the-committee-of-the-whole-agenda.pdf"><u>Agenda</u></a></li></ul>
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062152Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1bsvqotndbiobbeacft0g7dqhh@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250114T010000Z
+DTEND:20250114T040000Z
+SUMMARY:Plano City Council Meeting
+DESCRIPTION:Do you live or work in Plano? Show up or comment over zoom to show your support for DART. Please fill out this form to let us know you are going to comment. <a href="https://www.google.com/url?q=https://forms.gle/H1CD5qY5qbcd25eTA&amp\;sa=D&amp\;source=calendar&amp\;ust=1739676748876149&amp\;usg=AOvVaw1N7hMncAvNy5kux_-5cCYU" target="_blank">https://forms.gle/H1CD5qY5qbcd25eTA</a><br>
+LOCATION:1520 K Ave\, Plano\, TX 75074
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3pcs2phubmn0h7otsuaq62ok1n@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250118T193000Z
+DTEND:20250118T220000Z
+SUMMARY:DATA January General Meeting (Livestream)
+DESCRIPTION:Join with Google Meet: https://meet.google.com/gig-ijox-net\nOr dial: (US) +1 323-942-0699 PIN: 695170477#\nMore phone numbers: https://tel.meet/gig-ijox-net?pin=5192915168901&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720\n\nJoin with Google Meet: https://meet.google.com/gig-ijox-net\nOr dial: (US) +1 323-942-0699 PIN: 695170477#\nMore phone numbers: https://tel.meet/gig-ijox-net?pin=5192915168901&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5fee2e8aj07drl6vj56vbfo06p@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250118T230000Z
+DTEND:20250119T020000Z
+SUMMARY:Dallas Urbanists STLC Mixer
+LOCATION:The Exchange Food Hall\, 211 S Akard St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_a1e36010-8549-43ce-a649-10b91d868eec
+DTSTAMP:20250810T134515Z
+DTSTART:20250118T230000Z
+DTEND:20250119T010018Z
+SUMMARY:Dallas Urbanists January Mixer
+DESCRIPTION:RSVP here: https://www.meetup.com/dallas-urbanists-stlc/events/305511620/?slug=dallas-urbanists-stlc&eventId=305511620
+Looking to get more involved in local advocacy? This event is the perfect way to get a clear picture of who's doing what in our community. We'll start with a brief presentation on "What is Dallas Urbanists STLC," then hear from three local groups making a difference:
+🏘️
+Dallas Neighbors for Housing
+🚲
+Dallas Bicycle Coalition
+🚍
+Dallas Area Transit Alliance (DATA)
+SCHEDULE
+
+5:00 DOORS OPEN
+5:30 PROGRAM BEGINS
+Introducing Dallas Urbanists STLC, 10 minutes
+Feature #1: Dallas Neighbors for Housing, 10 minutes
+Feature #2: DATA / Dallas Area Transit Alliance, 10 minutes
+Feature #3: Dallas Bicycle Coalition, 10 minutes
+6:10 JOINT Q&A
+6:30 MEET & GREET
+
+LOCATION:AT&T Exchange Hall: 211 S Akard St, Dallas, TX 75202
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:78octoqek957un6v0rjoppekrt@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250128T010000Z
+DTEND:20250128T040000Z
+SUMMARY:Plano City Council Meeting
+DESCRIPTION:Do you live or work in Plano? Show up or comment over zoom to show your support for DART. Please fill out this form to let us know you are going to comment. <a href="https://www.google.com/url?q=https://forms.gle/H1CD5qY5qbcd25eTA&amp\;sa=D&amp\;source=calendar&amp\;ust=1739675991729011&amp\;usg=AOvVaw0eZ9I-B2QmjHxyO0_U5Uhf" target="_blank">https://forms.gle/H1CD5qY5qbcd25eTA</a><br>
+LOCATION:1520 K Ave\, Plano\, TX 75074
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023804Z
+LAST-MODIFIED:20250810T062153Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4e8piffa9cf0pogovip6tf6hli@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250201T180000Z
+DTEND:20250201T220000Z
+SUMMARY:Discussing the Future of Transit in Texas
+LOCATION:1515 Young Street\, Hamon Training Room
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_d8e93ccc-ff50-4147-89c3-44338d9f19ad
+DTSTAMP:20250810T134515Z
+DTSTART:20250202T180000Z
+DTEND:20250202T210000Z
+SUMMARY:Tweed Ride Dallas
+DESCRIPTION:The Dallas Tweed Ride is officially this Sunday, February 2nd starting at the grassy knoll in downtown Dallas. Dress in your favorite 1920's attire and bicycle down to meet us at noon. We'll roll out at 12:30 p.m. and circle around downtown with a few historic stops along the way, and then on to the Bishop Arts District for games, live jazz music with the 
+@bishopavenuehotsix
+ and more at Jaquval Brewpub!
+
+See more on IG at 
+@jaquval
+.
+
+LOCATION:The Grassy Knoll 411 Elm St, Dallas, TX 75202
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4s1hum56bo3m9j4mv3i79u9inl@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250202T230000Z
+DTEND:20250203T010000Z
+SUMMARY:Plano Social
+LOCATION:Dumpling House\, 221 W Parker Rd #525\, Plano\, TX 75023\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:q1rrmf8r0t7utpdpck76hcfago@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250210T233000Z
+DTEND:20250211T050000Z
+SUMMARY:Richardson City Council Meeting
+DESCRIPTION:<a href="https://www.cor.net/departments/communications/citizens-information-television">https://www.cor.net/departments/communications/citizens-information-television</a><br><br>CONSIDER RESOLUTION NO. 25-03\, SUPPORTING THE FULL FUNDING OF THE DALLAS AREA RAPID<br>TRANSIT (DART) SYSTEM AND URGING CONTINUED INVESTMENT IN PUBLIC TRANSIT.<br>
+LOCATION:RICHARDSON CITY HALL (2360 CAMPBELL CREEK BLVD.\, SUITE 525\, RICHARDSON\, TX 75082)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:gt7hc7bm9mhq8t00u3gldd49no@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250211T010000Z
+DTEND:20250211T040000Z
+SUMMARY:Plano City Council Meeting
+DESCRIPTION:Do you live or work in Plano? Show up or comment over zoom to show your support for DART. Please fill out this form to let us know you are going to comment. <a href="https://forms.gle/H1CD5qY5qbcd25eTA">https://forms.gle/H1CD5qY5qbcd25eTA</a><br>
+LOCATION:1520 K Ave\, Plano\, TX 75074
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023801Z
+LAST-MODIFIED:20250810T062149Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0p9duntljfjh1iqgsg3c263kgn@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250211T193000Z
+DTEND:20250211T230000Z
+SUMMARY:DART Committee of the Whole Meeting
+DESCRIPTION:Meeting Agenda <b><a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-02-11-committee-of-the-whole-agenda.pdf?sfvrsn=ccf58592_1">View/Download</a></b><br>2025-02-11 Committee of the Whole Agenda Packet <b><a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-02-11-committee-of-the-whole-agenda-packet.pdf?sfvrsn=73e7bc2b_1">View/Download</a></b><br>
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ggggduuthbago69u2ur6ft0r7o@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250211T233000Z
+DTEND:20250212T023000Z
+SUMMARY:Addison City Council Meeting
+DESCRIPTION:The City Council will receive an update from Dallas Area RapidTransit (DART) President and Chief Executive Officer\, Nadine Lee.<br>
+LOCATION:Addison Conference Centre 15650 Addison Road Addison\, Texas 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:q7grei85rrdin911in1ktpf4n8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250212T153000Z
+DTEND:20250212T191500Z
+SUMMARY:2025 Texas Vision Zero Summit: TxLege Forum on Ending Traffic Deaths
+DESCRIPTION:This will be broadcast from the main room at the TxLege Forum on Ending Traffic Deaths. A Farm&City staff member will be present on the zoom hosting the event. They will try to relay questions and comments to the in-person staff\, and may be able to facilitate discussions in between panels. However\, predominantly this gives you access to watch and hear the discussions happening in person\, as well as access to the recording after the event.<br>
+LOCATION:https://us02web.zoom.us/webinar/register/WN_D_9l6ATZTwC_U8MGAo-ILg?mc_cid=4c933347f3#/registration
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:uln2eat0vvggq1742v0nm2u724@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250213T003000Z
+DTEND:20250213T023000Z
+SUMMARY:Silver Line Biannual Meeting (Addison)
+DESCRIPTION:<a href="https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february">https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february</a><br><br>Dallas Area Rapid Transit (DART) will hold the next series of Silver Line Regional Rail Biannual Community Meetings in February at 6:30 p.m<br><br>Beginning Wednesday\, Feb. 5\, staff from DART and Archer Western Herzog\, the design-build contractor\, will be on hand to outline the latest construction developments\, service planning and answer community questions. This will be the first of two community meetings across the Silver Line corridor\, with the second series scheduled for later this summer.<br>
+LOCATION:The Radisson Hotel (4960 Arapaho Road\, Addison\, 75001)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023801Z
+LAST-MODIFIED:20250810T062149Z
+END:VEVENT
+BEGIN:VEVENT
+UID:9841tcs741bg7be0fclfblgm7g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250213T150000Z
+DTEND:20250213T210000Z
+SUMMARY:Dallas CPC - Parking Reform Public Hearing
+DESCRIPTION:Briefing 9am<br>Public hearing 12pm<br>
+LOCATION:Dallas City Hall
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:78ut7dsevf4ptc1abipf8gnp1r@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250213T190000Z
+DTEND:20250213T230000Z
+SUMMARY:NCTCOG RTC
+LOCATION:North Central Texas Council of Governments\, 616 Six Flags Dr\, Arlington\, TX 76011\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:rvigglt6aen7lo4310oncuh774@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250216T173000Z
+DTEND:20250216T210000Z
+SUMMARY:Transit Together: Galentine's Coffee Crawl (Hosted by DFW Urbanistas)
+DESCRIPTION:Urbanistas DFW has collected a map of transit friendly and Urbanista approved coffee shops. All are welcome\, this is not an exclusive women's event. Remember to bring a reusable mug!<br>
+LOCATION:Akard Station
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:cn9pevgpj29be5riirv9ojum08@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250216T210000Z
+DTEND:20250217T000000Z
+SUMMARY:Mary's Memorial Ride
+DESCRIPTION:Join DATA as we do a memorial ride in honor for Mary by following her public transit commute. We will ride the Green Line to SW/Medical Center then transfer to the 57/230 bus lines.<br><br>To Honor Mary\, she always would want to pull people onto trains and buses. DATA will be doing an "honor ride" where we will be taking the Green Line from Downtown Carrollton Station and riding the 230/57 bus to her workplace where she worked as an instrument repair technician.<br>
+LOCATION:Downtown Carrollton Station
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2laicrsbr8jhq3mqnq4g788id1@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250217T000000Z
+DTEND:20250217T020000Z
+SUMMARY:Carrollton Social
+LOCATION:Babe's Chicken Dinner House\, 1456 Belt Line Rd #171\, Garland\, TX 75044\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:r6h9st9hkpc7jgmm2b3270qjdc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250219T003000Z
+DTEND:20250219T023000Z
+SUMMARY:Silver Line Biannual Meeting (Carrollton)
+DESCRIPTION:<a href="https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february">https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february</a><br><br>Dallas Area Rapid Transit (DART) will hold the next series of Silver Line Regional Rail Biannual Community Meetings in February at 6:30 p.m<br><br>Beginning Wednesday\, Feb. 5\, staff from DART and Archer Western Herzog\, the design-build contractor\, will be on hand to outline the latest construction developments\, service planning and answer community questions. This will be the first of two community meetings across the Silver Line corridor\, with the second series scheduled for later this summer.<br>
+LOCATION:Crosby Recreation Center​ (1610 E Crosby Rd\, Carrollton\, 75006​) ​
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:mg35lnmcd3n4ocbemi0vc9or94@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250220T000000Z
+DTEND:20250220T020000Z
+SUMMARY:How TxDOT Works Texas Streets Coalition
+DESCRIPTION:Zoom event with Dallas Streets Coalition. Education on TxDOT. <a href="https://us02web.zoom.us/j/81049941304?pwd=oh3lkbelO9a5nbGfoBQJx8Snmw5PUj.1">https://us02web.zoom.us/j/81049941304?pwd=oh3lkbelO9a5nbGfoBQJx8Snmw5PUj.1</a><br><br>Event slides: <a href="https://prezi.com/view/yb5c0YOS26dchfyPVwvW/">https://prezi.com/view/yb5c0YOS26dchfyPVwvW/</a><br>
+LOCATION:https://us02web.zoom.us/j/81049941304?pwd=oh3lkbelO9a5nbGfoBQJx8Snmw5PUj.1
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_647bc176-b91d-48a4-82e7-3ca0acb6f68a
+DTSTAMP:20250810T134515Z
+DTSTART:20250220T000000Z
+DTEND:20250220T013000Z
+SUMMARY:How TXDOT Works: Public Workshop
+DESCRIPTION:Join advocates from 
+Texas Streets Coalition
+ for a virtual workshop to support transportation advocates in better understanding how TXDOT works. Learn about planning policies and processes and opportunities to get involved. Join advocates from across the state for a 60 minute presentation, followed by a 30 minute Q&A. 
+
+Zoom link: tinyurl.com/howtxdotworks
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6i3v7bjjho7vph2t9d2d3v8mrc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250220T003000Z
+DTEND:20250220T023000Z
+SUMMARY:Silver Line Biannual Meeting (Coppell)
+DESCRIPTION:<a href="https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february">https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february</a><br><br>Dallas Area Rapid Transit (DART) will hold the next series of Silver Line Regional Rail Biannual Community Meetings in February at 6:30 p.m<br><br>Beginning Wednesday\, Feb. 5\, staff from DART and Archer Western Herzog\, the design-build contractor\, will be on hand to outline the latest construction developments\, service planning and answer community questions. This will be the first of two community meetings across the Silver Line corridor\, with the second series scheduled for later this summer.<br>
+LOCATION:The Sound at Cypress Waters (3111 Olympus Blvd\, Coppell\, 75019​​)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:i9mfs5s69njesun1h9gip0p000@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250221T000000Z
+DTEND:20250221T020000Z
+SUMMARY:North Texas Urbanist Book Club (Hosted by Better Block)
+DESCRIPTION:Have you ever wondered how your city impacts your daily life? From the streets we walk to the neighborhoods we live in\, urbanism shapes it all - and we’re here to talk about it.<br><br>Join the first meeting of the NTX Urbanist Book Club\, where we’ll explore “Paved Paradise” by Henry Grabar. This eye-opening book dives into the fascinating world of parking policies\, uncovering how they affect housing\, transportation\, and the way cities like Dallas grow and thrive.<br><br>This is more than just a book club - it’s a space to connect with others\, share ideas\, and learn how we can create better communities together. Whether you’re a lifelong Dallasite\, new to the city\, or simply curious about urban design - this event is for you!<br><br>When: Thursday\, February 20<br>Where: @thewilddetectives<br>Time: 6:30pm - 7:30pm<br><br>Copies of the book can be purchased at Wild Detectives our checked out at the Dallas Public Library.<br><br><a href="https://www.eventbrite.com/e/ntx-urbanist-book-club-paved-paradise-tickets-1224168784789?aff=od">https://www.eventbrite.com/e/ntx-urbanist-book-club-paved-paradise-tickets-1224168784789?aff=od</a><br>
+LOCATION:314 W 8th St\, Dallas\, Texas 75208
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:o7r414ml88mldoh0qfohhnen0o@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250221T003000Z
+DTEND:20250221T013000Z
+SUMMARY:Silver Line Biannual Meeting (Plano)
+DESCRIPTION:<a href="https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february">https://www.dart.org/about/plans-projects-and-initiatives/expansion/silver-line-regional-rail-project/silverline-news-releases/dart-silver-line-biannual-community-meetings-set-to-begin-in-february</a><br><br>Dallas Area Rapid Transit (DART) will hold the next series of Silver Line Regional Rail Biannual Community Meetings in February at 6:30 p.m<br><br>Beginning Wednesday\, Feb. 5\, staff from DART and Archer Western Herzog\, the design-build contractor\, will be on hand to outline the latest construction developments\, service planning and answer community questions. This will be the first of two community meetings across the Silver Line corridor\, with the second series scheduled for later this summer.<br>
+LOCATION:Harrington Library​ (1501 18th St\, Plano\, 75074​)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_f06f81ee-fecd-4b58-9c0f-15d7f2b4710f
+DTSTAMP:20250810T134515Z
+DTSTART:20250222T160000Z
+DTEND:20250222T173000Z
+SUMMARY:DBC Coffee Social (Social Ride to Follow)
+DESCRIPTION:Join the Dallas Bicycle Coalition board for our first event of the year! We'll be hanging out at The Meteor Cafe from 10-11:30a for morning coffee and good conversation. Learn about our 2025 goals, sign up to get involved, and give input on our advocacy priorities for the year. 
+Optionally, join the Hangover Riders for a 10-12 mile social ride, leaving from The Meteor at 11:30.
+RSVP: https://actionnetwork.org/events/february-coffee-social/
+
+LOCATION:The Meteor Cafe 1950 Hi Line Dr, Dallas, TX 75207
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:paol11b28qagqvunk2snik78qk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250222T160000Z
+DTEND:20250222T173000Z
+SUMMARY:[DBC] Coffee Social
+DESCRIPTION:Dallas Bicycle Coalition focuses on making Dallas a safe and convenient place to bike\, and they're hosting a coffee social on Saturday at 10am at the Meteor in Dallas. Meet cool\, community-focused people working to make our city better!<br><br><a href="https://www.reddit.com/r/dart/comments/1iskh0b/coffee_social_with_dallas_bicycle_coalition_on/">https://www.reddit.com/r/dart/comments/1iskh0b/coffee_social_with_dallas_bicycle_coalition_on/</a><br>
+LOCATION:The Meteor Dallas\, 1950 Hi Line Dr\, Dallas\, TX 75207\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:v1bloiiv176id9pilrqfin6pt8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250222T193000Z
+DTEND:20250222T220000Z
+SUMMARY:DATA General Meeting and Special Election
+DESCRIPTION:February general meeting and special election for electing an Events Planning chair. Hamon training room 5th floor.<br><br>Join with Google Meet: <a href="https://meet.google.com/boa-zrks-mkd">https://meet.google.com/boa-zrks-mkd</a><br>Or dial: (US) +1 754-666-0463 PIN: 727594731#<br>More phone numbers: <a href="https://tel.meet/boa-zrks-mkd?pin=7803065978154&amp\;hs=7">https://tel.meet/boa-zrks-mkd?pin=7803065978154&hs=7</a><br><br>Learn more about Meet at: <a href="https://support.google.com/a/users/answer/9282720">https://support.google.com/a/users/answer/9282720</a><br>\n\nJoin with Google Meet: https://meet.google.com/boa-zrks-mkd\nOr dial: (US) +1 754-666-0463 PIN: 727594731#\nMore phone numbers: https://tel.meet/boa-zrks-mkd?pin=7803065978154&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1515 Young St\, Dallas\, TX 75201
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:29h4e56iqp5hm7kigkfjbto588@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250223T190000Z
+DTEND:20250223T220000Z
+SUMMARY:Book Club Meeting and Urbanists Mappy Hour
+DESCRIPTION:Reading Human Transit for the month of February. Hosted at Dolce Paradisio in Addison.<br><br>Stick around afterwards for Mappy Hour\, an informal social for local urbanists to contribute to OpenStreetMap together. <a href="https://www.openstreetmap.org/about">What is OSM</a><br>
+LOCATION:5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023803Z
+LAST-MODIFIED:20250810T062151Z
+END:VEVENT
+BEGIN:VEVENT
+UID:cfd37qr394hj50k7uv9u8ef148@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250225T010000Z
+DTEND:20250225T040000Z
+SUMMARY:Save Plano Buses - Plano City Council Meeting
+DESCRIPTION:Do you live or work in Plano? Show up or comment over zoom to show your support for DART. Please fill out this form to let us know you are going to comment. <a href="https://forms.gle/H1CD5qY5qbcd25eTA">https://forms.gle/H1CD5qY5qbcd25eTA</a><br>
+LOCATION:1520 K Ave\, Plano\, TX 75074
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250225T234500Z
+DTEND:20250226T024500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+RRULE:FREQ=MONTHLY;UNTIL=20260101T055959Z;BYDAY=4TU
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5cdjg47aqg984aua8e94d2s9bk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250225T234500Z
+DTEND:20250226T014500Z
+SUMMARY:SAVE PLANO BUSES FROM ELIMINATION - DART Board Meeting
+DESCRIPTION:There is a proposal that would eliminate routes 235\, 254\, and portions of the routes 236 and 247.  In their place\, Plano would have a citywide GoLink zone. We are going to show OPPOSITION to removing Plano bus routes\, but we are okay with citywide GoLink. Plano can have citywide GoLink and keep their bus routes. There is no good reason to remove Plano's bus routes. To be clear\, we can and should be supportive or neutral to citywide GoLink. We oppose removal of DART bus services in Plano.<br><br>You have to register to leave a public comment prior to the board meeting. Registration is done in person. We encourage Plano residents to prioritize speaking to their council about this issue. Non-Plano residents should prioritize the board meeting.<br>
+LOCATION:1401 Pacific Avenue\, Dallas\, TX
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062155Z
+END:VEVENT
+BEGIN:VEVENT
+UID:l047n8aepkch7vo96a2k5c0puk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250226T180000Z
+DTEND:20250226T190000Z
+SUMMARY:[Link Houston] How to Advocate at the Texas Legislative Session
+DESCRIPTION:<a href="https://us02web.zoom.us/meeting/register/rC-vL6KBTxiCByDxs0Q3SA?fbclid=PAZXh0bgNhZW0CMTEAAabssSad0Z38c6vd1fEXq9eLiFq_R9xREDOrMnTHc0w3Do9E1OouBv0GuvY_aem_cYr_cMRlmTfgebGA_ayRaw#/registration">https://us02web.zoom.us/meeting/register/rC-vL6KBTxiCByDxs0Q3SA?fbclid=PAZXh0bgNhZW0CMTEAAabssSad0Z38c6vd1fEXq9eLiFq_R9xREDOrMnTHc0w3Do9E1OouBv0GuvY_aem_cYr_cMRlmTfgebGA_ayRaw#/registration</a><br>
+LOCATION:https://us02web.zoom.us/meeting/register/rC-vL6KBTxiCByDxs0Q3SA?fbclid=PAZXh0bgNhZW0CMTEAAabssSad0Z3
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:bn8ansrl6pb9qqgramfmbh3564@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250227T190000Z
+DTEND:20250227T210000Z
+SUMMARY:Irving City Council Work Session
+DESCRIPTION:Irving will have a presentation regarding a DART Update listedas Agenda Item No. 4 on the Work Session Agenda<br><br><a href="https://www.cityofirving.org/DocumentCenter/View/64336/Feb-27-Work-Session-Agenda">https://www.cityofirving.org/DocumentCenter/View/64336/Feb-27-Work-Session-Agenda</a><br>
+LOCATION:Irving City Hall
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:8fh0epn85tgqmetse43nkbugao@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250227T203000Z
+DTEND:20250227T213000Z
+SUMMARY:Trinity Railway Express Advisory Committee Meeting
+DESCRIPTION:The Trinity Railway Express Advisory Committee meeting will beheld in person at Trinity Metro Board<br>Room. The public is encouraged to attend the meeting in person. The following video conference link will<br>be available to the public to listen and view the meeting:<br><a href="https://www.dart.org/about/board/boardvideo.asp">https://www.dart.org/about/board/boardvideo.asp</a>.<br>DART Committee Members Trinity Metro Committee Members<br>Rick Stopfer Ben Robertson<br>Carmen Garcia Chair Jeff Davis<br>Gary Slagel Isaac Manning<br><br><ol><li>Call to Order [5 Minutes]</li><li>Selection of TRE Advisory Committee Chair (Action Item) [5 Minutes]</li><li>Approval of the Meeting Minutes from November 20\, 2024 (Action Item) [5 Minutes]</li><li>TRE Marketing Plan Update FY25 [15 Minutes]</li><li>TRE Operations Report Update [10 Minutes]</li><li>TRE Fleet and Facility Update [10 Minutes]</li><li>TRE Capital Projects Update [10 Minutes]</li><li>PTC Update [5 Minutes]</li><li>FY24/25 Operating and Capital Budget Update [5 Minutes]</li><li>Other items for discussion</li><li>Agenda Items for Next TRE Advi...</li></ol>
+LOCATION:Equipment Maintenance Facility (EMF) 108 Valley View Lane Irving\, Texas 75061
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7u3outoaqhoqp6p15s82geefec@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250228T150000Z
+DTEND:20250228T180000Z
+SUMMARY:DART Board Workshop on upcoming Legislation and Transit 2.0
+DESCRIPTION:<a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-02-28-board-workshop-agenda-packet.pdf?sfvrsn=ae9d29ac_1">https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-02-28-board-workshop-agenda-packet.pdf?sfvrsn=ae9d29ac_1</a><br>
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5ero2ec4bei2bq3694ib8re7i7@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250301T013000Z
+DTEND:20250301T033000Z
+SUMMARY:[DBC] Dallas Critical Mass
+DESCRIPTION:<p>Critical Mass is a global movement where people ride their bike together as a group to demonstrate the need to make space for bikes on the road. It happens on the last Friday of the month in cities around the world. Dallas Critical Mass leaves at 8pm from the Dallas Farmer's market.</p><p>This is a social\, conversation paced ride. The ride always starts at 8pm at the Dallas Farmer's Market\, but the ride leader and ending location changes each month. Check the Facebook group for details. Bring white front lights and rear red lights\, a helmet\, and water. A bike lock and other bike tools are encouraged\, but not required.</p><p><a href="https://www.facebook.com/groups/criticalmassdallas">Read more about Critical Mass Dallas on the official Facebook group</a></p><p><a href="https://en.wikipedia.org/wiki/Critical_Mass_(cycling)">more about Critical Mass (in general) on Wikipedia</a></p>
+LOCATION:Dallas Farmers Market\, 920 S Harwood St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RRULE:FREQ=MONTHLY;UNTIL=20250328T045959Z;BYDAY=-1FR
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5s20ska2ps3njtcljmqbbhjijk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250301T160000Z
+DTEND:20250301T190000Z
+SUMMARY:[DSA NTX] Ecosoc Meeting + Tabling at Harrington Library
+DESCRIPTION:Help us save transit in North Texas! We will discuss legislative updates briefly before tabling at the front of Harrington Library to let Plano residents know that their state representatives are threatening cuts to public transit in North Texas! All are welcome\, even if you've never tabled before or you're hearing about DART cuts for the first time.<br><br><a href="https://actionnetwork.org/events/ecosoc-meeting-tabling-at-harrington-library">https://actionnetwork.org/events/ecosoc-meeting-tabling-at-harrington-library</a><br>
+LOCATION:Harrington Library • 1501 18th Street\, Plano\, TX 75074 US
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_4f5fd653-d0b6-4b96-88a3-53c7205872fd
+DTSTAMP:20250810T134515Z
+DTSTART:20250309T000000Z
+DTEND:20250309T030000Z
+SUMMARY:Bike Story Night Dallas!
+DESCRIPTION:Bike Story Night is Coming to Dallas!
+Join us for an unforgettable evening where we come together to share the magic of storytelling, reconnect with old bike friends, and make new connections. We also like to shine a spotlight on different local bike non-profits at each event.
+At Bike Story Night, our mission is to empower individuals to share their unique stories with the community, both in-person and online. These events serve as a platform for diverse voices, celebrating the intersection of storytelling and the joy of cycling.
+Get tickets (suggested donation $10-$20)
+
+PS don't miss the social ride beforehand!
+Ride Leader: Jaime Ramirez from Hangover Riders
+📍Starting Point: 5PM Dallas Farmers Market - 920 S Harwood St
+ROLL OUT 5:30
+🎤Mid Stop: 6:15 - 9PM ~ 🎤🚲Bike Story Night at 🍻Four Corners Brewing Co.
+📍Ending: Back at the Start
+How many miles total? (6miles) What's your average pace? 10-12 mph
+
+LOCATION:Four Corners Brewery 1311 S Ervay St. Dallas, TX 75215
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4tdmi3kqa4sui9bald212vguel@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250309T000000Z
+DTEND:20250309T030000Z
+SUMMARY:[DBC] Bike Story Night Dallas!
+DESCRIPTION:This event is not sponsored or hosted by DATA but we are sharing events that our members may be interested in.<br><br>Join us for an unforgettable evening where we come together to share the magic of storytelling\, reconnect with old bike friends\, and make new connections. We also like to shine a spotlight on different local bike non-profits at each event.<br><br>At Bike Story Night\, our mission is to empower individuals to share their unique stories with the community\, both in-person and online. These events serve as a platform for diverse voices\, celebrating the intersection of storytelling and the joy of cycling.<br><br>Featured Storyteller submission form: <a href="https://forms.gle/rojpDcJrV2kS4KyN8">https://forms.gle/rojpDcJrV2kS4KyN8</a><br><br>Website: <a href="https://www.bikestorynight.com/home">https://www.bikestorynight.com/home</a><br><br>Dallas Volunteer / Interest form: <a href="https://forms.gle/LDRSDmaAyrwkxtsB8">https://forms.gle/LDRSDmaAyrwkxtsB8</a><br>
+LOCATION:Four Corners Brewing Company\, 1311 S Ervay St\, Dallas\, TX 75215\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5fkn59bumei0oav6hugglkjgm4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250309T180000Z
+DTEND:20250309T193000Z
+SUMMARY:DATA Book Club Meeting
+DESCRIPTION:For March\, we are revisiting Human Transit to finish our discussion of that book. This is also a great spot to grab lunch before we start the discussion!<br>
+LOCATION:Dolce Paradiso\, 5030 Addison Circle\, Addison\, TX\, 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ngnakh28kb5l4q673f7bdi10kk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250310T170000Z
+DTEND:20250310T200000Z
+SUMMARY:NCTCOG Transportation Public Meeting
+LOCATION:NCTCOG 600 Six Flags Dr Arlington\, TX  76011 United States
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_92100bc6-02cb-4c6f-971e-f1a574f52332
+DTSTAMP:20250810T134515Z
+DTSTART:20250311T203000Z
+DTEND:20250313T203000Z
+SUMMARY:National Bike Summit
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6p8vvnb7j46g227hefjh5q6k64@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250314T000000Z
+DTEND:20250314T010000Z
+SUMMARY:DATA Lobby Day Training Session #1
+LOCATION:https://us02web.zoom.us/j/84263078911?pwd=awijygL3DNDGDQeDjAbWsz6sV1IzRE.1
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2a7guo7o1k3tbip3cfbd7av5g0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250314T210000Z
+DTEND:20250314T220000Z
+SUMMARY:Plano City Council Special Session Watch Party
+DESCRIPTION:Let’s say goodbye to Shelbs and either Wageman or Barbera\, and then say hello to hopefully not Shelbs<br>
+LOCATION:https://www.plano.gov/1565/Plano-TV
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:mdejer2pck0cl4droaqcjee8hk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250316T164500Z
+DTEND:20250316T200000Z
+SUMMARY:[DFW Urbanistas] Transit Together: Dallas Arboretum
+DESCRIPTION:Urbanistas DFW are celebrating spring by going to the Dallas Arboretum! Meet at Akard Station at 11:50am\, and we'll take the 214 bus together to the Arboretum. For anyone meeting us there\, we'll arrive a little after 12:30pm. This is not exclusively a women's event. All are welcome. Please remember to purchase a ticket in advance and bring a reusable shopping bag if you'd like to support the Arboretum Women's Market.<br>
+LOCATION:Dallas Arboretum (Meet at Akard Station)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:s3i05e1nessu4pdla4i87vq860@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250318T230000Z
+DTEND:20250319T000000Z
+SUMMARY:[Dallas Neighbors for Housing] Housing Bills in Texas Legislature
+DESCRIPTION:Join Dallas Neighbors for Housing on Zoom\, Tuesday\, March 18at 6pm (CT) for an educational session about housing bills that are being considered in the Texas Legislature.<br><br>The Texas Legislature files thousands of bills every session. The current session has seen a number of bills put forward that will affect housing across the state. The bills range from good (increased funding for Affordable Housing and allowing ADUs by-right) to bad (decreased tenants rights). We believe it's important to know what's happening at the state level because it directly impacts policy in Dallas. However\, there's so much information it's difficult to keep up with everything.<br><br><a href="https://actionnetwork.org/events/housing-bills-at-the-texas-legislature">RSVP</a> on our event page to receive the zoom invite and learn more!<br><br>This event is neither hosted nor sponsored by DATA but may be of interest to DART community members.<br>
+LOCATION:Zoom (see details for Action Network sign up)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:td7dfehnnr8b83f8q0er5aml2o@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250319T000000Z
+DTEND:20250319T010000Z
+SUMMARY:Lobby Day Training Session #2
+DESCRIPTION:Please join this lobby day training session\, all attendees tolobby day should join one training session.<br>
+LOCATION:https://us02web.zoom.us/j/81679645286?pwd=FhRW8Gqa4oz83Uq0K1KaGkyT4A7A6w.1
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0leqsns4l505ft6nke3l9519nc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250320T230000Z
+DTEND:20250321T000000Z
+SUMMARY:[DUSTLC] Webinar: How to craft your Dallas Urbanists "Follow-Along" Story
+DESCRIPTION:Dallas Urbanists STLC<br><br>Breaking the Cycle: How Stories Shape Our City<br><br>Decision-makers who shape Dallas—from council members to developers—base their choices on assumptions about:<br><br>How people currently live in Dallas<br>What people want for Dallas's future<br>Example: A council member who rarely uses DART might:<br><br>Assume only desperate people use public transit<br>Conclude nobody wants better transit options<br>Vote for car-centered policies<br>Inadvertently create a city where fewer people use transit<br>In a city of 1.3 million people\, our future is decided by a handful of politicians who are trapped in this cycle. Stories help break this cycle by popping the "car-bubble."<br><br>Your Story Is Worth Sharing<br><br>Even if your experience seems ordinary\, it matters! We want to hear from you if:<br><br>You commute by bus\, train\, or bicycle<br>You chose your neighborhood for its walkability<br>Your family uses transit or active transportation<br>You own a car but try to limit its use<br>You drive everywhere but wish you had alternativ<br>
+LOCATION:Webinar
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:hc3unfs9e2lun1joku55mpog9k@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250321T140000Z
+DTEND:20250321T170000Z
+SUMMARY:DART COTW Workshop
+DESCRIPTION:The Dallas Area Rapid Transit Special Called Meeting of the<br>Committee-of-the-Whole\, with Board Chair Presiding\, will be held at the DART<br>Headquarters Conference Room 1-C\, 1st floor and by videoconference.<br><br><a href="https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-03-21-special-called-mtg-committee-of-the-whole-agenda-packet.pdf?sfvrsn=7ab67ac0_1">https://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-03-21-special-called-mtg-committee-of-the-whole-agenda-packet.pdf?sfvrsn=7ab67ac0_1</a><br>
+LOCATION:DART HQ\, 1401 Pacific Ave\, Dallas
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3bjf0jkafn50o6q5sl8s8q6g0g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T140000Z
+DTEND:20250322T160000Z
+SUMMARY:DART 2025 Pre-Public Community Hearing for Upcoming Service Changes
+LOCATION:DART HQ (1401 Pacific Ave)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023802Z
+LAST-MODIFIED:20250810T062150Z
+END:VEVENT
+BEGIN:VEVENT
+UID:md3musv6ul94udti1ole8hr5g8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T153000Z
+DTEND:20250322T173000Z
+SUMMARY:[DBC] March Coffee Social & Dallas Pride Ride
+DESCRIPTION:Join the Dallas Bicycle Coalition for our March Coffee Social!We’ll be hanging out at Union Coffee from 10:30-12:00 for coffee and good conversation. Meet some like-minded friends\, learn about our 2025 advocacy goals\, and sign up to get involved! <a href="https://actionnetwork.org/events/march-coffee-social?">RSVP to let us know you can make it!</a><br>
+LOCATION:Union Coffee (3705 Cedar Springs)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_09bcaefd-36f5-45ee-8c0a-7386a256929a
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T153000Z
+DTEND:20250322T170000Z
+SUMMARY:DBC March Coffee Social (Dallas Pride Ride to Follow)
+DESCRIPTION:Join the Dallas Bicycle Coalition board for our March Coffee Social! We'll be hanging out at Union Coffee from 10:30-12:00 for morning coffee and good conversation. Learn about our 2025 advocacy goals and sign up to get involved.
+Optionally, join Dallas Pride Ride for a 10 mile social ride, leaving from Union at noon.
+
+RSVP: https://actionnetwork.org/events/march-coffee-social
+
+LOCATION:Union Coffee: 3705 Cedar Springs Rd
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062143Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_48d490b0-9ee3-41e0-a4d1-08b2ee875209
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T170000Z
+DTEND:20250322T180000Z
+SUMMARY:Dallas Pride Ride (First Ride!)
+DESCRIPTION:Dallas Pride Ride is a quarterly no-drop social bike ride for queer folks & allies around Dallas highlighting queer-owned + allied businesses. Follow them on IG at @dallasprideride.
+
+First ride is March 22 at noon after the DBC Coffee Social.
+
+LOCATION:Union Coffee: 3705 Cedar Springs Rd
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:841vip8thipqqfks07m4kb6pco@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T183000Z
+DTEND:20250322T204500Z
+SUMMARY:DATA March General Meeting
+DESCRIPTION:NEW LOCATION: 1st Floor\, Community Showcase Room<br>\n\nJoin with Google Meet: https://meet.google.com/cqo-rngu-fef\nOr dial: (US) +1 317-743-0368 PIN: 955851691#\nMore phone numbers: https://tel.meet/cqo-rngu-fef?pin=9577203265185&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1515 Young St (Community Showcase Room - 1st Floor)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:3
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:9ctco5abuojucc13ona5fhcs3g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T220000Z
+DTEND:20250323T000000Z
+SUMMARY:Dallas Urbanists Mixer: March Madness
+DESCRIPTION:RSVP link: <a href="https://www.meetup.com/dallas-urbanists/events/306551886/">https://www.meetup.com/dallas-urbanists/events/306551886/</a><br><br>Over the past two months\, it’s not just the Luka Dončić trade that’s driving us mad—there’s a whirlwind of urban issues shaking things up! At our next mixer\, you’ll hear from advocates about a shocking bill in the Texas House and Senate that could slash DART funding by 25% to 43%\, a heated debate at CPC over whether bars should be forced to provide parking\, housing advocates gearing up to review City Council candidates ahead of the May election\, and the latest draft of the city’s Master Bike Plan\, which is open for public review until March 30th. Plus\, don’t miss the chance to meet Urbanistas DFW\, a dynamic social club for women who ride public transit!<br>
+LOCATION:The Exchange
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:4
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_396ab54f-d11d-46ef-b55b-ce942e369418
+DTSTAMP:20250810T134515Z
+DTSTART:20250322T220000Z
+DTEND:20250322T230000Z
+SUMMARY:Dallas Urbanists March Mixer
+DESCRIPTION:RSVP TBD
+Looking to get more involved in local advocacy? This event is the perfect way to get a clear picture of who's doing what in the Dallas Urbanist community. 
+
+LOCATION:AT&T Exchange Hall: 211 S Akard St, Dallas, TX 75202
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:lb52n9tfaj82ts7ejkunt7srpk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250324T232000Z
+DTEND:20250325T010000Z
+SUMMARY:DATA Press Conference
+DESCRIPTION:Dallas Area Transit Alliance will host a press conference\, during which members of DATA and allied organizations will speak out against the transportation bills that could irreparably harm DART and its ability to serve the riders. HB 3187 and SB 1557 would ultimately result in a 44% funding cut to DART at a time where transit is becoming increasingly popular and critical to a growing region. The members of DATA believe that if any of these bills pass\, there will be serious transportation\, economic\, and environmental impacts that could harm the prosperity of the entire DFW region.<br>
+LOCATION:Plano Municipal Center\, 1520 K Ave\, Plano
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:9aq862hm75m9srv8fdn778du3k@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250325T224500Z
+DTEND:20250326T014500Z
+SUMMARY:[OFFICIAL] DART 2025 Hearing for Upcoming Service Changes (Includes Silver Line Frequency)
+DESCRIPTION:DART hearing for upcoming service changes\, which include Silver Line frequency.<br>
+LOCATION:DART HQ (1401 Pacific Ave\, Dallas)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_57a7cdf1-4790-4626-bdcd-3dbfb11e7ddc
+DTSTAMP:20250810T134515Z
+DTSTART:20250331T170900Z
+DTEND:20250331T180900Z
+SUMMARY:Cyclists in Suits (Bike Texas)
+DESCRIPTION:https://www.biketexas.org/advocacy/cyclists-in-suits-2025/
+
+Texas’ biennial Bike Lobby Day at the Capitol is 
+back
+ in person for 2025! After two legislative sessions of virtual meetings, we're delighted to return to our Capitol building and meet with legislative offices in person. Mark your calendar and make plans to be in Austin on Monday, March 31 for Cyclists in Suits 2025 – Texas’ Bike Lobby Day.
+
+In the course of one day, people who ride bikes from around the state will meet with every legislative office to tell them about our bills, what people who bike, walk, and use other active transportation in Texas need from their elected officials, and address concerns they may have. In the past, we’ve heard about bad bills and been able to take action immediately just from talking to staffers in legislative offices, and we’ve moved the needle on important legislation with an in-person visit.
+
+To make it all happen, we need 
+you!
+ 
+Register now for Cyclists in Suits
+ and start planning your trip.
+
+If you’re coming in from outside of Austin and would like to organize a bus or carpool from your area, let us know so we can connect you with other advocates coming from your direction.
+
+Here’s a tentative schedule of the day:
+7:30am | Pre-meeting at BikeTexas – please be on time! (
+900 Springdale Rd., Austin, TX 78702
+) We’ll have coffee and bagels waiting for you.
+9:00am | Wheels down – we’ll bike as a group to the Capitol (other transportation arrangements will be made in the event of bad weather).
+9:30am – 3:00pm | Lobby teams will meet with their assigned legislative offices. We’ll visit each office at the Capitol during the course of the day.
+11:30am – 1:00pm | Take team lunch breaks in the Capitol cafeteria (along with lobbyists, staffers, etc.) between office visits during this time window. Please budget $15-$20 for lunch.
+3:00pm | Group picture on the Capitol steps.
+3:30pm | Ride back to BikeTexas.
+4:00 – 6:00pm | Share meeting notes and observations with fellow attendees and celebrate with light refreshments!
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0bllttftcng8mtqi043aluue78@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250401T130000Z
+DTEND:20250401T220000Z
+SUMMARY:DATA Lobby Day
+DESCRIPTION:Join DATA for Lobby Day\, limited slots available for hotel and carpool blocks. If you are carpooling most carpools will be leaving on the night before and going to our designated hotel to rest prior to walking to the Capitol building. Storage will be available for those that are staying in the hotel block who may need to store items during the visit.<br>
+LOCATION:The Texas State Capitol
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:e5n5lm8v8vqpjcbi7eo94lfpic@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250401T220000Z
+DTEND:20250402T010000Z
+SUMMARY:Austin Social\, co-hosted by DATA and AURA
+DESCRIPTION:Relax after our intensive lobby day and let’s go eat! Meet with Austin Urbanist groups and connect with the larger urbanist community.<br><br><ul><li><a href="https://aura-atx.org/">AURA (an Austin for Everyone)</a></li></ul>
+LOCATION:Fareground Austin\, 111 Congress Ave\, Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2fot0m1ueoakg45ud7chtiqvmq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250402T140000Z
+DTEND:20250402T170000Z
+SUMMARY:Senate Transportation Committee Hearing
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:a4c309gkt5iqhen0cglaggtsi4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250402T223000Z
+DTEND:20250403T003000Z
+SUMMARY:The Future of Transit In North Texas: Opportunities and Challenges— Presented by CNU-NTX and DATA
+DESCRIPTION:North Texas is at a critical juncture in our collective fight to support local transit initiatives and serve.<br><br>Join us to hear perspectives from organizations dedicated to promoting transit and their riders\, along with a fireside chat with the CEOs from our region's two major Transit Agencies\, Trinity Metro and DART.<br><br>Learn more about the challenges and opportunities riders and agencies face from operations to legislation along with insight into plans for more Transit-Oriented Development throughout our region.<br><br>DATA or CNU members get free admission otherwise a $35 admission fee will apply\, please see the link below to register\, <a href="https://www.eventbrite.com/e/the-future-of-transit-in-north-texas-opportunities-and-challenges-tickets-1265570568639">https://www.eventbrite.com/e/the-future-of-transit-in-north-texas-opportunities-and-challenges-tickets-1265570568639</a><br>
+LOCATION:Corgan (401 North Houston Street Dallas\, TX 75202)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:43b2b0p4nhodj98vesti45fjak@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250403T050000Z
+DTEND:20250404T050000Z
+SUMMARY:[Texas Streets Coalition] Transportation Advocacy Day
+DESCRIPTION:RSVP – <a href="https://www.google.com/url?q=https://tinyurl.com/TSCAdvocacy25&amp\;sa=D&amp\;source=calendar&amp\;ust=1742940618266532&amp\;usg=AOvVaw1LQ7yx2-O-0bCb4KtYjj50">https://tinyurl.com/TSCAdvocacy25</a><br><br>Y’all…we are headed to the Texas Capitol!! This is a great opportunity to talk directly with our Representative and Senators' offices about legislation that impacts you. We will provide transportation to and from Austin\, all meals for the day\, and training and resources on how to make the most of the day. This is a bilingual event. Spanish translation and interpretation will be provided. Childcare and missed work stipends available.<br><br>Gente... Nos estamos dirigiendo al Capitolio de Texas!! Esta es una gran oportunidad de hablar directamente con nuestros representantes y senadores acerca de la legislación que nos afecta e impacta. Vamos a proveer transporte hacia Austin y de regreso\, todas las comidas del día y entrenamiento y recursos para poder aprovechar el día al máximo. Este es un nunca bilingüe. Se ...<br>
+LOCATION:Texas State Capitol Building
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1pc5f1qu1u385e0830dav3vn11@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250403T050000Z
+DTEND:20250404T050000Z
+SUMMARY:[Texas Streets Coalition] Transportation Advocacy Day
+DESCRIPTION:<p>RSVP – <a href="https://www.google.com/url?q=https://tinyurl.com/TSCAdvocacy25&amp\;sa=D&amp\;source=calendar&amp\;ust=1742940618266532&amp\;usg=AOvVaw1LQ7yx2-O-0bCb4KtYjj50" target="_blank">https://tinyurl.com/TSCAdvocacy25</a></p><p>Y’all…we are headed to the Texas Capitol!! This is a great opportunity to talk directly with our Representative and Senators&#39\; offices about legislation that impacts you. We will provide transportation to and from Austin\, all meals for the day\, and training and resources on how to make the most of the day. This is a bilingual event. Spanish translation and interpretation will be provided. Childcare and missed work stipends available. </p><br><br><br><br>Gente... Nos estamos dirigiendo al Capitolio de Texas!! Esta es una gran oportunidad de hablar directamente con nuestros representantes y senadores acerca de la legislación que nos afecta e impacta. Vamos a proveer transporte hacia Austin y de regreso\, todas las comidas del día y entrenamiento y recursos para poder aprovechar el día al máximo. Este es un nunca bilingüe. Se proporcionará traducción e interpretación al español. Cuidado de niños y estipendios de trabajo perdido disponibles.
+LOCATION:Texas State Capitol Building
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_97b15d23-402e-43ed-b757-7dcd5ed3b201
+DTSTAMP:20250810T134515Z
+DTSTART:20250411T203000Z
+DTEND:20250411T213000Z
+SUMMARY:Coombs Creek Trail Extension Celebration
+DESCRIPTION:Join Chad West, Dallas City Council District 1, and JR Huerta, Dallas Park and Recreation Board District 1, and experience Dallas’ newest trail extension. Bring your bicycles to Moss Park for the opening celebration, then cycle 4 miles to the new Coombs Creek Trail Bridge by Beckley Avenue for the ribbon-cutting. After the ceremony, attendees are welcome to return home or continue informal celebrations at Chip’s Old Fashioned Hamburgers, 1605 N. Beckley Avenue.
+
+LOCATION:Moss Park 2600 Sunset Avenue Dallas, TX 75211
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_d242e8c5-b3f3-443b-954e-af9ae3258452
+DTSTAMP:20250810T134515Z
+DTSTART:20250413T150000Z
+DTEND:20250413T170000Z
+SUMMARY:Pop-up Ride with Dallas Bike Ride, Hangover Riders, Trek & Downtown Dallas
+DESCRIPTION:Sign up for free: https://www.eventbrite.com/e/pop-up-ride-with-dallas-bike-ride-hangover-riders-trek-downtown-dallas-tickets-1291300637969
+Kick off the Spring with a bike ride to celebrate Dallas’s artistry!
+This April 13th, Dallas Bike Ride is partnering with Hangover Riders Bike Club, TREK Bicycles, and Downtown Dallas to promote our very first Pop-Up Ride!
+This is an open-road, approachable social ride recommended for riders comfortable sharing the road with automotive vehicles as it includes roads with mild to heavy traffic.
+We invite riders to meet at the Farmers Market at 10 am to get you ready to roll. Please listen carefully to the road and safety guidelines and bring your helmet and bike in good riding conditions. Arrive around 9:30 am to allow yourself enough time to park and gear up.
+The ride ends at the Downtown Dallas Arts & Music Festival, where riders are welcome to a program full of fun activities.
+
+
+LOCATION:Dallas Farmers Market 920 S Harwood St, Dallas, TX 75201, USA
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:76rghof4u41sdjb6n1ml1h08ds@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250415T233000Z
+DTEND:20250416T013000Z
+SUMMARY:Irving Candidate Forum
+DESCRIPTION:The League of Women Voters of Irving will host a forum for Irving City Council candidates.<br><br>When: 6:30 p.m. April 15\, 2025<br><br>Where: Council chambers\, City Hall\, 825 W. Irving Blvd.<br><br>The invited candidates include:<br><br>District 1 - John Bloch and Tony Grimes<br><br>District 2 (at large) - David Pfaff\, Mark Zeske\, Sergio Porres\, and Vicky Akinyi Oduk<br><br>District 7 - Priscilla Vigliante and Adam Muller<br><br>Early voting: April 22 to April 29j<br><br>Election Day: May 3<br>
+LOCATION:Irving City Hall Council Chambers
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062158Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_820a3c2e-2c26-41c3-91b3-41d5cfa5f374
+DTSTAMP:20250810T134515Z
+DTSTART:20250418T000000Z
+DTEND:20250418T010000Z
+SUMMARY:DBC Spring 2025 General Meeting
+DESCRIPTION:RSVP so we know to expect you: https://actionnetwork.org/events/dbc-spring-2025-general-meeting
+
+Every spring and fall, Dallas Bicycle Coalition organizes a general meeting so bike advocates in Dallas have the opportunity to gather and hear from leaders working to make streets safer, biking a more popular choice, and alternatives to driving more accessible. RSVP so we know to expect you!
+
+
+Details:
+Thursday, April 17 at 7pm
+Four Corners Brewing Company
+
+Speakers:
+Catherine Richardson, North Central Texas Council of Governments
+
+Rose Thompson, Black Women Who
+
+Tameca Harris, Bike Friendly South Dallas
+
+LOCATION:Four Corners Brewing: 1311 S Ervay St
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:kl1jc5lsi6li9pmjkdvnd4tpcg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250419T183000Z
+DTEND:20250419T210000Z
+SUMMARY:DATA April General Meeting
+DESCRIPTION:Dates and venues subject to change<br>\n\nJoin with Google Meet: https://meet.google.com/ziu-mscm-xcj\nOr dial: (US) +1 860-788-5232 PIN: 281721450#\nMore phone numbers: https://tel.meet/ziu-mscm-xcj?pin=7957948782613&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1515 Young Street\, Hamon Training Room
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:2
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_def67575-9039-4f67-88c1-643965b14d12
+DTSTAMP:20250810T134515Z
+DTSTART:20250419T191400Z
+DTEND:20250420T191400Z
+SUMMARY:Bikepacking with Backyard Bikepacking DFW (Eisenhower SP)
+DESCRIPTION:🪨 Erwin 2 Eisenhower
+Date: Apr 19 & 20
+Start: Erwin Park
+End: Eisenhower SP
+
+More details to come. See more on IG at 
+backyard.bikepacking.dfw
+.
+
+LOCATION:Eisenhower State Park
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_d1c187af-289c-4934-85c0-a6025982efce
+DTSTAMP:20250810T134515Z
+DTSTART:20250423T140000Z
+DTEND:20250423T213000Z
+SUMMARY:(Day 1) Bicycle Friendly Community Workshop, Hosted by The League of American Bicyclists
+DESCRIPTION:Apply by April 9 to attend. 
+https://docs.google.com/forms/d/e/1FAIpQLSc6ZBkh876TGHW7aRHOKUTPL_i-Cr4BATFE2sm7bKNVxNnuQQ/viewform
+
+The BFC Community Workshop will bring together local stakeholders, like you, to learn about the benefits and actions required to become a League-recognized 
+Bicycle Friendly Community
+ (BFC), conduct a ride audit, and produce Bicycle Action Plans for the community.
+
+Through this day and a half workshop, The League will send a 
+Bicycle Friendly America
+ staffer to your community and offer a hands-on needs assessment of the community through the lens of the 
+League’s 5E framework
+. This program is an interactive presentation that will conduct a deep dive into where the community is at, offer concrete solutions to issues, help the community realize its strengths and weaknesses, and provide a holistic view of how to strengthen and grow the community from an equity lens. The workshop will also conduct a 
+bike ride audit
+ organized and led by the local Dallas community.
+Logistics:
+Date
+: April 23-24
+Location
+: Harwood Community Room: 404 S Harwood Street, Dallas, TX 75201
+Cost
+: Free to attend the event.
+Lunch will be provided on Day 1 only.
+Tentative Agenda:
+Day 1: 9:00am-4:30pm
+Introductions
+Overview of BFC Program
+Overview of Local Community
+Deep Dive into 5Es
+Lunch (provided)
+Group Photo
+Bike Ride Audit (4-6 Miles)
+Day 2: 9:00am-12:00pm
+Action Planning
+Next Steps
+Adjourn
+
+LOCATION:Harwood Community Room 404 S Harwood Street, Dallas, TX 75201
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:71peeob9g19mqnrv71lq589jvk@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250424T130000Z
+DTEND:20250424T150000Z
+SUMMARY:Texas House Transportation Committee Hearing
+DESCRIPTION:Notice: <a href="https://capitol.texas.gov/tlodocs/89R/schedules/html/C4702025042408001.HTM">https://capitol.texas.gov/tlodocs/89R/schedules/html/C4702025042408001.HTM</a><br>Leave comments here: <a href="https://comments.house.texas.gov/home?c=c470">https://comments.house.texas.gov/home?c=c470</a><br>Register to testify here: <a href="https://mytxlegis.capitol.texas.gov/HWRSPublic/About.aspx">https://mytxlegis.capitol.texas.gov/HWRSPublic/About.aspx</a><br>
+LOCATION:Texas Capitol\, 1100 Congress Ave.\, Austin\, TX 78701\, USA (E2.010)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_b1ee75f9-a1b5-4edc-a30e-8f1678ebdb01
+DTSTAMP:20250810T134515Z
+DTSTART:20250424T140000Z
+DTEND:20250424T170000Z
+SUMMARY:(Day 2) Bicycle Friendly Community Workshop, Hosted by The League of American Bicyclists
+DESCRIPTION:Apply by April 9 to attend. 
+https://docs.google.com/forms/d/e/1FAIpQLSc6ZBkh876TGHW7aRHOKUTPL_i-Cr4BATFE2sm7bKNVxNnuQQ/viewform
+
+The BFC Community Workshop will bring together local stakeholders, like you, to learn about the benefits and actions required to become a League-recognized 
+Bicycle Friendly Community
+ (BFC), conduct a ride audit, and produce Bicycle Action Plans for the community.
+
+Through this day and a half workshop, The League will send a 
+Bicycle Friendly America
+ staffer to your community and offer a hands-on needs assessment of the community through the lens of the 
+League’s 5E framework
+. This program is an interactive presentation that will conduct a deep dive into where the community is at, offer concrete solutions to issues, help the community realize its strengths and weaknesses, and provide a holistic view of how to strengthen and grow the community from an equity lens. The workshop will also conduct a 
+bike ride audit
+ organized and led by the local Dallas community.
+Logistics:
+Date
+: April 23-24
+Location
+: Harwood Community Room: 404 S Harwood Street, Dallas, TX 75201
+Cost
+: Free to attend the event.
+Lunch will be provided on Day 1 only.
+Tentative Agenda:
+Day 1: 9:00am-4:30pm
+Introductions
+Overview of BFC Program
+Overview of Local Community
+Deep Dive into 5Es
+Lunch (provided)
+Group Photo
+Bike Ride Audit (4-6 Miles)
+Day 2: 9:00am-12:00pm
+Action Planning
+Next Steps
+Adjourn
+
+LOCATION:Harwood Community Room 404 S Harwood Street, Dallas, TX 75201
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_41b3f9bf-6517-4595-94af-0c3b7bcce81b
+DTSTAMP:20250810T134515Z
+DTSTART:20250426T160000Z
+DTEND:20250426T170000Z
+SUMMARY:Oak Cliff Book Crawl Bike Crawl (with Bike Friendly Oak Cliff)
+DESCRIPTION:Join DBC and Bike Friendly Oak Cliff for a bike crawl through Oak Cliff to support the 3rd annual Oak Cliff Book Crawl. This will be a social pace ride about 10 miles long. Bring water and remember to support your local Oak Cliff book stores along the way!
+
+Details:
+Meet at Whose Books at 11am
+Route- Whose Books -> Lucky Dog -> PAC DAllas ->Back to Bishop Arts for lunch
+Lunch around 1pm at Jaquval/Trades
+
+Reserve your spot for the Book Crawl here: 
+https://www.eventbrite.com/e/3rd-annual-oak-cliff-book-crawl-tickets-1294938589179
+
+LOCATION:512 W Davis St, Dallas, TX 75208
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:fbridggqairkhq9qtht8kmaoio@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250426T170000Z
+DTEND:20250426T190000Z
+SUMMARY:April DATA Social
+DESCRIPTION:No agenda\, no topic\, just get some food and hang out with friends!<br>
+LOCATION:Dumpling House\, 221 W Parker Rd\, Plano\, TX\, 75023
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_a4c42cc1-546d-49c2-9686-42454282ae94
+DTSTAMP:20250810T134515Z
+DTSTART:20250427T060000Z
+DTEND:20250427T070000Z
+SUMMARY:Urbanist GOTV (with Dallas Neighbors for Housing, Dallas Area Transit Alliance, and DFW Urbanistas)
+DESCRIPTION:Dallas has the lowest voter turnout of any major US city. Because of that, we continue to see a Dallas where change is slow. We are still a city built where the status quo of driving a car for every trip, dangerous and inaccessible streets, and single family housing no matter what, remain the standard in Dallas.
+
+Join together with Urbanist groups of Dallas to go to the polls. Vote for a walkable, bikeable, transit rich, affordable Dallas. Vote for Urbanism.
+RSVP on Action Network is appreciated.
+
+https://actionnetwork.org/events/urbanist-get-out-the-vote
+
+
+Details:
+
+Sunday, April 27
+
+12:20 Optional 
+@urbanistasdfw
+ Transit Together at Mockingbird Station or Bishop Arts Streetcar Station
+
+1:00pm Gather and Group Photo at West End Square
+
+1:30pm Vote at Dallas Records Building
+
+3:00pm (or immediately after voting) Social at Pegasus Brewing Company
+
+***Walking, biking, taking transit is highly encouraged!
+
+Urbanist GOTV is a collaboration between Dallas urbanist groups:
+
+@ridewithdata
+
+
+@dallasbicyclecoalition
+
+
+@neighborsdtx
+
+
+@dallasurbanists
+
+
+@urbanistasdfw
+
+
+This event is strictly to encourage people to vote and does not endorse any particular candidate. Any Dallas County voter is eligible to vote at any early voting location and is welcome to vote with us at the Dallas County Records Building. See more at Dallascountyvotes.org.
+
+LOCATION:West End Square 607 Corbin St Dallas, TX 75202
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:f0btdj0urj0a7hai80l72i050o@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250427T180000Z
+DTEND:20250427T220000Z
+SUMMARY:Urbanists GOTV [DBC\, DFW Urbansistas\, Better Block]
+DESCRIPTION:DATA will participate in the Get out the vote campaign where we will walk\, ride\, roll to the polls. More details on Action Network: <a href="https://actionnetwork.org/events/urbanist-get-out-the-vote">https://actionnetwork.org/events/urbanist-get-out-the-vote</a><br><br>[NOSYNC]<br>
+LOCATION:West End Square
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023809Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250429T224500Z
+DTEND:20250430T014500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20250422T174500
+CREATED:20250810T023806Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_e23f7570-7f00-486a-bab5-255a249a6a3d
+DTSTAMP:20250810T134515Z
+DTSTART:20250503T144500Z
+DTEND:20250503T154500Z
+SUMMARY:Election Day
+DESCRIPTION:https://www.dallascountyvotes.org/
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_8115604a-f140-465c-b125-bc8f5d239e5d
+DTSTAMP:20250810T134515Z
+DTSTART:20250503T185600Z
+DTEND:20250504T185600Z
+SUMMARY:Intro to Bikepacking w/ Backyard Bikepacking DFW (Cedar Hill SP)
+DESCRIPTION:We are very excited to announce our Spring Bikepacking Calendar!
+
+🪨 Erwin 2 Eisenhower
+Date: Apr 19 & 20
+Start: Erwin Park
+End: Eisenhower SP
+
+📑 Intro to Bikepacking
+Date: May 3 & 4
+Start: Dallas (White Rock Alehouse)
+End: Cedar Hill SP
+
+🐝 Waxahachie 2 Bee Mountain
+Date: May 31 & June 1
+Start: Waxahachie (Location TBD)
+End: Bee Mountain Resort
+
+More details and registration links for trips will be shared closer to the event dates. All attendees must register.
+``````````````````````````````````````````````````
+This May, Backyard Bikepacking DFW is hosting our second “Intro to Bikepacking” event. This will be a great opportunity to try out bikepacking without the hassle of planning a route, finding a crew, or leaving your backyard.
+
+We will be heading from White Rock Lake to Cedar Hill State Park (50 mile round trip) and camping overnight. Once at the campsite, there will be opportunities for swimming, hiking, fishing, and birdwatching. Our campsites will have water, electricity, and restrooms to make this a comfortable camping experience.
+
+What your entry gets you:
+
+⛺ Park entry and campsite spot
+📋 Pre-trip prep class (date TBD)
+👨‍🔧 Ride support from the Backyard Bikepacking team
+
+We truly want first-timers to feel welcome, so if you have any questions, concerns, or requests, please send us an email (backyard.bikepacking.dfw@gmail.com).
+Follow 
+backyard.bikepacking.dfw
+ on IG for more information.
+
+LOCATION:Cedar Hill State Park
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_85b63e9f-7181-48c9-b78c-6d9c761088ed
+DTSTAMP:20250810T134515Z
+DTSTART:20250507T164500Z
+DTEND:20250507T174500Z
+SUMMARY:Bike & Roll to School Day
+DESCRIPTION:https://www.nctcog.org/trans/plan/bikeped/saferoutestoschool
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:1a1hier5c8kkj9spotn6nu0k5g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250511T180000Z
+DTEND:20250511T190000Z
+SUMMARY:Canvassing Event - Jets @ Stars Game 3 (HG1)
+DESCRIPTION:Join DATA and DSA on canvassing in and around the AAC to let riders\, fans\, and anyone really know about the impacts of the DART cuts. We may also ride on the trains and let people know similarly.<br>
+LOCATION:American Airlines Center / Victory Station / PNC Plaza
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2qgkc03r9uin6ftuusjte9h2ub@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250511T205200Z
+DTEND:20250511T235200Z
+SUMMARY:Jets @ Stars G3
+LOCATION:American Airlines Center\, 2500 Victory Ave\, Dallas\, TX 75219\,USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5ivhdtqqeolo4c46ai8mncs1pf@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250512T170000Z
+DTEND:20250512T190000Z
+SUMMARY:NCTCOG Transportation Meeting
+DESCRIPTION:Participate by phone: 855-925-2801 Meeting code: 11304 <br><br>Email nctcogmay25@publicinput.com<br><br><br> 616 Six Flags Drive\, Arlington\, TX\, USA<br>Attend in person or watch the presentations live at <a href="www.publicinput.com/nctcogMay25.">www.publicinput.com/nctcogMay25.</a> A video recording will be made available afterward.<br><br>Need a ride to the public meeting? Request a $6 roundtrip ride from the DFW CentrePort Station to NCTCOG with the Arlington Transportation app! Download the app at: <a href="www.arlingtontx.gov/ondemand.">www.arlingtontx.gov/ondemand.</a><br><br>For special accommodations due to a disability or language translation\, contact 817-573-1719 or hwitcher@nctcog.org. Reasonable accommodations will be made.
+LOCATION:North Central Texas Council of Governments\, 616 Six Flags Dr\, Arlington\, TX 76011\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7qsbpn1jn673qgl68qr70680a3@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250513T045900Z
+DTEND:20250513T053000Z
+SUMMARY:Last day for House committees to report House Bills
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:71m80q8vfsgopm3mj9e11esiog@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250513T194500Z
+DTEND:20250513T230000Z
+SUMMARY:DART COTW
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3it1suc8l8vho3v28j3gb9jh2v@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250514T002200Z
+DTEND:20250514T032200Z
+SUMMARY:Jets @ Stars G4
+LOCATION:American Airlines Center\, 2500 Victory Ave\, Dallas\, TX 75219\,USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6ilp7asot2ceoov6spu0kpnlme@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250514T030000Z
+DTEND:20250514T040000Z
+SUMMARY:Last House Daily Calendar must be distributed
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7cjo3ipif37a0afmssohp5ljqg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250514T140000Z
+DTEND:20250514T200000Z
+SUMMARY:Dallas City Council (Remove Parking Minimums)
+DESCRIPTION:Public Hearing Item Number 1 - Register to speak at the following link. Deadline is May 13\, 2025 at 5pm<br><br><a href="https://dallascityhall.com/government/citysecretary/Pages/CCrules.aspx">https://dallascityhall.com/government/citysecretary/Pages/CCrules.aspx</a><br>
+LOCATION:Dallas City Hall\, 1500 Marilla St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2hdvljguvqrch1nfm5itobc08n@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250515T223000Z
+DTEND:20250516T013000Z
+SUMMARY:CNU-NTX Happy Hour
+DESCRIPTION:Come connect with fellow urbanists\, city lovers\, and community-minded folks at our upcoming happy hour at the Bearded Lady in Fort Worth! Whether you're already involved with CNU or just curious to learn more\, all are welcome at this informal meetup. Bring a friend!
+LOCATION:The Bearded Lady\, 300 S Main St\, Fort Worth\, TX 76104\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7u2j2gttaoqii39svahegi02gq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T040000Z
+DTEND:20250516T050000Z
+SUMMARY:Last Day for House to have 2nd reading bill for any House Bill
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:edo107bqngl7291v6t4ltudh14@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T093000Z
+DTEND:20250516T130000Z
+SUMMARY:WFAA Party on the Plaza - Dallas Bike Ride
+DESCRIPTION:Watch WFAA Channel 8 for periodic segments promoting the Dallas Bike Ride from 5am to 7am during Daybreak.<br><br>If part of crowd\, arrive at 4am\, if not watch from 5am to 7am.<br>
+LOCATION:WFAA Channel 8
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6b4sbideub7m3nlaktmlvagiq4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T160000Z
+DTEND:20250517T000000Z
+SUMMARY:Dallas Bike Ride (Packet Pickup)
+DESCRIPTION:Stop by and celebrate your upcoming ride with entertainment and refreshments\, browse our partner offerings\, get a FREE bike safety check\, and gear up at our Official Dallas Bike Ride Merch Shop. For those riders who chose packet pickup at registration\, this will be your ONLY opportunity to get your Rider Identification Kit.
+LOCATION:The Rustic\, 3656 Howell St\, Dallas\, TX 75204\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_4eac9188-dbdd-45d5-b2d2-e4aa14b4c808
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T160000Z
+DTEND:20250517T000000Z
+SUMMARY:Dallas Bike Ride Packet Pickup
+DESCRIPTION:Stop by and celebrate your upcoming ride with entertainment and refreshments, browse our partner offerings, get a FREE bike safety check, and gear up at our Official Dallas Bike Ride Merch Shop. For those riders who chose packet pickup at registration, this will be your ONLY opportunity to get your Rider Identification Kit.
+Learn more: https://dallasbikeride.com/ride-information/
+DBC will need 4-8 volunteers to table at packet pickup. More information will be shared soon.
+
+LOCATION:The Rustic 3656 Howell St Dallas, TX 75204 
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:33k4dq7a9snlftpti7ukoph1qb@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T173000Z
+DTEND:20250516T183000Z
+SUMMARY:Bike to Work Day
+DESCRIPTION:Commuting by bike and DART is a cost-effective\, earth-friendly alternative to the single-occupancy vehicle. Join us at one of our Bike to Work Day events. Enjoy giveaways\, snacks\, helpful information and more! Bike to Work Challenge Award given at 12:30 PM at Akard Station
+LOCATION:Akard\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_52bcdfc3-c07d-4804-8966-002a6037fe0a
+DTSTAMP:20250810T134515Z
+DTSTART:20250516T202700Z
+DTEND:20250516T212700Z
+SUMMARY:Bike to Work Day
+DESCRIPTION:https://bikeleague.org/events/bike-month/
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0llupqj8jov8f23bic2b16d896@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250517T030000Z
+DTEND:20250517T050000Z
+SUMMARY:Last Day for House to have 3rd reading bill for any House Bill
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6ld1jg91msuvm2boe44dgt9hqq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250517T110000Z
+DTEND:20250517T173000Z
+SUMMARY:Dallas Bike Ride
+DESCRIPTION:https://register.dallasbikeride.com/\n\nJoin DBC and other DATA members for the Dallas Bike Ride\, use code DALLASLOVESBIKES to save on your registration
+LOCATION:1500 Marilla St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_eee82a34-c485-4542-88eb-be99a09f0322
+DTSTAMP:20250810T134515Z
+DTSTART:20250517T120000Z
+DTEND:20250517T150000Z
+SUMMARY:Dallas Bike Ride: Dallas’s only car-free social ride is back!
+DESCRIPTION:Dallas’s only car-free social ride is back!
+Dallas Bike Ride is a celebration on two wheels! Join us for a fun, social ride- completely car-free- and cruise at your own pace past our city’s most iconic sights — perfect for first-timers and avid cyclists alike!
+Register at 
+register.dallasbikeride.com
+
+Dallas Bicycle Coalition is a proud community partner of Dallas Bike Ride. Get 15% off your registration with code "DALLASLOVESBIKES". Learn more here:
+ https://dallasbikeride.com/community-impact/
+
+Ride Information. See more at 
+https://dallasbikeride.com/ride-information/
+Saturday, May 17
+6:00 AM Corrals Open
+7:45 AM Corrals Close
+8:00 AM Ride Begins
+8:30 AM Finish Festival Begins
+
+LOCATION:1500 Marilla St, Dallas, TX 75201
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:e3erooq9jchje675pv771413t8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250517T183000Z
+DTEND:20250517T210000Z
+SUMMARY:DATA May General Meeting
+DESCRIPTION:Join with Google Meet: https://meet.google.com/wxo-rhny-aoz\nOr dial: (US) +1 646-653-9198 PIN: 865930570#\nMore phone numbers: https://tel.meet/wxo-rhny-aoz?pin=8834594113495&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:Dallas Public Library Central Campus\, Classsroom E (6th Floor)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6s81ep7orchf6sogab49b3juvo@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250517T220000Z
+DTEND:20250518T010000Z
+SUMMARY:Dallas Urbanists May Bimonthly Mixer
+DESCRIPTION:Brand new venue! Come join us!
+LOCATION:Ye Olde Scarlet Pumpernickel Tavern\, 1402 Main St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062200Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6paea94enkkijn86h7c6cc951f@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250518T002200Z
+DTEND:20250518T032200Z
+SUMMARY:Jets @ Stars G6
+LOCATION:American Airlines Center\, 2500 Victory Ave\, Dallas\, TX 75219\,USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023810Z
+LAST-MODIFIED:20250810T062201Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ucqj2f5lo4m6j5fh97c69r3glc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250520T234500Z
+DTEND:20250521T004500Z
+SUMMARY:Show Support for DART in Garland
+DESCRIPTION:From a passionate Garland resident on reddit:<br><br>"Our dearcity council has not made any resolution to defend DART. I will be filling out a speaker card to talk about it and I believe every person from every district should show out! Please share this as much as you can!"<br><br>Please support this effort\, and Garland residents\, please show up and support their event!<br><br>Ask Garland to pass a formal resolution to support full funding for DART!<br>
+LOCATION:Garland City Hall
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:3
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:9lnkv2u7kqcs6gv4k0jsi4vqhs@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250522T230000Z
+DTEND:20250523T020000Z
+SUMMARY:A night of Good Trouble
+DESCRIPTION:Join us for A Night of Good Trouble\, featuring DFW Change Makers of all kinds celebrating the evening together at 4Corners Brewery.<br><br>Register here (it's free): <a href="https://www.eventbrite.com/e/a-night-of-good-trouble-tickets-1349755086799">https://www.eventbrite.com/e/a-night-of-good-trouble-tickets-1349755086799</a><br>
+LOCATION:Four Corners Brewery
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_fbcc2198-4121-44f0-bcd3-7368c2875179
+DTSTAMP:20250810T134515Z
+DTSTART:20250523T000000Z
+DTEND:20250523T010000Z
+SUMMARY:A Night of Good Trouble: College of Constructive Hellraising Graduation
+DESCRIPTION:Dallas Bicycle Coalition was one of 10 organizations to participate in the College of Constructive Hellraising this spring. Come to our graduation. The event is free, but please RSVP for food. https://www.eventbrite.com/e/a-night-of-good-trouble-tickets-1349755086799?
+````````````````````````````````````````````
+Come join us for a night of good trouble featuring Jerry Hawkins speaking on "How Change Happens in Dallas", the annual 
+College of Constructive Hell-Raising
+ graduation ceremony, 
+a brand new competition among DFW grassroots groups for the best project pitch,
+ AND the debut of an importanty 
+new Dallas voting alliance.
+ Free food. Free information. Free entertainment. Y'all come.
+
+About the College:
+ Since 2017 The 
+College of Constructive
+ 
+Hell-Raising,
+ has offered an annual semester-long class about how to win grassroots Change. We draw on our three decades of experience as well as the history of those DFW elders and peers who’ve taught us with their own examples. Unlike other seminars for political activists, the College isn’t issue or skill-specific. It’s about the mechanics of how you win grassroots fights with grassroots resources, no matter the cause. Our goal is for graduates to 
+“think like an organizer.”
+About the Organizing School
+: The Organizing School is a collection of North Texas community organizers and change-makers that span generations and causes. We’ve come together to share our collective knowledge, skills, and expertise to our peers who are seeking their own change.
+
+LOCATION:Four Corners Brewery: 1311 S Ervay St
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023821Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:j6sstj3eoujqdn100ckma6g5kg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250525T043000Z
+DTEND:20250525T044500Z
+SUMMARY:Deadline for House committee report on SBs to be filed
+LOCATION:Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:khl7emjk0uqf1t1bs6vgfeooq0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250526T030000Z
+DTEND:20250526T031500Z
+SUMMARY:Last House daily calendar with SBs must be distributed
+LOCATION:Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:mjokegvoen0ecmebj521a21mo0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250528T040000Z
+DTEND:20250528T045900Z
+SUMMARY:Last day for House to consider 2nd reading SBs
+LOCATION:Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_cb4146e2-7a8f-4088-aea5-31fb7cdee4ce
+DTSTAMP:20250810T134515Z
+DTSTART:20250528T150000Z
+DTEND:20250528T160000Z
+SUMMARY:Dallas Bike Plan City Council Vote
+DESCRIPTION:Join DBC and bike advocates across Dallas to celebrate the passing of the Dallas Bike Plan. Date and time subject to change so stay tuned on our email and social media. 
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3lr69c5aobekreasjt45d1abgc@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250529T040000Z
+DTEND:20250529T045900Z
+SUMMARY:Last day for House to consider 3nd reading SBs
+LOCATION:Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_85cb494b-6b4d-4808-bee2-6b64249c2de8
+DTSTAMP:20250810T134515Z
+DTSTART:20250531T191700Z
+DTEND:20250601T191700Z
+SUMMARY:Bikepacking with Backyard Bikepacking DFW (Bee Mountain Resort)
+DESCRIPTION:🐝 Waxahachie 2 Bee Mountain
+Date: May 31 & June 1
+Start: Waxahachie (Location TBD)
+End: Bee Mountain Resort
+
+More details to come. Follow 
+backyard.bikepacking.dfw
+ on IG for more information.
+
+LOCATION:Bee Mountain Resort 13499 County Rd 1241, Cleburne, TX 76033
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:kj223jjm0a08j90prbqkivdfd4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250531T230000Z
+DTEND:20250601T030000Z
+SUMMARY:[DFW Urbanistas] Transit Together: Dallas Trinity FC
+DESCRIPTION:We will meet at Akard Station first at 6:00pm\, then take the Green Line to Fair Park Station.<br><br>Join us on Saturday\, May 31st at 7:00 PM as Dallas Trinity FC takes on Carolina Ascent FC—currently in 1st place! As a valued member of DART\, you're invited to enjoy an exclusive 30% off your tickets for this special night.<br>This is our final home match of the regular season\, so don’t miss out on the energy\, excitement\, and celebration! 🎉<br><br>Your Exclusive Perks:<br>✅ 30% off tickets<br>✅ Free Boots’ Bobblehead (while supplies last) 🎁<br>🎆 Post-Match Fireworks Show<br><br>Come cheer on Dallas' first professional women’s soccer team and be part of an unforgettable evening!<br><br><a href="https://www.gofevo.com/event/Dart2?access_code=Dart2§ion=LD%3A27&amp\;row=28&amp\;purl=f09222561357">Buy Tickets Here</a><br>
+LOCATION:Akard Station ➡️ Fair Park Station ➡️ Cotton Bowl
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:k05rj513o7bse1ju2frqc6945c@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250601T180000Z
+DTEND:20250601T200000Z
+SUMMARY:DATA Book Club
+DESCRIPTION:We will be finishing up The Death and Life of Great American Cities\, then deciding which book to read next. Current candidates are Right of Way and Color of Law\, though additional suggestions are certainly welcome.<br>
+LOCATION:Dolce Paradiso\, 5030 Addison Circle\, Addison\, TX\, 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062202Z
+END:VEVENT
+BEGIN:VEVENT
+UID:mjoiqn8aq3illst3peq9u58ph0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250602T220000Z
+DTEND:20250602T230000Z
+SUMMARY:End of Regular 89th Texas Legislative Session
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023808Z
+LAST-MODIFIED:20250810T062159Z
+END:VEVENT
+BEGIN:VEVENT
+UID:3h340kc3730jem3lmr2ivahd4c@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250608T000000Z
+DTEND:20250608T030000Z
+SUMMARY:DATA Social - End of the Lege!
+DESCRIPTION:It’s finally over! Let’s celebrate with a pint at Pegasus Brewery! We will have brief updates and some other surprises.\n\nVenue is subject to change based on availability. Should the venue change this calendar invite will be updated.
+LOCATION:Pegasus City Brewery\, 1508 Commerce St\, Dallas\, TX 75201\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:64s3idhg6lhj2bb574o30b9k6cp30bb1chh34b9ocop62pb5c5i64e9o74@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250609T233000Z
+DTEND:20250610T003000Z
+SUMMARY:Irving DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:City of Irving\, City Hall\, 825 W Irving Blvd\, Irving\, TX 75060\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:64p68c3274sjgb9k6oqm8b9k60omab9pc5hmab9i68rjcdpic9i32c35cg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250611T233000Z
+DTEND:20250612T003000Z
+SUMMARY:Richardson DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Temporary City Hall Annex\, 2360 Campbell Creek Blvd Suite 550\, Richardson\, TX 75082\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6krjap9h75ijibb6cdgjeb9k6gpj0b9p6lij4b9pc4pm2c1ickpm6cj674@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250611T233000Z
+DTEND:20250612T003000Z
+SUMMARY:Glenn Heights DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Glenn Heights Community Center\, 1938 S Hampton Rd d\, Glenn Heights\, TX 75154\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:g3pmoedc8dh7f1akg2rmtrk56g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250612T180000Z
+DTEND:20250612T210000Z
+SUMMARY:RTC Meeting
+LOCATION:North Central Texas Council of Governments\, 616 Six Flags Dr\, Arlington\, TX 76011\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+RRULE:FREQ=MONTHLY;UNTIL=20260101T055959Z;BYDAY=2TH
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6pi64dr460sjib9p69i34b9kcosjcbb1cpijibb16cq38o9k6gpjep1icg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250612T233000Z
+DTEND:20250613T003000Z
+SUMMARY:Addison DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Addison Athletic Club\, 3900 Beltway Dr\, Addison\, TX 75001\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6kqjccj171i34bb36oom2b9kcpj64bb1cos38bb6c9gj8e9pchgj6pb56c@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250616T233000Z
+DTEND:20250617T003000Z
+SUMMARY:Plano DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Plano Municipal Center\, 1520 K Ave\, Plano\, TX 75074\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_66e4f451-f210-4daa-a466-1b75f8831db9
+DTSTAMP:20250810T134515Z
+DTSTART:20250617T230000Z
+DTEND:20250618T000000Z
+SUMMARY:Skillman Ave Feedback Session (D14)
+DESCRIPTION:Session hosted by Councilman Ridley's Office.
+Share your thoughts on:
+pedestrian safety
+a new shared use path for walking and biking
+traffic flow
+enhanced park connectivity
+Learn more: 
+https://bit.ly/SkillmanStudy
+
+LOCATION:Garden Cafe 5310 Junius St, Dallas, TX 75214
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6di6ad9l6tgj8b9j6co68b9kcdim2bb2c8sm6bb2cooj0p9icoo30c1hco@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250617T233000Z
+DTEND:20250618T003000Z
+SUMMARY:South Dallas DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Singing Hills Recreation Center\, 6805 Patrol Way\, Dallas\, TX 75241\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:68qj8o9n64pm6bb570s64b9k6sp3cb9p70ojeb9nc8s36ohk6orm4db16k@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250617T233000Z
+DTEND:20250618T003000Z
+SUMMARY:Cockrell Hill & West Dallas DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Jaycee Zaragoza Recreation Center\, 3114 Clymer St\, Dallas\, TX 75212\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:c8sjgdpoc8o6ab9n6ph32b9k6srm4b9p6lj3ab9g6csm6p9l6ti36phjc8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250618T233000Z
+DTEND:20250619T003000Z
+SUMMARY:Farmers Branch DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Farmers Branch City Hall\, 13000 William Dodson Pkwy\, Farmers Branch\, TX 75234\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:75i30db369gjgb9o60sjib9k6orj2b9p6lhjebb66crjccb56crj4e1l74@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250618T233000Z
+DTEND:20250619T003000Z
+SUMMARY:Highland Park and University Park DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:University Park City Hall\, 3800 University Blvd\, Dallas\, TX 75205\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:q1ae9htmdd9i7bue00f9nj5kac@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250621T180000Z
+DTEND:20250621T200000Z
+SUMMARY:DART to the Pub hosted by CCL Dallas
+LOCATION:The Rustic\, 3656 Howell St\, Dallas\, TX 75204\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:b09n72696v8vf77aubhpruhku4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250623T040000Z
+DTEND:20250623T050000Z
+SUMMARY:Last day for Abbott to sign or veto bills
+DESCRIPTION:The final moment of truth for the 89th Texas Legislature<br>
+LOCATION:Austin
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:c8p3icph6crjab9kckp6cb9k6oqjebb26di3ab9ncdijephnc8s62oj170@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250623T233000Z
+DTEND:20250624T003000Z
+SUMMARY:Carrollton DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Carrollton Senior Center\, 1720 Keller Springs Rd\, Carrollton\, TX 75006\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:74sj8choccsm8b9g6th6cb9kcli36b9o6cq64bb268s38p1hcosj2opp6g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250625T233000Z
+DTEND:20250626T003000Z
+SUMMARY:Rowlett DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!<br>
+LOCATION:Rowlett Community Centre\, 5300 Main St\, Rowlett\, TX 75088\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:3
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0lnb6mtfa3nalmqhkotgi14tc5@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250626T230000Z
+DTEND:20250627T003000Z
+SUMMARY:North Dallas Biannual Silver Line Community Meeting
+LOCATION:Texas A&M AgriLife Research and Extension Center at Dallas\, 17360 Coit Rd\, Dallas\, TX 75252\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6hhm8c9m6ssjeb9hcgo34b9kc8pmabb16sq38bb16hj3ecr2c5j6aohkc8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250626T233000Z
+DTEND:20250627T003000Z
+SUMMARY:Garland DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:William E. Dollar Municipal Building\, 200 N 5th St\, Garland\, TX 75040\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6gsm2p1ocpim4b9k64om2b9kckq6cbb16gr3gbb6c8qj6p1gclhj0opl6o@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250627T170000Z
+DTEND:20250627T180000Z
+SUMMARY:DART Telephone Town Hall on Proposed Service & Fare Changes
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Virtual
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:6cr38oj1cko68b9n6oo3cb9kckr3ib9pc8q62b9hckqm4ohn6cpjce9h60@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250628T150000Z
+DTEND:20250628T160000Z
+SUMMARY:Downtown Dallas DART Proposed Service & Fare Changes Meeting
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ttgorm9tdeghebm0ep5t5ncet4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250628T183000Z
+DTEND:20250628T204500Z
+SUMMARY:DATA June General Meeting
+DESCRIPTION:While the DART board meets the week before\, due to 4th of July there are two meetings in one month. Therefore this meeting is aligned for the JULY Board meeting.<br>\n\nJoin with Google Meet: https://meet.google.com/gkj-khjc-iub\nOr dial: (US) +1 323-515-0981 PIN: 981347378#\nMore phone numbers: https://tel.meet/gkj-khjc-iub?pin=6710322483682&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:Hamon Training Room
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:2
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4uriigk5mh3ca7t591n1k6e7ts@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250628T210000Z
+DTEND:20250629T010000Z
+SUMMARY:Mappy Hour (OSM Mapping)
+DESCRIPTION:Enter via Murphy Drive\, 6th floor
+LOCATION:1200 Main St\, Dallas\, TX 75202\, USA (Floor 6)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_a31b43b8-54bc-4d1b-9fc7-3257118b7218
+DTSTAMP:20250810T134515Z
+DTSTART:20250629T140000Z
+DTEND:20250629T150000Z
+SUMMARY:Dallas Pride Ride
+DESCRIPTION:Dallas Pride Ride is a quarterly no-drop social bike ride for queer folks & allies around Dallas highlighting queer-owned + allied businesses. Follow them on IG at @dallasprideride.
+
+2nd quarter ride is Sunday, June 29 at 9am. Meet up at The Salty Donut. The route is about 12 miles with multiple stops.
+
+LOCATION:Salty Donut: 414 W Davis St Dallas, TX 75208
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:60qjidb474pj2b9kcdij2b9kcpi3ab9p61i32bb370s32d1i6lij8e9ocg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250701T233000Z
+DTEND:20250702T003000Z
+SUMMARY:DART Virtual Town Hall on Proposed Service & Fare Changes
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. DART is holding meetings to hear advice from the public prior to the public hearing on July 8th! We need to show up in force to tell them no caps! No cuts! No bargaining with Plano!
+LOCATION:Virtual
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062204Z
+END:VEVENT
+BEGIN:VEVENT
+UID:f21hjltk15hkrhjev87d8tibb4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250708T224500Z
+DTEND:20250709T050000Z
+SUMMARY:DART Board Meeting & Public Hearing - 5% GMP
+DESCRIPTION:The 5% GMP compromise (that famously doesn’t appease Plano) iscurrently non-binding. We need to show up in force to tell them no caps! No cuts! No bargaining with Plano! The meeting starts at 6. Show up by 5:45 so that you can sign up to speak.<br>
+LOCATION:DART Headquarters - 1401 Pacific Ave\, Dallas\, TX\, 75202
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250708T224500Z
+DTEND:20250709T014500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20250722T174500
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5nffp15ggai1thfocn02n6oss2@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250709T230000Z
+DTEND:20250710T003000Z
+SUMMARY:Addison Biannual Silver Line Community Meeting
+LOCATION:The Addison Performing Arts Centre\, 15650 Addison Rd\, Addison\,TX 75001\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:02u923n6ank66lrrheam9dd8ab@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250710T230000Z
+DTEND:20250711T003000Z
+SUMMARY:Cypress Waters/Coppell Biannual Silver Line Community Meeting
+LOCATION:The Sound\, 3111 Olympus Blvd\, Coppell\, TX 75019\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:rucsss209te9uqflkrg9rhvdus@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250712T140000Z
+DTEND:20250712T220000Z
+SUMMARY:Transit Iron Man (All the Systems as of July 2025) Trip!
+DESCRIPTION:"We will be celebrating our victory against HB3187/SB1557 by taking a day trip from Rowlett to Grapevine to have lunch in the least efficient way\, but we will be riding all possible trains to get there! Then we will travel to the "furthest" east you can get on DART by ending our day at Flying Saucer in Garland on the shores of Lake Ray Hubbard by shoving as many of our friends in a clown car... I mean GoLink van as possible. (For SCIENCE!) Oh yeah\, you don't have to do the whole thing if you want\, it's not an actual Ironman.<br><br><ul><li>Start @ Rowlett Cafe - Breakfast</li><li>9:20-9:35 Walk to Rowlett Station</li><li>9:36-10:18 DART Blue Line @ Rowlett to EBJ Union</li><li>10:35-11:33 TRE Union to Fort Worth Central</li><li>11:41-12:11 FW Orange Line @ FWC to Northside</li><li>12:25-12:56 TexRail @ Northside to Grapevine</li><li>12:56-13:56 Lunch at Grapevine</li><li>13:56-14:06 TexRail @ Grapevine to DFW</li><li>14:34-15:26 DART Orange @ DFW to Akard</li><li>15:26-15:31 Walk to Commerce/Field</li><li>15:31-16:02 224 to Lake Ray Hubbard TC</li><li>16:02-??</li></ul>
+LOCATION:Downtown Rowlett Station\, 5000 Martin Dr\, Rowlett\, TX 75088\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:5jkso27sbh2j0mqfe5ivsbqtvq@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250712T220000Z
+DTEND:20250713T010000Z
+SUMMARY:Transit Iron Man (All the Systems as of July 2025)\n Social
+DESCRIPTION:If our GoLink van makes it to Flying Saucer\, we will enjoy our evening after travelling over 115 miles!
+LOCATION:Flying Saucer Draught Emporium\, 4821 Bass Pro Dr\, Garland\, TX 75043\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:848a6f475vubf5oevtu9dgaino@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250713T180000Z
+DTEND:20250713T200000Z
+SUMMARY:DATA Book Club
+DESCRIPTION:For this month\, we are going to be reading chapters 1 through5 of Right of Way by Angie Schmitt. This quick read explains the policy failures that have lead the the epidemic of pedestrian deaths. I read it a few months ago\, and I strongly recommend it. Disclaimer: It will make you angry.<br><br>Please note: We are meeting on a different day than usual! To avoid the 4th of July weekend\, we will be meeting on the 2nd Sunday instead of our usual 1st.<br>
+LOCATION:Dolce Paradiso\, 5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023813Z
+LAST-MODIFIED:20250810T062205Z
+END:VEVENT
+BEGIN:VEVENT
+UID:60phafmtncoli8p7djqs8j0rks@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250715T230000Z
+DTEND:20250716T003000Z
+SUMMARY:Richardson Biannual Silver Line Community Meeting
+LOCATION:Richardson IQHQ\, 1302 E Collins Blvd\, Richardson\, TX 75081\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:2bdrbishu7hjb73opqcgl19kvv@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250716T230000Z
+DTEND:20250717T003000Z
+SUMMARY:Carrollton Biannual Silver Line Community Meeting
+LOCATION:Crosby Recreation Center\, 1610 E Crosby Rd\, Carrollton\, TX 75006\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_1034437d-888b-423f-b34f-d835babf1970
+DTSTAMP:20250810T134515Z
+DTSTART:20250717T223000Z
+DTEND:20250717T233000Z
+SUMMARY:Grand Avenue Study Public Meeting
+DESCRIPTION:Learn more and sign up for updates: 
+www.publicinput.com/grandavenue
+
+What improvements would you like to see on Grand Avenue between the “3G” Intersection and Interstate 30? Join NCTCOG for a public meeting and share your thoughts. Following public feedback on early planning and design concepts, the project team has developed a series of draft recommendations for each segment in the corridor. These recommendations combine roadway, safety, and bicycle/pedestrian improvements, as well as improvements to school drop off/pick up areas. Members of the community will be invited to comment on the draft recommendations.
+
+LOCATION:Mt. Auburn Elementary School: 6012 E. Grand Avenue, Dallas, TX 75223
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062143Z
+END:VEVENT
+BEGIN:VEVENT
+UID:4p5dq9eb0j6os2e7g7p3bu0i7r@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250717T230000Z
+DTEND:20250718T003000Z
+SUMMARY:Plano Biannual Silver Line Community Meeting
+LOCATION:Harrington Library\, 1501 18th St\, Plano\, TX 75074\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7tnfqu7jje9esngj1u4hvq97ud@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250719T183000Z
+DTEND:20250719T204500Z
+SUMMARY:DATA July General Meeting
+DESCRIPTION:<table><tbody><tr><td><a href="https://meet.google.com/gga-dpok-brd" target="_blank"><br>meet.google.com/gga-dpok-brd</a></td></tr><tr><td></td><td><br></td></tr></tbody></table>\n\nJoin with Google Meet: https://meet.google.com/gga-dpok-brd\nOr dial: (US) +1 929-276-0874 PIN: 667673483#\nMore phone numbers: https://tel.meet/gga-dpok-brd?pin=7939203088726&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:1515 Young St\, Dallas\, TX 75201\, USA (O'hara Hall\, 7th Floor)
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:n9s358ldjph7m9vrn49bh0pkr0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250719T220000Z
+DTEND:20250720T010000Z
+SUMMARY:Dallas Urbanists July Bimonthly Mixer
+DESCRIPTION:The last one was a great success so join us again for the bi-monthly Urbanists Mixer hosted by Dallas Urbanists STLC\, Dallas Area Transit Alliance\, Dallas Bicycle Coalition\, and Dallas Neighbors for Housing. Invited groups will be announced in the near future.
+LOCATION:Ye Olde Scarlet Pumpernickel Tavern\, 1402 Main St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023811Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:lamcqu7crs6ic37qaf71m573v0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250726T150000Z
+DTEND:20250726T220000Z
+SUMMARY:Sachse Train Day 2025
+DESCRIPTION:Learn about railroads\, BIG and small\, along with their impact to Sachse’s history as you travel between the special depots. Caboose tours too and you can build miniature train models! Hosted by North Texas T-TRAK Modular Railroad Club and the Sachse Historical Society.\n\nNote: this event has multiple locations.\nSachse Historical Society and Sachse Community Center
+LOCATION:Sachse Historical Society Museum\, 3033 6th St\, Sachse\, TX 75048\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062206Z
+END:VEVENT
+BEGIN:VEVENT
+UID:k1su6vmhdd05j3rb9jfc3f65io@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250728T224000Z
+DTEND:20250729T000000Z
+SUMMARY:Speak against service cuts to Richardson City Council!
+DESCRIPTION:Richardson residents! I could use your help\, I want to speak to Richardson City council and discuss issues with the GMP. Richardson has a new mayor and council hasn't heard about DART from public speakers for a while\, so let's show them residents do support DART!<br><br>I will be urging Richardson city council to work with DART to prevent service cuts at all costs. I will suggest Richardson consider not taking their portion of the GMP if necessary<br>
+LOCATION:2360 Campbell Creek Blvd. Suite 550. Richardson\, TX 75082
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:jad27e576e71fi2hle720ov55s@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250801T143000Z
+DTEND:20250801T230000Z
+SUMMARY:DART Board of Directors Budget Workshop
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:g3pmoedc8dh7f1akg2rmtrk56g@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250807T180000Z
+DTEND:20250807T210000Z
+SUMMARY:RTC Meeting
+LOCATION:Irving Convention Center at Las Colinas\, 500 West Las Colinas Blvd\, Irving\, TX 75039
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20250814T130000
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:j8fmjjv9984r672cnofbat2fq0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250809T140000Z
+DTEND:20250809T233000Z
+SUMMARY:Jet Lag: Hide and Seek across DART
+DESCRIPTION:Jet Lag is a sprawling real-world adventure game that can be played across public transit systems—from buses\, to ferries\, to trains. We will do a Dallas version across the DART system\, full rules will be published soon.<br><br>Because of how many people we have interested\, we will play a modified version of the game with teams of 3-5 players to find another team of 3-5 players. The ultimate determination of who wins will be based on the lowest team searching time and not the time hidden.<br>
+LOCATION:EBJ Union Station
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:5
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7deki0roibf9bi2nlocsler795@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250812T224500Z
+DTEND:20250813T000000Z
+SUMMARY:DART Special Board Meeting
+DESCRIPTION:Time 6pm\n\nhttps://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-08-12-dart-board-of-directors-agenda.pdf?sfvrsn=1accc5cd_1\n\nhttps://dartorgcmsblob.dart.org/prod/docs/default-source/about-dart/2025-08-12-special-board-of-directors-agenda-packet.pdf?sfvrsn=92aefab7_1\n\n\nThe draft budget is expected to get tentatively approved to be sent to the cities on this date.
+LOCATION:1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:event_310120411@meetup.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250813T233000Z
+DTEND:20250814T010000Z
+SUMMARY:Online Rehearsal Night before WWD Film Day on Aug 16
+DESCRIPTION:Dallas Urbanists STLC\nIn preparation for the third annual *[Week Without Driving](https://weekwithoutdriving.org)*[ ](https://weekwithoutdriving.org)challenge (September 29 to October 5)\, we have an ambitious plan to produce 24 short videos for an "Advent Calendar" of tips and tricks for navigating Dallas by walking\, biking\, and public transit. The idea is to publish one short video each day starting September 5 to help challenge-takers prepare for the challenge starting September 29.\n\nSounds cool\, right? 😁\n\n**EVENT SCHEDULE**\nOn Wednesday\, August 13th\, we will meet in the "meeting-room" voice channel on our members-only Discord server ([signup to be an official member to receive invite link](https://dallasurbanists.org/join)). During the rehearsal\, we will assign to actors and practice lines. For camera operators\, we will preview the shot list and film instructions.\n\nOn Saturday\, August 16th\, the plan is to meet at Mockingbird Station to capture footage for our WWD Advent Calendar videos. [Please RSVP to both this and the Film Day event.](https://www.meetup.com/dallasurbanists/events/310120364/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2)\n\n**WHO WE NEED**\nWe need volunteers! You don't need to be pros or have experience\; amateurs welcome! (Although if pros did want to volunteer\, we'd be very excited to have your help too 😉) We'll take as many people as we can get. At a bare minimum\, we need:\n\n* 3x actors to appear and speak on-camera\n* 2x camera operators\n\n**PRODUCTION SCHEDULE**\n\n* **JULY 31\, THURS:** Last day for anyone to post ideas for WWD Advent Calendar on the [r/dallasurbanists subreddit](https://www.reddit.com/r/dallasurbanists/). This cutoff gives us time to select the final 24 tips & tricks for the advent calendar.\n* **AUGUST 10\, SUNDAY:** Target date for final shot list and video scripts. This target is to give volunteers time to review lines.\n* **AUGUST 13\, WEDNESDAY 6:30 PM:** Online table-read\n* **AUGUST 16\, SATURDAY 9:00 AM:** Film Day ([Please RSVP to both this and the Film Day event.](https://www.meetup.com/dallasurbanists/events/310120364/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2)\n* **SEPTEMBER 5-28\, FRIDAY:** One video published per day for 24 days on the *Dallas Urbanists STLC* [YouTube channel](https://www.youtube.com/@DallasUrbanists) and [Instagram account](https://instagram.com/dallasurbanists).\n\n\\-\\-\\-\n\n**WHAT IS WEEK WITHOUT DRIVING?**\n[Week Without Driving](https://weekwithoutdriving.org/) is a challenge that invites people who typically drive—especially elected officials\, planners\, and community leaders—to go a week without driving in order to better understand and address the barriers nondrivers face. In 2024\, over 520 groups in all 50 states and D.C participated in the annual challenge.
+X-ORGANIZING-GROUP:Dallas Urbanists STLC
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062210Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_a5582001-cb3d-40bd-90d0-9e7f918c30fd
+DTSTAMP:20250810T134515Z
+DTSTART:20250814T154500Z
+DTEND:20250828T154500Z
+SUMMARY:Budget Town Halls
+DESCRIPTION:DBC is teaming up with Environment Texas to advocate for funding in the 2026 budget and get advocates out to budget town halls!
+
+See advocacy details here: 
+dallasbicyclecoalition.org/advocacy
+
+Budget town hall info
+
+Budget Town Hall Advocate Sign Up
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023820Z
+LAST-MODIFIED:20250810T062147Z
+END:VEVENT
+BEGIN:VEVENT
+UID:event_310120364@meetup.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250816T140000Z
+DTEND:20250816T200000Z
+SUMMARY:Film Day for Week Without Driving
+DESCRIPTION:Dallas Urbanists STLC\nIn preparation for the third annual *[Week Without Driving](https://weekwithoutdriving.org)*[ ](https://weekwithoutdriving.org)challenge (September 29 to October 5)\, we have an ambitious plan to produce 24 short videos for an "Advent Calendar" of tips and tricks for navigating Dallas by walking\, biking\, and public transit. The idea is to publish one short video each day starting September 5 to help challenge-takers prepare for the challenge starting September 29.\n\nSounds cool\, right? 😁\n\n**EVENT SCHEDULE**\nOn Saturday\, August 16th\, the plan is to meet at Mockingbird Station to capture footage for our WWD Advent Calendar videos.\n\n* **9:00 AM @ SMU/Mockingbird Station**\, shoot outdoor scenes. Expect to be on the move\; after shooting our station scenes\,\n* **NOON @ TBD**\, break for lunch\n* **1:00 PM @ TBD**\, shoot indoor scenes\n* **3:00 PM @ SMU/Mockingbird Station**\, wrap-up. The tentative plan is for our movement to bring us back to SMU/Mockingbird Station where we started.\n\n**WHO WE NEED**\nWe need volunteers! You don't need to be pros or have experience\; amateurs welcome! (Although if pros did want to volunteer\, we'd be very excited to have your help too 😉) We'll take as many people as we can get. At a bare minimum\, we need:\n\n* 3x actors to appear and speak on-camera\n* 2x camera operators\n* 1x cart guy -- someone to pull and watch over the cart with all our stuff as we move from location to location\n\nThe more volunteers\, the better! More actors = each memorizes fewer lines and more character variety. More cameras = more angles\, potentially wrap faster by allowing us to work multiple scenes simultaneously. More assistants = makes the whole operation run more smoothly and can serve as non-speaking background extras.\n\n**PRODUCTION SCHEDULE**\n\n* **JULY 31\, THURS:** Last day for anyone to post ideas for WWD Advent Calendar on the [r/dallasurbanists subreddit](https://www.reddit.com/r/dallasurbanists/). This cutoff gives us time to select the final 24 tips & tricks for the advent calendar.\n* **AUGUST 10\, SUNDAY:** Target date for final shot list and video scripts. This target is to give volunteers time to review lines.\n* **AUGUST 13\, WEDNESDAY 6:30 PM:** Online table-read. [Please RSVP to both events.](https://www.meetup.com/dallasurbanists/events/310120411)\n* **AUGUST 16\, SATURDAY 9:00 AM:** Film Day\n* **SEPTEMBER 5-28\, FRIDAY:** One video published per day for 24 days on the *Dallas Urbanists STLC* [YouTube channel](https://www.youtube.com/@DallasUrbanists) and [Instagram account](https://instagram.com/dallasurbanists).\n\n\\-\\-\\-\n\n**WHAT IS WEEK WITHOUT DRIVING?**\n[Week Without Driving](https://weekwithoutdriving.org/) is a challenge that invites people who typically drive—especially elected officials\, planners\, and community leaders—to go a week without driving in order to better understand and address the barriers nondrivers face. In 2024\, over 520 groups in all 50 states and D.C participated in the annual challenge.
+X-ORGANIZING-GROUP:Dallas Urbanists STLC
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062210Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_15000ef0-f8f0-4937-8e64-7ea860f6a255
+DTSTAMP:20250810T134515Z
+DTSTART:20250816T143000Z
+DTEND:20250816T153000Z
+SUMMARY:DBC August Coffee Social (with Environment Texas)
+DESCRIPTION:Join the Dallas Bicycle Coalition board for our August Coffee Social! We'll be hanging out from 9:30-11:00 for morning coffee and good conversation. Learn about the upcoming budget town halls and our budget asks for 2025. This year, we're collaborating with Environment Texas to get people to the town halls and elevate both of our advocacy goals.
+Location and RSVP TBD
+
+LOCATION:Location TBD
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062143Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7mi4p9r34rkvk78a2d17jt8ac8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250816T143000Z
+DTEND:20250816T180000Z
+SUMMARY:Week without Driving - Film Day
+LOCATION:Mockingbird Station\, Mockingbird Sta\, Dallas\, TX 75206\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:9ovssarfmqvvqdtvvo0p56foeg@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250817T180000Z
+DTEND:20250817T200000Z
+SUMMARY:DATA August Book Club
+DESCRIPTION:We will be finishing up Right of Way\, and then we’ll select our next book! Suggestions welcome in #book-club<br>
+LOCATION:Dolce Paradiso\, 5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ttll5dosq9ko4k70aui63pi1j8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250823T183000Z
+DTEND:20250823T204500Z
+SUMMARY:DATA August General Meeting
+DESCRIPTION:<a href="https://meet.google.com/rzn-iidy-ubf">https://meet.google.com/rzn-iidy-ubf</a><br>\n\nJoin with Google Meet: https://meet.google.com/rzn-iidy-ubf\nOr dial: (US) +1 262-427-8022 PIN: 417592828#\nMore phone numbers: https://tel.meet/rzn-iidy-ubf?pin=3793731377720&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:Hamon Training Room
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_16b40a9c-3335-4a61-a61b-88f1f67fa339
+DTSTAMP:20250810T134515Z
+DTSTART:20250905T003000Z
+DTEND:20250905T013000Z
+SUMMARY:Katy Trail 5k (DBC Bike Valet)
+DESCRIPTION:Join us for the Katy 5K, a unique course that takes you through some of the most beautiful parts of Dallas. DBC bike valet provided!
+Join us for the Katy 5K, a unique course that takes you through some of the most beautiful parts of Dallas, including Turtle Creek, the Uptown streets of Dallas, and the beautiful Katy Trail. Post race, celebrate with us at the Picnic Party with live entertainment by DJ EJ: The Official DJ for the Dallas Cowboys, two complimentary Michelob ULTRA beverages (21 & over), free food from over 30 local eateries, sponsor swag, and selfie stations throughout the Katy 5K Picnic Party. It is sure to be an unforgettable experience! DBC Bike Valet provided! Volunteers needed for the valet if you aren't running.
+Register: https://katytraildallas.org/5k/
+Sign up to volunteer for the bike valet: TBD
+
+LOCATION:Reverchon Park (3505 Maple Ave., Dallas, TX 75219)
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:0vh0sm5sct6u6ec7jh6qgg6p1r@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250907T180000Z
+DTEND:20250907T200000Z
+SUMMARY:DATA September Book Club
+LOCATION:Dolce Paradiso\, 5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_1c2a0ef6-05f2-4e1a-bee5-53be9ccacd0c
+DTSTAMP:20250810T134515Z
+DTSTART:20250913T133000Z
+DTEND:20250913T150000Z
+SUMMARY:DBC September Coffee Social (with Bike Friendly South Dallas)
+DESCRIPTION:Join the Dallas Bicycle Coalition board for our Septemer Coffee Social! We'll be hanging out from 8:30-10:00 for morning coffee and good conversation. Learn about how to get involved in Week Without Driving and our upcoming Storytelling for Advocacy workshop.
+This month, we're partnering with Bike Friendly South Dallas for a social ride after coffee. Bring your bike and leave straight from the coffee shop for a social paced, beginner friendly ride with the community.
+Location and RSVP TBD
+
+LOCATION:Location TBD
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023817Z
+LAST-MODIFIED:20250810T062144Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_4c1ad93a-a8be-448d-9c28-70ce16b0502c
+DTSTAMP:20250810T134515Z
+DTSTART:20250913T180000Z
+DTEND:20250913T190000Z
+SUMMARY:Hangover Riders 10 Year Anniversary Ride
+DESCRIPTION:Hop on your bike in style, decked out in your snazziest Hawaiian shirt collection! Our biking adventure starts at Dallas Farmers Market, cruising to Four Corners for a fiesta of tacos and cold brews. Come out and celebrate our 10th Anniversary party. We will have a DJ.
+
+Pacheco Taco N Burger will be selling Tacos and Burgers. Let’s brighten up the streets with our colorful shirts!
+
+This ride will cover 12-15 miles, cruising leisurely 10-12 mph. Stay tuned for the route details, which will be coming soon.
+
+‼️Get ready to pedal out at 1pm SHARP from Farmers Market. Please arrive early, and let’s hit the road!‼️
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+BEGIN:VEVENT
+UID:l7nkplg2j3a9hbag7kl43buu3s@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250919T050000Z
+DTEND:20250920T050000Z
+SUMMARY:National Parking Day
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:7l9qj2su2nes7933ubq1li1op8@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250927T183000Z
+DTEND:20250927T204500Z
+SUMMARY:DATA September Annual Meeting (Elections)
+DESCRIPTION:<a href="https://meet.google.com/rnz-bzdm-pog">https://meet.google.com/rnz-bzdm-pog</a><br>\n\nJoin with Google Meet: https://meet.google.com/rnz-bzdm-pog\nOr dial: (US) +1 929-252-0772 PIN: 483511926#\nMore phone numbers: https://tel.meet/rnz-bzdm-pog?pin=5700061727485&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:O'hara Hall - 7th Floor - Dallas Public Library
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:l18cjk5sc9q4bnjejr637ppac0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250927T220000Z
+DTEND:20250928T010000Z
+SUMMARY:Dallas Urbanists September Bimonthly Mixer
+DESCRIPTION:The last one was a great success so join us again for the bi-monthly Urbanists Mixer hosted by Dallas Urbanists STLC\, Dallas Area Transit Alliance\, Dallas Bicycle Coalition\, and Dallas Neighbors for Housing. Invited groups will be announced in the near future.
+LOCATION:Ye Olde Scarlet Pumpernickel Tavern\, 1402 Main St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:event_310391072@meetup.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250927T220000Z
+DTEND:20250928T010000Z
+SUMMARY:Dallas Urbanists September Bimonthly Mixer
+DESCRIPTION:Dallas Urbanists STLC\n**THIS MONTH'S THEME:** *Transit Together September*\n\n**ABOUT THE BIMONTHLY MIXER**\nLooking to get more involved in local advocacy? This event is the perfect way to get a clear picture of who's doing what in our community. We'll start with a brief presentation on "What is Dallas Urbanists STLC\," then hear from three local groups making a big difference:\n\n* 🚍[Dallas Area Transit Alliance (DATA)](https://dallasareatransitalliance.org/)\n🏘️[Dallas Neighbors for Housing](https://www.dallasneighborsforhousing.org/home)\n* 🚲[Dallas Bicycle Coalition](https://dallasbicyclecoalition.org/)\n\n**SCHEDULE**\n5:00 Doors open\n5:30 Program begins\n6:30 Program finishes\, social time\n\n**WHAT IS DALLAS URBANISTS STLC?**\nWe are people who care about making Dallas a more walkable\, bike-friendly\, transit-oriented\, affordable\, and vibrant place to live. As a [Strong Towns Local Conversation](https://www.strongtowns.org/local) (STLC)\, we are part of the [Strong Towns](https://strongtowns.org/) movement to replace America’s postwar pattern of development\, the "Suburban Experiment\," with a pattern of development that is financially strong and resilient. We advocate for neighborhoods of all sizes in Dallas to be safe\, livable and inviting.\n\nReady to officially be a Dallas Urbanist? [Become a member today!](https://docs.google.com/forms/d/e/1FAIpQLSdKwSs9hVDGsPv5Mnxw4AkugfKkdS93WhryhWKqHgM835nolw/viewform)
+X-ORGANIZING-GROUP:Dallas Urbanists STLC
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062210Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ahpa7bqu56t3ag4tf1mvo8a9b0@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250929T050000Z
+DTEND:20251006T050000Z
+SUMMARY:Week without Driving
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023814Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_912efbd6-cb80-47dc-b040-f19e56b48478
+DTSTAMP:20250810T134515Z
+DTSTART:20250929T164300Z
+DTEND:20251005T164300Z
+SUMMARY:Week Without Driving 2025
+DESCRIPTION:https://weekwithoutdriving.org/
+
+If you can drive or afford a car, you may not understand what it’s like to rely on walking, rolling, transit and asking for rides. But for nearly a third of people living in the United States – people with disabilities, young people, seniors and people who can’t afford cars or gas – this is our every day.
+America Walks created the Week Without Driving experience so that those who have the option to drive can learn firsthand about the barriers and challenges that nondrivers face and work with nondrivers to create more accessible communities for all.
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023819Z
+LAST-MODIFIED:20250810T062146Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20250930T224500Z
+DTEND:20251001T014500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20250923T174500
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062156Z
+END:VEVENT
+BEGIN:VEVENT
+UID:43bo8pibevunguctt0g6pfov3c@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20251003T230000Z
+DTEND:20251004T000000Z
+SUMMARY:Week without Driving Social
+LOCATION:Time TBD - Location TBD
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062207Z
+END:VEVENT
+BEGIN:VEVENT
+UID:A5B7D061-F9E3-4802-8D72-E888A6727C42
+DTSTAMP:20250810T134515Z
+DTSTART:20251005T180000Z
+DTEND:20251005T200000Z
+SUMMARY:DATA October Book Club
+LOCATION:Dolce Paradiso\, 5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_f72a9902-69d0-4e07-9888-924933999e69
+DTSTAMP:20250810T134515Z
+DTSTART:20251008T164600Z
+DTEND:20251008T174600Z
+SUMMARY: Walk & Roll to School Day
+DESCRIPTION:https://www.nctcog.org/trans/plan/bikeped/saferoutestoschool
+
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023821Z
+LAST-MODIFIED:20250810T062148Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ddsr8hslghqduqs9582gic40e4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20251025T183000Z
+DTEND:20251025T204500Z
+SUMMARY:DATA October General Meeting
+DESCRIPTION:Google Meetings Join Info:<br>Video call link: <a href="https://meet.google.com/wcq-axqn-cdx">https://meet.google.com/wcq-axqn-cdx</a><br>Or dial: ‪(US) +1 347-754-4726‬ PIN: ‪265 651 592‬#<br>More phone numbers: <a href="https://tel.meet/wcq-axqn-cdx?pin=2634389298741">https://tel.meet/wcq-axqn-cdx?pin=2634389298741</a><br>\n\nJoin with Google Meet: https://meet.google.com/wcq-axqn-cdx\nOr dial: (US) +1 347-754-4726 PIN: 265651592#\nMore phone numbers: https://tel.meet/wcq-axqn-cdx?pin=2634389298741&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+LOCATION:Classroom E - 6th Floor - Dallas Public Library
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023816Z
+LAST-MODIFIED:20250810T062209Z
+END:VEVENT
+BEGIN:VEVENT
+UID:ij34acjigrsfmngdditc0h3am4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20251115T230000Z
+DTEND:20251116T020000Z
+SUMMARY:Dallas Urbanists November Bimonthly Mixer
+DESCRIPTION:The last one was a great success so join us again for the bi-monthly Urbanists Mixer hosted by Dallas Urbanists STLC\, Dallas Area Transit Alliance\, Dallas Bicycle Coalition\, and Dallas Neighbors for Housing. Invited groups will be announced in the near future.
+LOCATION:Ye Olde Scarlet Pumpernickel Tavern\, 1402 Main St\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20251118T234500Z
+DTEND:20251119T024500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20251125T174500
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:8B4D5B5E-1F8D-4B94-8A2A-86D67F372EB7
+DTSTAMP:20250810T134515Z
+DTSTART:20251207T190000Z
+DTEND:20251207T210000Z
+SUMMARY:DATA December Book Club
+LOCATION:Dolce Paradiso\, 5030 Addison Cir\, Addison\, TX 75001
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+CREATED:20250810T023815Z
+LAST-MODIFIED:20250810T062208Z
+END:VEVENT
+BEGIN:VEVENT
+UID:36hkf067dab3rpe3po6i4mr44e@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20251209T234500Z
+DTEND:20251210T024500Z
+SUMMARY:DART Board Meeting
+LOCATION:Dallas Area Rapid Transit\, 1401 Pacific Ave\, Dallas\, TX 75202\, USA
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+RECURRENCE-ID:20251223T174500
+CREATED:20250810T023807Z
+LAST-MODIFIED:20250810T062157Z
+END:VEVENT
+BEGIN:VEVENT
+UID:onv55hlkcoee6huingbmag88k4@google.com
+DTSTAMP:20250810T134515Z
+DTSTART:20260516T113000Z
+DTEND:20260516T143000Z
+SUMMARY:Dallas Bike Ride 2026
+DESCRIPTION:Event schedule\n\nMay 16 6:30 AM CDT - Corrals Open\nMay 16 7:45 AM CDT - Corrals Close\nMay 16 8:00 AM CDT - Ride Begins\n\nSee all event details at https://register.dallasbikeride.com/
+LOCATION:1500 Marilla Street\, Dallas\, TX
+X-ORGANIZING-GROUP:DATA
+X-REJECTED:false
+SEQUENCE:1
+CREATED:20250810T023812Z
+LAST-MODIFIED:20250810T062203Z
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc_5ba8d909-5cfe-40e0-a9ca-ab5e7a8a83bc
+DTSTAMP:20250810T134515Z
+DTSTART:20260520T230000Z
+DTEND:20260521T000000Z
+SUMMARY:Ride of Silence 2026
+DESCRIPTION:https://rideofsilence.org/main.php
+
+LOCATION:White Rock Lake
+X-ORGANIZING-GROUP:Dallas Bicycle Coalition
+X-REJECTED:false
+CREATED:20250810T023818Z
+LAST-MODIFIED:20250810T062145Z
+END:VEVENT
+END:VCALENDAR
