@@ -79,12 +79,12 @@ func convertToEvent(i DBCEvent) event.Event {
 	}
 
 	if strings.TrimSpace(i.Excerpt) != "" {
-		o.Description = fmt.Sprintf("%v\n", i.Excerpt)
+		o.Description = fmt.Sprintf("%v\\n", escape(i.Excerpt))
 	}
 
 	for _, d := range i.Description {
 		for _, c := range d.Children {
-			o.Description += fmt.Sprintf("%v\n", c.Text)
+			o.Description += fmt.Sprintf("%v\\n", escape(c.Text))
 		}
 	}
 
