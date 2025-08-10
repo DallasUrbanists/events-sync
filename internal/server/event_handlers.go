@@ -159,26 +159,26 @@ func generateICalContent(events []database.Event) string {
 		builder.WriteString("BEGIN:VEVENT\r\n")
 
 		// Required fields
-		builder.WriteString(fmt.Sprintf("UID:%s\r\n", escapeICalText(event.UID)))
+		builder.WriteString(fmt.Sprintf("UID:%s\r\n", event.UID))
 		builder.WriteString(fmt.Sprintf("DTSTAMP:%s\r\n", time.Now().UTC().Format("20060102T150405Z")))
 		builder.WriteString(fmt.Sprintf("DTSTART:%s\r\n", event.StartTime.UTC().Format("20060102T150405Z")))
 		builder.WriteString(fmt.Sprintf("DTEND:%s\r\n", event.EndTime.UTC().Format("20060102T150405Z")))
 
 		// Optional fields
 		if event.Summary != "" {
-			builder.WriteString(fmt.Sprintf("SUMMARY:%s\r\n", escapeICalText(event.Summary)))
+			builder.WriteString(fmt.Sprintf("SUMMARY:%s\r\n", event.Summary))
 		}
 
 		if event.Description != nil && *event.Description != "" {
-			builder.WriteString(fmt.Sprintf("DESCRIPTION:%s\r\n", escapeICalText(*event.Description)))
+			builder.WriteString(fmt.Sprintf("DESCRIPTION:%s\r\n", *event.Description))
 		}
 
 		if event.Location != nil && *event.Location != "" {
-			builder.WriteString(fmt.Sprintf("LOCATION:%s\r\n", escapeICalText(*event.Location)))
+			builder.WriteString(fmt.Sprintf("LOCATION:%s\r\n", *event.Location))
 		}
 
 		if event.Organization != "" {
-			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", escapeICalText(event.Organization)))
+			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", event.Organization))
 		}
 
 		// Add rejected status as a custom property
@@ -191,7 +191,7 @@ func generateICalContent(events []database.Event) string {
 
 		// Add recurrence fields if present
 		if event.RecurrenceID != nil && *event.RecurrenceID != "" {
-			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", escapeICalText(*event.RecurrenceID)))
+			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", *event.RecurrenceID))
 		}
 
 		if event.RRule != nil && *event.RRule != "" {
@@ -218,22 +218,3 @@ func generateICalContent(events []database.Event) string {
 
 	return builder.String()
 }
-
-// escapeICalText escapes special characters in iCal text fields
-func escapeICalText(text string) string {
-	// Replace backslashes with double backslashes
-	text = strings.ReplaceAll(text, "\\", "\\\\")
-
-	// Replace semicolons with backslash-semicolon
-	text = strings.ReplaceAll(text, ";", "\\;")
-
-	// Replace commas with backslash-comma
-	text = strings.ReplaceAll(text, ",", "\\,")
-
-	// Replace newlines with \n
-	text = strings.ReplaceAll(text, "\n", "\\n")
-	text = strings.ReplaceAll(text, "\r", "\\r")
-
-	return text
-}
-

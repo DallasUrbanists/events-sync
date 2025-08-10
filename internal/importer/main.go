@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	"github.com/dallasurbanists/events-sync/pkg/event"
 )
@@ -36,4 +37,19 @@ func fetch(url string) ([]byte, error) {
 	}
 
 	return body, nil
+}
+
+func escape(i string) string {
+	o := i
+
+	o = strings.ReplaceAll(o, "\\", "\\\\")
+
+	o = strings.ReplaceAll(o, ";", "\\;")
+
+	o = strings.ReplaceAll(o, ",", "\\,")
+
+	o = strings.ReplaceAll(o, "\n", "\\n")
+	o = strings.ReplaceAll(o, "\r", "\\r")
+
+	return o
 }
