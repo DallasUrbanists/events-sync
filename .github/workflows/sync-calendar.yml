@@ -64,5 +64,5 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add static/dallas-urbanists-events-v3.ics
-        git commit -m "[skip render] Update calendar events"
+        git commit -m "[skip render] Update calendar events [skip actions]"
         git push
