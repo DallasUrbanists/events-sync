@@ -2,8 +2,7 @@ name: Sync Calendar Events
 
 on:
   schedule:
-    # Run at midnight and noon UTC
-    - cron: '0 */1 * * *'
+    - cron: '0 */3 * * *'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
