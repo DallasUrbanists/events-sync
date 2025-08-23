@@ -11,11 +11,12 @@ import (
 
 type Importers map[string]Importer
 
-type Importer func(string) ([]event.Event, error)
+type Importer func(string, string, map[string]string) ([]event.Event, error)
 
 func RegisterImporters() Importers {
 	i := Importers{}
 	i["custom_dallas_bicycle_coalition"] = custom_dallas_bicycle_coalition
+	i["action_network_api"] = action_network_api_importer
 
 	return i
 }

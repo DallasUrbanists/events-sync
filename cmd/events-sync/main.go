@@ -38,7 +38,7 @@ func main() {
 		var events []event.Event
 		var err error
 		if org.Importer != "ical" {
-			events, err = i[org.Importer](org.URL)
+			events, err = i[org.Importer](org.URL, orgName, org.Options)
 		} else {
 			events, err = event.FetchAndParseEvents(org.URL, orgName)
 		}

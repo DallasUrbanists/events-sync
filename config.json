@@ -7,6 +7,9 @@
     "Dallas Urbanists STLC": {
       "url": "https://www.meetup.com/dallasurbanists/events/ical/",
       "importer": "ical"
+    },
+    "Dallas Neighbors For Housing": {
+      "importer": "action_network_api"
     }
   }
 }
