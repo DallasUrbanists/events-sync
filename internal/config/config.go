@@ -11,8 +11,9 @@ import (
 )
 
 type Organization struct {
-	URL      string `json:"url"`
-	Importer string `json:"importer"`
+	URL      string            `json:"url"`
+	Importer string            `json:"importer"`
+	Options  map[string]string `json:"options,omitempty"`
 }
 
 type Config struct {
@@ -45,13 +46,10 @@ func LoadConfig() (*Config, error) {
 		return nil, fmt.Errorf("error decoding config file: %v", err)
 	}
 
-	env_config_entries := Config{
-		Organizations: map[string]Organization{},
-	}
-
 	prefix := "CONFIG_ORGANIZATIONS_"
 	url_suffix := "_URL"
 	importer_suffix := "_IMPORTER"
+	options_prefix := "_OPTIONS_"
 
 	envs := os.Environ()
 
@@ -62,11 +60,18 @@ func LoadConfig() (*Config, error) {
 			if len(parts) == 2 {
 				original_key := parts[0]
 				key := strings.TrimPrefix(original_key, prefix)
+				option := ""
 
 				if strings.HasSuffix(key, url_suffix) {
 					key = strings.TrimSuffix(key, url_suffix)
 				} else if strings.HasSuffix(key, importer_suffix) {
 					key = strings.TrimSuffix(key, importer_suffix)
+				} else if strings.Contains(key, options_prefix) {
+					optionParts := strings.SplitN(key, options_prefix, 2)
+					if len(optionParts) == 2 {
+						key = optionParts[0]
+						option = strings.ToLower(optionParts[1])
+					}
 				} else {
 					continue
 				}
@@ -74,25 +79,24 @@ func LoadConfig() (*Config, error) {
 				key = strings.ReplaceAll(key, "_", " ")
 				key = caser.String(key)
 
-				org, ok := env_config_entries.Organizations[key]
+				org, ok := config.Organizations[key]
 				if !ok {
-					org = Organization{}
+					org = Organization{Options: make(map[string]string)}
+				}
+				if org.Options == nil {
+					org.Options = make(map[string]string)
 				}
 
 				if strings.HasSuffix(original_key, url_suffix) {
 					org.URL = parts[1]
 				} else if strings.HasSuffix(original_key, importer_suffix) {
 					org.Importer = parts[1]
+				} else if strings.Contains(original_key, options_prefix) && option != "" {
+					org.Options[option] = parts[1]
 				}
 
-				env_config_entries.Organizations[key] = org
+				config.Organizations[key] = org
 			}
-		}
-	}
-
-	for k, v := range env_config_entries.Organizations {
-		if v.Importer != "" && v.URL != "" {
-			config.Organizations[k] = v
 		}
 	}
 

@@ -44,7 +44,7 @@ type SanityResponse struct {
 	Result []DBCEvent `json:"result"`
 }
 
-func custom_dallas_bicycle_coalition(url string) ([]event.Event, error) {
+func custom_dallas_bicycle_coalition(url string, organization string, options map[string]string) ([]event.Event, error) {
 	b, err := fetch(url)
 	if err != nil {
 		return nil, err
@@ -57,15 +57,15 @@ func custom_dallas_bicycle_coalition(url string) ([]event.Event, error) {
 
 	converted := []event.Event{}
 	for _, e := range sanityResp.Result {
-		converted = append(converted, convertToEvent(e))
+		converted = append(converted, convertToEvent(e, organization))
 	}
 
 	return converted, nil
 }
 
-func convertToEvent(i DBCEvent) event.Event {
+func convertToEvent(i DBCEvent, organization string) event.Event {
 	o := event.Event{
-		Organization: "Dallas Bicycle Coalition",
+		Organization: organization,
 		UID:          fmt.Sprintf("dbc_%v", i.ID),
 		Summary:      i.Title,
 		Location:     i.Location,
