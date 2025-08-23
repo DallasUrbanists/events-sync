@@ -17,6 +17,7 @@ func RegisterImporters() Importers {
 	i := Importers{}
 	i["custom_dallas_bicycle_coalition"] = custom_dallas_bicycle_coalition
 	i["action_network_api"] = action_network_api_importer
+	i["ical"] = ical_importer
 
 	return i
 }
