@@ -3,7 +3,7 @@ name: Scheduled Events Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6,18 * * *'  # 6 AM and 6 PM UTC
+    - cron: '0 */2 * * *'  # 6 AM and 6 PM UTC
 
 jobs:
   sync-events:
