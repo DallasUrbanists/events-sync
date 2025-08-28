@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -116,6 +117,26 @@ func (s *Server) exchangeCodeForToken(code string) (*DiscordTokenResponse, error
 		return nil, fmt.Errorf("error making request to Discord: %v", err)
 	}
 	defer resp.Body.Close()
+
+	// Log Discord response headers for debugging
+	log.Printf("Discord API Response Status: %s", resp.Status)
+	log.Printf("Discord API Response Headers:")
+	for key, values := range resp.Header {
+		for _, value := range values {
+			log.Printf("  %s: %s", key, value)
+		}
+	}
+
+	// Check for rate limiting related headers (case insensitive)
+	log.Printf("Checking for rate limiting headers...")
+	rateLimitHeaders := []string{"x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset", "retry-after", "cf-ray", "cf-cache-status"}
+	for _, headerName := range rateLimitHeaders {
+		if values, exists := resp.Header[http.CanonicalHeaderKey(headerName)]; exists {
+			log.Printf("Found rate limiting header %s: %v", headerName, values)
+		} else {
+			log.Printf("Rate limiting header %s not found", headerName)
+		}
+	}
 
 	// Read the response
 	body, err := io.ReadAll(resp.Body)
