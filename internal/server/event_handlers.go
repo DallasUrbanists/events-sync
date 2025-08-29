@@ -183,6 +183,7 @@ func generateICalContent(events []database.Event) string {
 
 		if event.Organization != "" {
 			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", event.Organization))
+			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", event.Organization))
 		}
 
 		// Add rejected status as a custom property
