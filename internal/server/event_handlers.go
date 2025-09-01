@@ -20,12 +20,15 @@ type EventResponse struct {
 	StartTime    time.Time `json:"start_time"`
 	EndTime      time.Time `json:"end_time"`
 	Rejected     bool      `json:"rejected"`
+	RecurrenceID *string   `json:"recurrence_id"`
 	CreatedAt    time.Time `json:"created_at"`
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 
-type UpdateRejectedRequest struct {
-	Rejected bool `json:"rejected"`
+type UpdateEventRequest struct {
+	RecurrenceID string  `json:"recurrence_id"`
+	Rejected     *bool   `json:"rejected,omitempty"`
+	Organization *string `json:"organization,omitempty"`
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
@@ -48,6 +51,7 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			StartTime:    event.StartTime,
 			EndTime:      event.EndTime,
 			Rejected:     event.Rejected,
+			RecurrenceID: event.RecurrenceID,
 			CreatedAt:    event.CreatedAt,
 			UpdatedAt:    event.UpdatedAt,
 		}
@@ -58,18 +62,59 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
-func (s *Server) updateEventStatus(w http.ResponseWriter, r *http.Request) {
+func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	uid := r.PathValue("uid")
 
-	var req UpdateRejectedRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	// First decode to raw data to validate fields
+	var rawData map[string]interface{}
+	if err := json.NewDecoder(r.Body).Decode(&rawData); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	if err := s.db.UpdateRejectedStatus(uid, req.Rejected); err != nil {
-		http.Error(w, fmt.Sprintf("Failed to update rejected status: %v", err), http.StatusInternalServerError)
+	// Validate that only allowed fields are being updated
+	allowedFields := map[string]bool{"recurrence_id": true, "rejected": true, "organization": true}
+	for key := range rawData {
+		if !allowedFields[key] {
+			http.Error(w, fmt.Sprintf("Field '%s' is not allowed to be updated", key), http.StatusBadRequest)
+			return
+		}
+	}
+
+	// Validate that at least one updatable field is being updated
+	if _, hasRejected := rawData["rejected"]; !hasRejected {
+		if _, hasOrg := rawData["organization"]; !hasOrg {
+			http.Error(w, "At least one field (rejected or organization) must be provided", http.StatusBadRequest)
+			return
+		}
+	}
+
+	// Now decode to the proper struct
+	var req UpdateEventRequest
+	reqBody, _ := json.Marshal(rawData)
+	if err := json.Unmarshal(reqBody, &req); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
+	}
+
+	// Update rejected status if provided
+	if req.Rejected != nil {
+		if err := s.db.UpdateRejectedStatus(uid, req.RecurrenceID, *req.Rejected); err != nil {
+			http.Error(w, fmt.Sprintf("Failed to update rejected status: %v", err), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	// Update organization if provided
+	if req.Organization != nil {
+		if *req.Organization == "" {
+			http.Error(w, "Organization cannot be empty", http.StatusBadRequest)
+			return
+		}
+		if err := s.db.UpdateEventOrganization(uid, req.RecurrenceID, *req.Organization); err != nil {
+			http.Error(w, fmt.Sprintf("Failed to update organization: %v", err), http.StatusInternalServerError)
+			return
+		}
 	}
 
 	w.Header().Set("Content-Type", "application/json")
