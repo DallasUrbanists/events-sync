@@ -8,3 +8,4 @@ docker-compose.yml
 testdata/
 *.test
 *.out
+static/
