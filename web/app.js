@@ -94,19 +94,16 @@ function eventManager() {
             this.filteredEvents = this.groupedEvents;
         },
 
-        async updateEventStatus(uid, recurrenceID, approved) {
+        async updateEventStatus(uid, approved) {
             const rejected = !approved;
 
             try {
-                const response = await fetch(`/api/events/${uid}`, {
-                    method: 'PATCH',
+                const response = await fetch(`/api/events/${uid}/status`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        recurrence_id: recurrenceID || '',
-                        rejected: rejected
-                    })
+                    body: JSON.stringify({ rejected: rejected })
                 });
 
                 if (!response.ok) {
@@ -130,53 +127,6 @@ function eventManager() {
                 console.error('Error updating status:', error);
                 this.showNotification('Failed to update event status. Please try again.', 'error');
             }
-        },
-
-        async updateEventOrganization(uid, recurrenceID, organization) {
-            try {
-                const response = await fetch(`/api/events/${uid}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        recurrence_id: recurrenceID || '',
-                        organization: organization
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                // Update the event in our local data
-                this.events.forEach(event => {
-                    if (event.uid === uid) {
-                        event.organization = organization;
-                    }
-                });
-
-                // Re-filter
-                this.filterEvents();
-
-                // Show success message
-                this.showNotification('Event organization updated successfully!', 'success');
-            } catch (error) {
-                console.error('Error updating organization:', error);
-                this.showNotification('Failed to update event organization. Please try again.', 'error');
-            }
-        },
-
-        async saveOrganizationChange(event) {
-            // Save the change and exit edit mode
-            await this.updateEventOrganization(event.uid, event.recurrence_id || '', event.organization);
-            event.editingOrganization = false;
-        },
-
-        cancelOrganizationChange(event) {
-            // Revert to original value and exit edit mode
-            event.organization = event.originalOrganization;
-            event.editingOrganization = false;
         },
 
         showNotification(message, type = 'info') {
