@@ -84,11 +84,11 @@ func (db *DB) UpsertEvent(e event.Event) error {
 		if hasSignificantChanges(existing, e) {
 			rejected = false // Reset to not rejected when there are significant changes
 		}
-		// Update the event
-		return db.updateEvent(e, rejected)
+		// Update the event (preserving organization field)
+		return db.updateEventWithoutOrganization(e, rejected)
 	} else {
-		// Higher sequence, always update
-		return db.updateEvent(e, false)
+		// Higher sequence, always update (preserving organization field)
+		return db.updateEventWithoutOrganization(e, false)
 	}
 }
 
@@ -185,6 +185,81 @@ func (db *DB) updateEvent(e event.Event, rejected bool) error {
 	return nil
 }
 
+// UpdateEventOrganization updates only the organization field of an event
+func (db *DB) UpdateEventOrganization(uid string, recurrenceID string, organization string) error {
+	_, err := db.Exec("UPDATE events SET organization = $1 WHERE uid = $2 AND recurrence_id = $3", organization, uid, recurrenceID)
+	if err != nil {
+		return fmt.Errorf("failed to update organization: %v", err)
+	}
+	return nil
+}
+
+// updateEventWithoutOrganization updates an existing event but preserves the organization field
+func (db *DB) updateEventWithoutOrganization(e event.Event, rejected bool) error {
+	var query string
+	var args []interface{}
+
+	if e.RecurrenceID != "" {
+		query = `
+			UPDATE events SET
+				summary = $1,
+				description = $2,
+				location = $3,
+				start_time = $4,
+				end_time = $5,
+				created_time = $6,
+				modified_time = $7,
+				status = $8,
+				transparency = $9,
+				sequence = $10,
+				recurrence_id = $11,
+				rrule = $12,
+				rdate = $13,
+				exdate = $14,
+				rejected = $15
+			WHERE uid = $16 AND recurrence_id = $17
+		`
+		args = []interface{}{
+			e.Summary, e.Description, e.Location,
+			e.StartTime, e.EndTime, e.Created, e.Modified,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID, e.RecurrenceID,
+		}
+	} else {
+		query = `
+			UPDATE events SET
+				summary = $1,
+				description = $2,
+				location = $3,
+				start_time = $4,
+				end_time = $5,
+				created_time = $6,
+				modified_time = $7,
+				status = $8,
+				transparency = $9,
+				sequence = $10,
+				recurrence_id = $11,
+				rrule = $12,
+				rdate = $13,
+				exdate = $14,
+				rejected = $15
+			WHERE uid = $16 AND recurrence_id = ''
+		`
+		args = []interface{}{
+			e.Summary, e.Description, e.Location,
+			e.StartTime, e.EndTime, e.Created, e.Modified,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID,
+		}
+	}
+
+	_, err := db.Exec(query, args...)
+
+	if err != nil {
+		return fmt.Errorf("failed to update event: %v", err)
+	}
+
+	return nil
+}
+
 // hasSignificantChanges checks if an event has significant changes that require review
 func hasSignificantChanges(existing Event, new event.Event) bool {
 	// Check if title (summary) changed
@@ -247,8 +322,8 @@ func (db *DB) GetEventsByRejectedStatus(rejected bool) ([]Event, error) {
 }
 
 // UpdateRejectedStatus updates the rejected status of an event
-func (db *DB) UpdateRejectedStatus(uid string, rejected bool) error {
-	_, err := db.Exec("UPDATE events SET rejected = $1 WHERE uid = $2", rejected, uid)
+func (db *DB) UpdateRejectedStatus(uid string, recurrenceID string, rejected bool) error {
+	_, err := db.Exec("UPDATE events SET rejected = $1 WHERE uid = $2 AND recurrence_id = $3", rejected, uid, recurrenceID)
 	if err != nil {
 		return fmt.Errorf("failed to update rejected status: %v", err)
 	}

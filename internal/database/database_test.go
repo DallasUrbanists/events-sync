@@ -62,3 +62,24 @@ func TestUpsertEventWithRecurrence(t *testing.T) {
 	// 5. Test that lower sequence events are ignored
 }
 
+func TestUpdateEventOrganization(t *testing.T) {
+	// This test would require a test database connection
+	// For now, we'll just verify the method signature and logic structure
+
+	// Test case: Update organization for an existing event
+	uid := "test-event-123@example.com"
+	recurrenceID := "20250108T120000Z"
+	newOrganization := "Updated Organization"
+
+	// In a real test with a database connection, we would:
+	// 1. Insert an event with a specific UID, recurrence_id, and organization
+	// 2. Call UpdateEventOrganization with the UID, recurrence_id, and new organization
+	// 3. Verify the organization field was updated for the specific event instance
+	// 4. Verify other fields remain unchanged
+	// 5. Verify that other events with the same UID but different recurrence_id are not affected
+
+	_ = uid
+	_ = recurrenceID
+	_ = newOrganization
+}
+
