@@ -25,7 +25,7 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 	)
 
 	router.Handle("GET /api/events", ms(http.HandlerFunc(s.getUpcomingEvents)))
-	router.Handle("PATCH /api/events/{uid}", ms(http.HandlerFunc(s.updateEvent)))
+	router.Handle("PUT /api/events/{uid}/status", ms(http.HandlerFunc(s.updateEventStatus)))
 	router.Handle("GET /api/events/stats", ms(http.HandlerFunc(s.getEventStats)))
 
 	return router
