@@ -27,6 +27,7 @@ func TestUpsertEventWithRecurrence(t *testing.T) {
 		Sequence:     2,
 		RRule:        "FREQ=WEEKLY;COUNT=10",
 		RecurrenceID: "", // Empty string represents the main recurring event
+		Type:         event.EventTypeSocialGathering,
 	}
 
 	// Test case 2: Insert a modified instance of the same recurring event
@@ -44,6 +45,7 @@ func TestUpsertEventWithRecurrence(t *testing.T) {
 		Transparency: "OPAQUE",
 		Sequence:     3,
 		RecurrenceID: "20250108T120000Z", // Specific recurrence instance
+		Type:         event.EventTypeSocialGathering,
 	}
 
 	// These events should be able to coexist in the database

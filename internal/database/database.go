@@ -33,6 +33,7 @@ type Event struct {
 	RRule        *string   `db:"rrule"`
 	RDate        *string   `db:"rdate"`
 	ExDate       *string   `db:"exdate"`
+	Type         string    `db:"type"`
 	Rejected     bool      `db:"rejected"`
 	CreatedAt    time.Time `db:"created_at"`
 	UpdatedAt    time.Time `db:"updated_at"`
@@ -94,20 +95,26 @@ func (db *DB) UpsertEvent(e event.Event) error {
 
 // insertEvent inserts a new event
 func (db *DB) insertEvent(e event.Event) error {
+	// Set default event type if not provided
+	eventType := e.Type
+	if eventType == "" {
+		eventType = event.EventTypeSocialGathering
+	}
+
 	query := `
 		INSERT INTO events (
 			uid, organization, summary, description, location,
 			start_time, end_time, created_time, modified_time,
-			status, transparency, sequence, recurrence_id, rrule, rdate, exdate, rejected
+			status, transparency, sequence, recurrence_id, rrule, rdate, exdate, type, rejected
 		) VALUES (
-			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
+			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18
 		)
 	`
 
 	_, err := db.Exec(query,
 		e.UID, e.Organization, e.Summary, e.Description, e.Location,
 		e.StartTime, e.EndTime, e.Created, e.Modified,
-		e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, false,
+		e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, eventType, false,
 	)
 
 	if err != nil {
@@ -119,6 +126,12 @@ func (db *DB) insertEvent(e event.Event) error {
 
 // updateEvent updates an existing event
 func (db *DB) updateEvent(e event.Event, rejected bool) error {
+	// Set default event type if not provided
+	eventType := e.Type
+	if eventType == "" {
+		eventType = event.EventTypeSocialGathering
+	}
+
 	var query string
 	var args []interface{}
 
@@ -140,13 +153,14 @@ func (db *DB) updateEvent(e event.Event, rejected bool) error {
 				rrule = $13,
 				rdate = $14,
 				exdate = $15,
-				rejected = $16
-			WHERE uid = $17 AND recurrence_id = $18
+				type = $16,
+				rejected = $17
+			WHERE uid = $18 AND recurrence_id = $19
 		`
 		args = []interface{}{
 			e.Organization, e.Summary, e.Description, e.Location,
 			e.StartTime, e.EndTime, e.Created, e.Modified,
-			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID, e.RecurrenceID,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, eventType, rejected, e.UID, e.RecurrenceID,
 		}
 	} else {
 		query = `
@@ -166,13 +180,14 @@ func (db *DB) updateEvent(e event.Event, rejected bool) error {
 				rrule = $13,
 				rdate = $14,
 				exdate = $15,
-				rejected = $16
-			WHERE uid = $17 AND recurrence_id = ''
+				type = $16,
+				rejected = $17
+			WHERE uid = $18 AND recurrence_id = ''
 		`
 		args = []interface{}{
 			e.Organization, e.Summary, e.Description, e.Location,
 			e.StartTime, e.EndTime, e.Created, e.Modified,
-			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, eventType, rejected, e.UID,
 		}
 	}
 
@@ -194,8 +209,23 @@ func (db *DB) UpdateEventOrganization(uid string, recurrenceID string, organizat
 	return nil
 }
 
+// UpdateEventType updates only the type field of an event
+func (db *DB) UpdateEventType(uid string, recurrenceID string, eventType string) error {
+	_, err := db.Exec("UPDATE events SET type = $1 WHERE uid = $2 AND recurrence_id = $3", eventType, uid, recurrenceID)
+	if err != nil {
+		return fmt.Errorf("failed to update event type: %v", err)
+	}
+	return nil
+}
+
 // updateEventWithoutOrganization updates an existing event but preserves the organization field
 func (db *DB) updateEventWithoutOrganization(e event.Event, rejected bool) error {
+	// Set default event type if not provided
+	eventType := e.Type
+	if eventType == "" {
+		eventType = event.EventTypeSocialGathering
+	}
+
 	var query string
 	var args []interface{}
 
@@ -216,13 +246,14 @@ func (db *DB) updateEventWithoutOrganization(e event.Event, rejected bool) error
 				rrule = $12,
 				rdate = $13,
 				exdate = $14,
-				rejected = $15
-			WHERE uid = $16 AND recurrence_id = $17
+				type = $15,
+				rejected = $16
+			WHERE uid = $17 AND recurrence_id = $18
 		`
 		args = []interface{}{
 			e.Summary, e.Description, e.Location,
 			e.StartTime, e.EndTime, e.Created, e.Modified,
-			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID, e.RecurrenceID,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, eventType, rejected, e.UID, e.RecurrenceID,
 		}
 	} else {
 		query = `
@@ -241,13 +272,14 @@ func (db *DB) updateEventWithoutOrganization(e event.Event, rejected bool) error
 				rrule = $12,
 				rdate = $13,
 				exdate = $14,
-				rejected = $15
-			WHERE uid = $16 AND recurrence_id = ''
+				type = $15,
+				rejected = $16
+			WHERE uid = $17 AND recurrence_id = ''
 		`
 		args = []interface{}{
 			e.Summary, e.Description, e.Location,
 			e.StartTime, e.EndTime, e.Created, e.Modified,
-			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, rejected, e.UID,
+			e.Status, e.Transparency, e.Sequence, e.RecurrenceID, e.RRule, e.RDate, e.ExDate, eventType, rejected, e.UID,
 		}
 	}
 
@@ -298,6 +330,16 @@ func (db *DB) GetEvents() ([]Event, error) {
 	err := db.Select(&events, "SELECT * FROM events ORDER BY start_time")
 	if err != nil {
 		return nil, fmt.Errorf("failed to get events: %v", err)
+	}
+	return events, nil
+}
+
+// GetEventsByType retrieves events filtered by event type
+func (db *DB) GetEventsByType(eventType string) ([]Event, error) {
+	var events []Event
+	err := db.Select(&events, "SELECT * FROM events WHERE type = $1 ORDER BY start_time", eventType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get events by type: %v", err)
 	}
 	return events, nil
 }

@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/dallasurbanists/events-sync/internal/database"
+	"github.com/dallasurbanists/events-sync/pkg/event"
 )
 
 type EventResponse struct {
@@ -19,6 +20,7 @@ type EventResponse struct {
 	Location     *string   `json:"location"`
 	StartTime    time.Time `json:"start_time"`
 	EndTime      time.Time `json:"end_time"`
+	Type         string    `json:"type"`
 	Rejected     bool      `json:"rejected"`
 	RecurrenceID *string   `json:"recurrence_id"`
 	CreatedAt    time.Time `json:"created_at"`
@@ -29,6 +31,7 @@ type UpdateEventRequest struct {
 	RecurrenceID string  `json:"recurrence_id"`
 	Rejected     *bool   `json:"rejected,omitempty"`
 	Organization *string `json:"organization,omitempty"`
+	Type         *string `json:"type,omitempty"`
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
@@ -50,6 +53,7 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			Location:     event.Location,
 			StartTime:    event.StartTime,
 			EndTime:      event.EndTime,
+			Type:         event.Type,
 			Rejected:     event.Rejected,
 			RecurrenceID: event.RecurrenceID,
 			CreatedAt:    event.CreatedAt,
@@ -73,7 +77,7 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Validate that only allowed fields are being updated
-	allowedFields := map[string]bool{"recurrence_id": true, "rejected": true, "organization": true}
+	allowedFields := map[string]bool{"recurrence_id": true, "rejected": true, "organization": true, "type": true}
 	for key := range rawData {
 		if !allowedFields[key] {
 			http.Error(w, fmt.Sprintf("Field '%s' is not allowed to be updated", key), http.StatusBadRequest)
@@ -84,8 +88,10 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	// Validate that at least one updatable field is being updated
 	if _, hasRejected := rawData["rejected"]; !hasRejected {
 		if _, hasOrg := rawData["organization"]; !hasOrg {
-			http.Error(w, "At least one field (rejected or organization) must be provided", http.StatusBadRequest)
-			return
+			if _, hasType := rawData["type"]; !hasType {
+				http.Error(w, "At least one field (rejected, organization, or type) must be provided", http.StatusBadRequest)
+				return
+			}
 		}
 	}
 
@@ -113,6 +119,22 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 		}
 		if err := s.db.UpdateEventOrganization(uid, req.RecurrenceID, *req.Organization); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to update organization: %v", err), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	// Update event type if provided
+	if req.Type != nil {
+		if *req.Type == "" {
+			http.Error(w, "Event type cannot be empty", http.StatusBadRequest)
+			return
+		}
+		if !event.IsValidEventType(*req.Type) {
+			http.Error(w, "Invalid event type", http.StatusBadRequest)
+			return
+		}
+		if err := s.db.UpdateEventType(uid, req.RecurrenceID, *req.Type); err != nil {
+			http.Error(w, fmt.Sprintf("Failed to update event type: %v", err), http.StatusInternalServerError)
 			return
 		}
 	}
@@ -145,8 +167,26 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
-	// Get all events from the database
-	events, err := s.db.GetEvents()
+	// Get event type from query parameter
+	eventType := r.URL.Query().Get("type")
+
+	var events []database.Event
+	var err error
+
+	if eventType != "" {
+		// Validate event type
+		if !event.IsValidEventType(eventType) {
+			http.Error(w, "Invalid event type. Valid values are: civic_meeting, social_gathering, volunteer_action", http.StatusBadRequest)
+			return
+		}
+
+		// Get events filtered by type
+		events, err = s.db.GetEventsByType(eventType)
+	} else {
+		// Get all events if no type specified
+		events, err = s.db.GetEvents()
+	}
+
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
@@ -229,6 +269,11 @@ func generateICalContent(events []database.Event) string {
 		if event.Organization != "" {
 			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", event.Organization))
 			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", event.Organization))
+		}
+
+		// Add event type as a custom property
+		if event.Type != "" {
+			builder.WriteString(fmt.Sprintf("X-EVENT-TYPE:%s\r\n", event.Type))
 		}
 
 		// Add rejected status as a custom property

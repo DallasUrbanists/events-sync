@@ -204,6 +204,7 @@ func convertActionNetworkEventToEvent(anEvent ActionNetworkEvent, organization s
 		Modified:     createdTime,
 		Status:       strings.ToUpper(anEvent.Status),
 		Transparency: "OPAQUE",
+		Type:         event.EventTypeSocialGathering,
 	}
 
 	return e, nil

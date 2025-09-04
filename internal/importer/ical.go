@@ -104,7 +104,10 @@ func ParseICS(content string, organization string) ([]event.Event, error) {
 		}
 
 		if strings.TrimSpace(line) == "BEGIN:VEVENT" {
-			currentEvent = &event.Event{Organization: organization}
+			currentEvent = &event.Event{
+				Organization: organization,
+				Type:         event.EventTypeSocialGathering,
+			}
 			continue
 		}
 
@@ -202,6 +205,8 @@ func processEventField(event *event.Event, u parseUtils, key, value string) {
 		event.RDate = value
 	case "EXDATE":
 		event.ExDate = value
+	case "X-EVENT-TYPE":
+		event.Type = value
 	}
 }
 

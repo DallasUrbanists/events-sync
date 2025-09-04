@@ -22,4 +22,25 @@ type Event struct {
 	RRule        string    `json:"rrule"`
 	RDate        string    `json:"rdate"`
 	ExDate       string    `json:"exdate"`
+	Type         string    `json:"type"`
+}
+
+// EventType constants for convenience
+const (
+	EventTypeCivicMeeting   = "civic_meeting"
+	EventTypeSocialGathering = "social_gathering"
+	EventTypeVolunteerAction = "volunteer_action"
+)
+
+// EventTypes maps event type keys to their display names
+var EventTypes = map[string]string{
+	EventTypeCivicMeeting:   "Civic Meeting",
+	EventTypeSocialGathering: "Social Gathering",
+	EventTypeVolunteerAction: "Volunteer Action",
+}
+
+// IsValidEventType checks if the given event type is valid
+func IsValidEventType(eventType string) bool {
+	_, exists := EventTypes[eventType]
+	return exists
 }

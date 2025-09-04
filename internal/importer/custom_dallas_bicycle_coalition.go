@@ -71,6 +71,7 @@ func convertToEvent(i DBCEvent, organization string) event.Event {
 		Location:     i.Location,
 		StartTime:    i.Date.StartDate,
 		Created:      i.CreatedAt,
+		Type:         event.EventTypeSocialGathering,
 	}
 
 	o.EndTime = i.Date.EndDate
