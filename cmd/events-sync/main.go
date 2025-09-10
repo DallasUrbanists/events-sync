@@ -79,17 +79,17 @@ func syncEvents(organization string, events []*event.Event, repo event.Repositor
 
 		// event exists
 		si := event.SyncEventInput{
-			Summary: &newEvent.Summary,
-			Description: newEvent.Description,
-			Location: newEvent.Location,
-			StartTime: &newEvent.StartTime,
-			EndTime: &newEvent.EndTime,
-			Status: newEvent.Status,
+			Summary:      &newEvent.Summary,
+			Description:  newEvent.Description,
+			Location:     newEvent.Location,
+			StartTime:    &newEvent.StartTime,
+			EndTime:      &newEvent.EndTime,
+			Status:       newEvent.Status,
 			Transparency: newEvent.Transparency,
-			Sequence: &newEvent.Sequence,
-			RRule: newEvent.RRule,
-			RDate: newEvent.RDate,
-			ExDate: newEvent.ExDate,
+			Sequence:     &newEvent.Sequence,
+			RRule:        newEvent.RRule,
+			RDate:        newEvent.RDate,
+			ExDate:       newEvent.ExDate,
 		}
 
 		if hasSignificantChanges(existingEvent, newEvent) {
@@ -104,11 +104,11 @@ func syncEvents(organization string, events []*event.Event, repo event.Repositor
 	}
 
 	pi := event.PruneOrganizationEventsInput{
-		Organization: organization,
+		Organization:   organization,
 		ExistingEvents: []event.GetEventInput{},
 	}
 
-	for _, e := range(events) {
+	for _, e := range events {
 		i := event.GetEventInput{UID: e.UID}
 		if e.RecurrenceID != nil && *e.RecurrenceID != "" {
 			i.RecurrenceID = e.RecurrenceID
@@ -124,24 +124,24 @@ func syncEvents(organization string, events []*event.Event, repo event.Repositor
 }
 
 func hasSignificantChanges(existing *event.Event, new *event.Event) bool {
-  if existing.Summary != new.Summary ||
+	if existing.Summary != new.Summary ||
 		existing.Sequence < new.Sequence {
-    return true
-  }
+		return true
+	}
 
-  // Check if time changed (within 1 minute tolerance)
-  if !existing.StartTime.Equal(new.StartTime) {
-    diff := existing.StartTime.Sub(new.StartTime)
-    if diff < -time.Minute || diff > time.Minute {
-      return true
-    }
-  }
+	// Check if time changed (within 1 minute tolerance)
+	if !existing.StartTime.Equal(new.StartTime) {
+		diff := existing.StartTime.Sub(new.StartTime)
+		if diff < -time.Minute || diff > time.Minute {
+			return true
+		}
+	}
 
-  // Check if location changed
-  existingLocation := ""
+	// Check if location changed
+	existingLocation := ""
 	if existing.Location != nil {
-    existingLocation = *existing.Location
-  }
+		existingLocation = *existing.Location
+	}
 
 	newLocation := ""
 	if new.Location != nil {
@@ -149,10 +149,10 @@ func hasSignificantChanges(existing *event.Event, new *event.Event) bool {
 	}
 
 	if existingLocation != newLocation {
-    return true
-  }
+		return true
+	}
 
-  return false
+	return false
 }
 
 func reportStats(repo event.Repository) error {
@@ -172,7 +172,6 @@ func reportStats(repo event.Repository) error {
 			nonRejectedEvents = append(nonRejectedEvents, e)
 		}
 	}
-
 
 	fmt.Println("\n=== Rejected Status Summary ===")
 	fmt.Printf("rejected: %d events\n", len(rejectedEvents))

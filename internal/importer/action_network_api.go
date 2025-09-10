@@ -13,10 +13,10 @@ import (
 )
 
 type ActionNetworkAPIResponse struct {
-	TotalPages   int    `json:"total_pages"`
-	PerPage      int    `json:"per_page"`
-	Page         int    `json:"page"`
-	TotalRecords int    `json:"total_records"`
+	TotalPages   int `json:"total_pages"`
+	PerPage      int `json:"per_page"`
+	Page         int `json:"page"`
+	TotalRecords int `json:"total_records"`
 	Embedded     struct {
 		Events []ActionNetworkEvent `json:"osdi:events"`
 	} `json:"_embedded"`

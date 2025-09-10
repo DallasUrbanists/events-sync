@@ -14,27 +14,27 @@ import (
 
 type Store struct {
 	*sqlx.DB
-	Events event.Repository
+	Events                    event.Repository
 	AuthenticatedDiscordUsers discord.UserRepository
 }
 
 type DB struct {
-  *sqlx.DB
+	*sqlx.DB
 }
 
 // Connect establishes a database connection
 func Connect(connStr string) (*Store, error) {
-  db, err := sqlx.Connect("postgres", connStr)
-  if err != nil {
-    return nil, fmt.Errorf("failed to connect to database: %v", err)
-  }
+	db, err := sqlx.Connect("postgres", connStr)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to database: %v", err)
+	}
 
-  // Test the connection
-  if err := db.Ping(); err != nil {
-    return nil, fmt.Errorf("failed to ping database: %v", err)
-  }
+	// Test the connection
+	if err := db.Ping(); err != nil {
+		return nil, fmt.Errorf("failed to ping database: %v", err)
+	}
 
-  return &Store{
+	return &Store{
 		db,
 		&EventRepository{db},
 		&AuthenticatedDiscordUserRepository{db},

@@ -9,13 +9,13 @@ import (
 )
 
 type Server struct {
-	db           *database.Store
-	config       *config.Config
+	db            *database.Store
+	config        *config.Config
 	discordConfig *config.DiscordConfig
-	jwtConfig    *config.JWTConfig
-	host         string
-	port         string
-	Server       http.Server
+	jwtConfig     *config.JWTConfig
+	host          string
+	port          string
+	Server        http.Server
 }
 
 type NewAppOpts struct {

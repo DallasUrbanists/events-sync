@@ -12,77 +12,77 @@ import (
 )
 
 type EventRepository struct {
-  *sqlx.DB
+	*sqlx.DB
 }
 
 // Event represents an event in the database
 type Event struct {
-	ID           int        `db:"id"`
-  CreatedAt    time.Time  `db:"created_at"`
-  UpdatedAt    time.Time  `db:"updated_at"`
+	ID        int       `db:"id"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
 
-  UID          string     `db:"uid"`
-  Organization string     `db:"organization"`
-  Summary      string     `db:"summary"`
-  Description  *string    `db:"description"`
-  Location     *string    `db:"location"`
-  StartTime    time.Time  `db:"start_time"`
-  EndTime      time.Time  `db:"end_time"`
-  CreatedTime  *time.Time `db:"created_time"`
-  ModifiedTime *time.Time `db:"modified_time"`
-  Status       *string    `db:"status"`
-  Transparency *string    `db:"transparency"`
-  Rejected     bool       `db:"rejected"`
+	UID          string     `db:"uid"`
+	Organization string     `db:"organization"`
+	Summary      string     `db:"summary"`
+	Description  *string    `db:"description"`
+	Location     *string    `db:"location"`
+	StartTime    time.Time  `db:"start_time"`
+	EndTime      time.Time  `db:"end_time"`
+	CreatedTime  *time.Time `db:"created_time"`
+	ModifiedTime *time.Time `db:"modified_time"`
+	Status       *string    `db:"status"`
+	Transparency *string    `db:"transparency"`
+	Rejected     bool       `db:"rejected"`
 	Sequence     int        `db:"sequence"`
-  RecurrenceID *string    `db:"recurrence_id"`
-  RRule        *string    `db:"rrule"`
-  RDate        *string    `db:"rdate"`
-  ExDate       *string    `db:"exdate"`
+	RecurrenceID *string    `db:"recurrence_id"`
+	RRule        *string    `db:"rrule"`
+	RDate        *string    `db:"rdate"`
+	ExDate       *string    `db:"exdate"`
 }
 
-func marshal(d *Event) *event.Event{
+func marshal(d *Event) *event.Event {
 	e := event.Event{
-    UID: d.UID,
-    Organization: d.Organization,
-    Summary: d.Summary,
-    Description: d.Description,
-    Location: d.Location,
-    StartTime: d.StartTime,
-    EndTime: d.EndTime,
-    Created: d.CreatedTime,
-    Modified: d.ModifiedTime,
-    Rejected: d.Rejected,
-    Status: d.Status,
-    Transparency: d.Transparency,
-    Sequence: d.Sequence,
-    RecurrenceID: d.RecurrenceID,
-    RRule: d.RRule,
-    RDate: d.RDate,
-    ExDate: d.ExDate,
+		UID:          d.UID,
+		Organization: d.Organization,
+		Summary:      d.Summary,
+		Description:  d.Description,
+		Location:     d.Location,
+		StartTime:    d.StartTime,
+		EndTime:      d.EndTime,
+		Created:      d.CreatedTime,
+		Modified:     d.ModifiedTime,
+		Rejected:     d.Rejected,
+		Status:       d.Status,
+		Transparency: d.Transparency,
+		Sequence:     d.Sequence,
+		RecurrenceID: d.RecurrenceID,
+		RRule:        d.RRule,
+		RDate:        d.RDate,
+		ExDate:       d.ExDate,
 	}
 
 	return &e
 }
 
-func unmarshal(e *event.Event) *Event{
+func unmarshal(e *event.Event) *Event {
 	d := Event{
-  	UID: e.UID,
-  	Organization: e.Organization,
-  	Summary: e.Summary,
-  	Description: e.Description,
-  	Location: e.Location,
-  	StartTime: e.StartTime,
-  	EndTime: e.EndTime,
-  	CreatedTime: e.Created,
-  	ModifiedTime: e.Modified,
-  	Status: e.Status,
-  	Transparency: e.Transparency,
-  	Sequence: e.Sequence,
-  	RecurrenceID: e.RecurrenceID,
-  	RRule: e.RRule,
-  	RDate: e.RDate,
-  	ExDate: e.ExDate,
-  	Rejected: e.Rejected,
+		UID:          e.UID,
+		Organization: e.Organization,
+		Summary:      e.Summary,
+		Description:  e.Description,
+		Location:     e.Location,
+		StartTime:    e.StartTime,
+		EndTime:      e.EndTime,
+		CreatedTime:  e.Created,
+		ModifiedTime: e.Modified,
+		Status:       e.Status,
+		Transparency: e.Transparency,
+		Sequence:     e.Sequence,
+		RecurrenceID: e.RecurrenceID,
+		RRule:        e.RRule,
+		RDate:        e.RDate,
+		ExDate:       e.ExDate,
+		Rejected:     e.Rejected,
 	}
 
 	empty := ""
@@ -114,17 +114,17 @@ const insertEventQuery = `
 `
 
 func (db *EventRepository) InsertEvent(e *event.Event) error {
-  d := unmarshal(e)
+	d := unmarshal(e)
 	rows, err := db.NamedQuery(insertEventQuery, d)
-  if err != nil {
-    return fmt.Errorf("failed to insert event: %v", err)
-  }
+	if err != nil {
+		return fmt.Errorf("failed to insert event: %v", err)
+	}
 	defer rows.Close()
 
-  return nil
+	return nil
 }
 
-func (db *EventRepository) GetEvent(i *event.GetEventInput) (*event.Event, error){
+func (db *EventRepository) GetEvent(i *event.GetEventInput) (*event.Event, error) {
 	getEventQuery := fmt.Sprintf(`
 		SELECT %v FROM events
 		WHERE
@@ -141,11 +141,11 @@ func (db *EventRepository) GetEvent(i *event.GetEventInput) (*event.Event, error
 	}
 
 	err := db.Get(existing, getEventQuery, i.UID, *recurrenceID)
-  if err == sql.ErrNoRows {
-	  return nil, event.NewNoEventsError(err)
+	if err == sql.ErrNoRows {
+		return nil, event.NewNoEventsError(err)
 	} else if err != nil {
-    return nil, err
-  }
+		return nil, err
+	}
 
 	return marshal(existing), nil
 }
@@ -160,41 +160,41 @@ func (db *EventRepository) GetEvents(i *event.GetEventsInput) ([]*event.Event, e
 	if i != nil {
 		filterPrefix := "WHERE"
 
-    if i.Rejected != nil {
-      idx++
-      getEventQuery += fmt.Sprintf("%v rejected = $%d ", filterPrefix, idx)
-      args = append(args, i.Rejected)
+		if i.Rejected != nil {
+			idx++
+			getEventQuery += fmt.Sprintf("%v rejected = $%d ", filterPrefix, idx)
+			args = append(args, i.Rejected)
 			filterPrefix = "AND"
-    }
+		}
 
-    if i.Organization != nil {
-      idx++
-      getEventQuery += fmt.Sprintf("%v organization = $%d ", filterPrefix, idx)
-      args = append(args, i.Organization)
+		if i.Organization != nil {
+			idx++
+			getEventQuery += fmt.Sprintf("%v organization = $%d ", filterPrefix, idx)
+			args = append(args, i.Organization)
 			filterPrefix = "AND"
-    }
+		}
 
-    if i.UpcomingOnly {
-      getEventQuery += fmt.Sprintf("%v start_time > NOW() ", filterPrefix)
+		if i.UpcomingOnly {
+			getEventQuery += fmt.Sprintf("%v start_time > NOW() ", filterPrefix)
 			filterPrefix = "AND"
-    }
-  }
+		}
+	}
 
 	getEventQuery += "ORDER BY start_time"
 
-  err := db.Select(&dbEvents, getEventQuery, args...)
-  if err == sql.ErrNoRows {
-	  return nil, event.NewNoEventsError(err)
+	err := db.Select(&dbEvents, getEventQuery, args...)
+	if err == sql.ErrNoRows {
+		return nil, event.NewNoEventsError(err)
 	} else if err != nil {
-    return nil, fmt.Errorf("failed to get events: %v", err)
-  }
+		return nil, fmt.Errorf("failed to get events: %v", err)
+	}
 
-  events := []*event.Event{}
-  for _, event := range(dbEvents) {
-    events = append(events, marshal(event))
-  }
+	events := []*event.Event{}
+	for _, event := range dbEvents {
+		events = append(events, marshal(event))
+	}
 
-  return events, nil
+	return events, nil
 }
 
 func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEventInput) error {
@@ -229,7 +229,7 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 	}
 
 	_, err := db.Exec(updateQuery, args...)
-  return err
+	return err
 }
 
 func (db *EventRepository) SyncEvent(gi *event.GetEventInput, si *event.SyncEventInput) error {
@@ -333,73 +333,72 @@ func (db *EventRepository) SyncEvent(gi *event.GetEventInput, si *event.SyncEven
 		args = append(args, gi.RecurrenceID)
 	}
 
-  _, err := db.Exec(updateQuery, args...)
+	_, err := db.Exec(updateQuery, args...)
 	return err
 }
 
 func (db *EventRepository) PruneOrganizationEvents(pi *event.PruneOrganizationEventsInput) error {
-  organization := pi.Organization
-  sourceEvents := pi.ExistingEvents
+	organization := pi.Organization
+	sourceEvents := pi.ExistingEvents
 
-  sourceEventMap := make(map[string]bool)
-  for _, e := range sourceEvents {
-    key := e.UID
-    if e.RecurrenceID != nil && *e.RecurrenceID != "" {
-      key = e.UID + ":" + *e.RecurrenceID
-    }
-    sourceEventMap[key] = true
-  }
+	sourceEventMap := make(map[string]bool)
+	for _, e := range sourceEvents {
+		key := e.UID
+		if e.RecurrenceID != nil && *e.RecurrenceID != "" {
+			key = e.UID + ":" + *e.RecurrenceID
+		}
+		sourceEventMap[key] = true
+	}
 
-  events, err := db.GetEvents(&event.GetEventsInput{Organization: &organization})
-  if err != nil {
-    return fmt.Errorf("failed to get events for organization %s: %v", organization, err)
-  }
+	events, err := db.GetEvents(&event.GetEventsInput{Organization: &organization})
+	if err != nil {
+		return fmt.Errorf("failed to get events for organization %s: %v", organization, err)
+	}
 
-  var eventsToDelete []*event.Event
-  for _, e := range events {
-    key := e.UID
-    if e.RecurrenceID != nil && *e.RecurrenceID != "" {
-      key = e.UID + ":" + *e.RecurrenceID
-    }
+	var eventsToDelete []*event.Event
+	for _, e := range events {
+		key := e.UID
+		if e.RecurrenceID != nil && *e.RecurrenceID != "" {
+			key = e.UID + ":" + *e.RecurrenceID
+		}
 
-    if !sourceEventMap[key] {
-      eventsToDelete = append(eventsToDelete, e)
-    }
-  }
+		if !sourceEventMap[key] {
+			eventsToDelete = append(eventsToDelete, e)
+		}
+	}
 
-  if len(eventsToDelete) > 0 {
-    fmt.Printf("Deleting %d events for organization %s that are no longer in source calendar:\n", len(eventsToDelete), organization)
+	if len(eventsToDelete) > 0 {
+		fmt.Printf("Deleting %d events for organization %s that are no longer in source calendar:\n", len(eventsToDelete), organization)
 
-    // Convert to DB event object and
-    // log summaries of events being deleted
-    dbEventsToDelete := []*Event{}
-    for i, e := range eventsToDelete {
-      dbEvent := unmarshal(e)
-      dbEventsToDelete = append(dbEventsToDelete, dbEvent)
+		// Convert to DB event object and
+		// log summaries of events being deleted
+		dbEventsToDelete := []*Event{}
+		for i, e := range eventsToDelete {
+			dbEvent := unmarshal(e)
+			dbEventsToDelete = append(dbEventsToDelete, dbEvent)
 
-      summary := dbEvent.Summary
-      if len(summary) > 50 {
-        summary = summary[:47] + "..."
-      }
-      fmt.Printf("  %d. %s (UID: %s)\n", i+1, summary, dbEvent.UID)
-    }
+			summary := dbEvent.Summary
+			if len(summary) > 50 {
+				summary = summary[:47] + "..."
+			}
+			fmt.Printf("  %d. %s (UID: %s)\n", i+1, summary, dbEvent.UID)
+		}
 
+		for _, dbEvent := range dbEventsToDelete {
+			deleteQuery := "DELETE FROM events WHERE uid = $1 AND organization = $2 "
+			args := []interface{}{dbEvent.UID, dbEvent.Organization}
 
-    for _, dbEvent := range dbEventsToDelete {
-      deleteQuery := "DELETE FROM events WHERE uid = $1 AND organization = $2 "
-      args := []interface{}{dbEvent.UID, dbEvent.Organization}
+			if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
+				deleteQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args)+1)
+				args = append(args, dbEvent.RecurrenceID)
+			}
 
-      if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
-        deleteQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args) + 1)
-        args = append(args, dbEvent.RecurrenceID)
-      }
+			_, err := db.Exec(deleteQuery, args...)
+			if err != nil {
+				fmt.Printf("Error deleting event (%s): %v\n", deleteQuery, err)
+			}
+		}
+	}
 
-      _, err := db.Exec(deleteQuery, args...)
-      if err != nil {
-        fmt.Printf("Error deleting event (%s): %v\n", deleteQuery, err)
-      }
-    }
-  }
-
-  return nil
+	return nil
 }

@@ -173,7 +173,7 @@ func generateICalContent(events []*event.Event) string {
 
 	loc, err := time.LoadLocation("America/Chicago")
 	if err != nil {
-			panic(err)
+		panic(err)
 	}
 
 	// Write iCal header

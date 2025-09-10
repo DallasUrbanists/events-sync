@@ -1,10 +1,10 @@
 package discord
 
 type AuthenticatedUser struct {
-	DiscordID  string
-  Username   string
+	DiscordID string
+	Username  string
 }
 
-type UserRepository interface{
+type UserRepository interface {
 	GetDiscordUserByID(string) (*AuthenticatedUser, error)
 }
