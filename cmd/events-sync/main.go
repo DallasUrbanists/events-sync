@@ -1,10 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
-	"sort"
 	"time"
 
 	"github.com/dallasurbanists/events-sync/internal/config"
@@ -23,7 +23,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error connecting to database: %v", err)
 	}
-	defer db.Close()
+	defer db.DB.Close()
 
 	cfg, err := config.LoadConfig()
 	if err != nil {
@@ -31,116 +31,151 @@ func main() {
 	}
 
 	i := importer.RegisterImporters()
-	var allEvents []event.Event
 	for orgName, org := range cfg.Organizations {
 		fmt.Printf("Processing organization: %s\n", orgName)
 
-		var events []event.Event
-		var err error
-		events, err = i[org.Importer](org.URL, orgName, org.Options)
+		events, err := i[org.Importer](org.URL, orgName, org.Options)
 		if err != nil {
 			fmt.Printf("Error processing %s: %v\n", orgName, err)
 			continue
 		}
 
-		for _, e := range events {
-			if err := db.UpsertEvent(e); err != nil {
-				fmt.Printf("Error storing event %s: %v\n", e.UID, err)
-			}
+		err = syncEvents(orgName, events, db.Events)
+		if err != nil {
+			log.Fatalf("failed to sync %v: %v", orgName, err)
 		}
 
-		if err := db.DeleteEventsNotInSource(orgName, events); err != nil {
-			fmt.Printf("Error deleting events not in source for %s: %v\n", orgName, err)
-		}
-
-		allEvents = append(allEvents, events...)
 		fmt.Printf("Found %d events for %s\n", len(events), orgName)
 	}
 
-	// Automatically mark past events as reviewed
-	fmt.Println("\n=== Marking past events as reviewed ===")
-	if err := db.MarkPastEventsAsReviewed(); err != nil {
-		log.Printf("Warning: Could not mark past events as reviewed: %v", err)
-	}
-
-	// Load all events from database
-	dbEvents, err := db.GetEvents()
+	err = reportStats(db.Events)
 	if err != nil {
-		log.Printf("Warning: Could not load events from database: %v", err)
-	} else {
-		// Convert database events to package events
-		allEvents = make([]event.Event, len(dbEvents))
-		for i, dbEvent := range dbEvents {
-			allEvents[i] = databaseEventToEvent(dbEvent)
+		log.Fatalf("failed to report stats: %v", err)
+	}
+}
+
+func syncEvents(organization string, events []*event.Event, repo event.Repository) error {
+	for _, newEvent := range events {
+		gi := event.GetEventInput{UID: newEvent.UID}
+		if newEvent.RecurrenceID != nil && *newEvent.RecurrenceID != "" {
+			gi.RecurrenceID = newEvent.RecurrenceID
+		}
+
+		// check if event already exists in DB
+		var noEventsError event.NoEventsError
+		existingEvent, err := repo.GetEvent(&gi)
+		if errors.As(err, &noEventsError) {
+			// new event -- insert and move on
+			insertErr := repo.InsertEvent(newEvent)
+			if insertErr != nil {
+				return insertErr
+			}
+
+			continue
+		}
+		if err != nil {
+			return fmt.Errorf("failed to check existing event: %v", err)
+		}
+
+		// event exists
+		si := event.SyncEventInput{
+			Summary: &newEvent.Summary,
+			Description: newEvent.Description,
+			Location: newEvent.Location,
+			StartTime: &newEvent.StartTime,
+			EndTime: &newEvent.EndTime,
+			Status: newEvent.Status,
+			Transparency: newEvent.Transparency,
+			Sequence: &newEvent.Sequence,
+			RRule: newEvent.RRule,
+			RDate: newEvent.RDate,
+			ExDate: newEvent.ExDate,
+		}
+
+		if hasSignificantChanges(existingEvent, newEvent) {
+			f := false
+			si.Rejected = &f
+		}
+
+		err = repo.SyncEvent(&gi, &si)
+		if err != nil {
+			return err
 		}
 	}
 
-	sort.Slice(allEvents, func(i, j int) bool {
-		return allEvents[i].StartTime.Before(allEvents[j].StartTime)
-	})
+	pi := event.PruneOrganizationEventsInput{
+		Organization: organization,
+		ExistingEvents: []event.GetEventInput{},
+	}
 
-	// output, err := json.MarshalIndent(allEvents, "", "  ")
+	for _, e := range(events) {
+		i := event.GetEventInput{UID: e.UID}
+		if e.RecurrenceID != nil && *e.RecurrenceID != "" {
+			i.RecurrenceID = e.RecurrenceID
+		}
+		pi.ExistingEvents = append(pi.ExistingEvents, i)
+	}
+
+	if err := repo.PruneOrganizationEvents(&pi); err != nil {
+		fmt.Printf("Error deleting events not in source for %s: %v\n", organization, err)
+	}
+
+	return nil
+}
+
+func hasSignificantChanges(existing *event.Event, new *event.Event) bool {
+  if existing.Summary != new.Summary ||
+		existing.Sequence < new.Sequence {
+    return true
+  }
+
+  // Check if time changed (within 1 minute tolerance)
+  if !existing.StartTime.Equal(new.StartTime) {
+    diff := existing.StartTime.Sub(new.StartTime)
+    if diff < -time.Minute || diff > time.Minute {
+      return true
+    }
+  }
+
+  // Check if location changed
+  existingLocation := ""
+	if existing.Location != nil {
+    existingLocation = *existing.Location
+  }
+
+	newLocation := ""
+	if new.Location != nil {
+		newLocation = *new.Location
+	}
+
+	if existingLocation != newLocation {
+    return true
+  }
+
+  return false
+}
+
+func reportStats(repo event.Repository) error {
+	events, err := repo.GetEvents(nil)
 	if err != nil {
-		log.Fatalf("Error marshaling events: %v", err)
+		return fmt.Errorf("Warning: Could not load events from database: %v", err)
 	}
 
-	fmt.Printf("\nTotal events found: %d\n", len(allEvents))
-	// fmt.Println(string(output))
+	fmt.Printf("\nTotal events found: %d\n", len(events))
 
-	if err := showReviewStatusSummary(db); err != nil {
-		log.Printf("Warning: Could not show review status summary: %v", err)
-	}
-}
-
-// databaseEventToEvent converts a database Event to a package Event
-func databaseEventToEvent(dbEvent database.Event) event.Event {
-	e := event.Event{
-		Organization: dbEvent.Organization,
-		UID:          dbEvent.UID,
-		Summary:      dbEvent.Summary,
-		StartTime:    dbEvent.StartTime,
-		EndTime:      dbEvent.EndTime,
-		Created:      time.Time{},
-		Modified:     time.Time{},
+	rejectedEvents := []*event.Event{}
+	nonRejectedEvents := []*event.Event{}
+	for _, e := range events {
+		if e.Rejected {
+			rejectedEvents = append(rejectedEvents, e)
+		} else {
+			nonRejectedEvents = append(nonRejectedEvents, e)
+		}
 	}
 
-	if dbEvent.Description != nil {
-		e.Description = *dbEvent.Description
-	}
-	if dbEvent.Location != nil {
-		e.Location = *dbEvent.Location
-	}
-	if dbEvent.CreatedTime != nil {
-		e.Created = *dbEvent.CreatedTime
-	}
-	if dbEvent.ModifiedTime != nil {
-		e.Modified = *dbEvent.ModifiedTime
-	}
-	if dbEvent.Status != nil {
-		e.Status = *dbEvent.Status
-	}
-	if dbEvent.Transparency != nil {
-		e.Transparency = *dbEvent.Transparency
-	}
 
-	return e
-}
-
-func showReviewStatusSummary(db *database.DB) error {
 	fmt.Println("\n=== Rejected Status Summary ===")
-
-	// Get rejected events
-	rejectedEvents, err := db.GetEventsByRejectedStatus(true)
-	if err != nil {
-		return fmt.Errorf("failed to get rejected events: %v", err)
-	}
 	fmt.Printf("rejected: %d events\n", len(rejectedEvents))
-
-	// Get non-rejected events
-	nonRejectedEvents, err := db.GetEventsByRejectedStatus(false)
-	if err != nil {
-		return fmt.Errorf("failed to get non-rejected events: %v", err)
-	}
 	fmt.Printf("approved: %d events\n", len(nonRejectedEvents))
 
 	return nil

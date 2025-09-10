@@ -7,22 +7,21 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dallasurbanists/events-sync/internal/database"
+	"github.com/dallasurbanists/events-sync/pkg/event"
 )
 
 type EventResponse struct {
-	ID           int       `json:"id"`
-	UID          string    `json:"uid"`
-	Organization string    `json:"organization"`
-	Summary      string    `json:"summary"`
-	Description  *string   `json:"description"`
-	Location     *string   `json:"location"`
-	StartTime    time.Time `json:"start_time"`
-	EndTime      time.Time `json:"end_time"`
-	Rejected     bool      `json:"rejected"`
-	RecurrenceID *string   `json:"recurrence_id"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	UID          string     `json:"uid"`
+	Organization string     `json:"organization"`
+	Summary      string     `json:"summary"`
+	Description  *string    `json:"description"`
+	Location     *string    `json:"location"`
+	StartTime    time.Time  `json:"start_time"`
+	EndTime      time.Time  `json:"end_time"`
+	Rejected     bool       `json:"rejected"`
+	RecurrenceID *string    `json:"recurrence_id"`
+	Created      *time.Time `json:"created"`
+	Modified     *time.Time `json:"modified"`
 }
 
 type UpdateEventRequest struct {
@@ -32,7 +31,7 @@ type UpdateEventRequest struct {
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
-	events, err := s.db.GetUpcomingEvents()
+	events, err := s.db.Events.GetEvents(&event.GetEventsInput{UpcomingOnly: true})
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
@@ -42,7 +41,6 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 	var result []EventResponse
 	for _, event := range events {
 		eventResp := EventResponse{
-			ID:           event.ID,
 			UID:          event.UID,
 			Organization: event.Organization,
 			Summary:      event.Summary,
@@ -52,8 +50,8 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			EndTime:      event.EndTime,
 			Rejected:     event.Rejected,
 			RecurrenceID: event.RecurrenceID,
-			CreatedAt:    event.CreatedAt,
-			UpdatedAt:    event.UpdatedAt,
+			Created:      event.Created,
+			Modified:     event.Modified,
 		}
 		result = append(result, eventResp)
 	}
@@ -97,24 +95,28 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Update rejected status if provided
-	if req.Rejected != nil {
-		if err := s.db.UpdateRejectedStatus(uid, req.RecurrenceID, *req.Rejected); err != nil {
-			http.Error(w, fmt.Sprintf("Failed to update rejected status: %v", err), http.StatusInternalServerError)
-			return
-		}
+	gi := &event.GetEventInput{UID: uid}
+	if req.RecurrenceID != "" {
+		gi.RecurrenceID = &req.RecurrenceID
 	}
 
-	// Update organization if provided
+	pi := &event.PatchEventInput{}
+
+	if req.Rejected != nil {
+		pi.Rejected = req.Rejected
+	}
+
 	if req.Organization != nil {
 		if *req.Organization == "" {
 			http.Error(w, "Organization cannot be empty", http.StatusBadRequest)
 			return
 		}
-		if err := s.db.UpdateEventOrganization(uid, req.RecurrenceID, *req.Organization); err != nil {
-			http.Error(w, fmt.Sprintf("Failed to update organization: %v", err), http.StatusInternalServerError)
-			return
-		}
+		pi.Organization = req.Organization
+	}
+
+	if err := s.db.Events.PatchEvent(gi, pi); err != nil {
+		http.Error(w, fmt.Sprintf("Failed to update: %v", err), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -125,7 +127,8 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 	stats := make(map[string]int)
 
 	// Get rejected events
-	rejectedEvents, err := s.db.GetEventsByRejectedStatus(true)
+	t := true
+	rejectedEvents, err := s.db.Events.GetEvents(&event.GetEventsInput{Rejected: &t})
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get rejected events: %v", err), http.StatusInternalServerError)
 		return
@@ -133,7 +136,8 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 	stats["rejected"] = len(rejectedEvents)
 
 	// Get non-rejected events
-	nonRejectedEvents, err := s.db.GetEventsByRejectedStatus(false)
+	f := false
+	nonRejectedEvents, err := s.db.Events.GetEvents(&event.GetEventsInput{Rejected: &f})
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get non-rejected events: %v", err), http.StatusInternalServerError)
 		return
@@ -146,7 +150,7 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 	// Get all events from the database
-	events, err := s.db.GetEvents()
+	events, err := s.db.Events.GetEvents(nil)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
@@ -164,7 +168,7 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(icalContent))
 }
 
-func generateICalContent(events []database.Event) string {
+func generateICalContent(events []*event.Event) string {
 	var builder strings.Builder
 
 	loc, err := time.LoadLocation("America/Chicago")
@@ -257,8 +261,8 @@ func generateICalContent(events []database.Event) string {
 		}
 
 		// Add created and modified times if available
-		builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.CreatedAt.UTC().Format("20060102T150405Z")))
-		builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.UpdatedAt.UTC().Format("20060102T150405Z")))
+		builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.Created.UTC().Format("20060102T150405Z")))
+		builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.Modified.UTC().Format("20060102T150405Z")))
 
 		builder.WriteString("END:VEVENT\r\n")
 	}

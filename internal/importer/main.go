@@ -11,7 +11,7 @@ import (
 
 type Importers map[string]Importer
 
-type Importer func(string, string, map[string]string) ([]event.Event, error)
+type Importer func(string, string, map[string]string) ([]*event.Event, error)
 
 func RegisterImporters() Importers {
 	i := Importers{}

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dallasurbanists/events-sync/internal/database"
+	"github.com/dallasurbanists/events-sync/pkg/discord"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -48,12 +48,12 @@ func (s *Server) AuthMiddleware(next http.Handler) http.Handler {
 		}
 
 		// Verify the user is still authenticated in the database
-		authenticated, err := s.db.IsDiscordUserAuthenticated(claims.DiscordID)
+		user, err := s.db.AuthenticatedDiscordUsers.GetDiscordUserByID(claims.DiscordID)
 		if err != nil {
 			http.Error(w, "Database error", http.StatusInternalServerError)
 			return
 		}
-		if !authenticated {
+		if user == nil {
 			http.Error(w, "User no longer authenticated", http.StatusUnauthorized)
 			return
 		}
@@ -82,7 +82,7 @@ func (s *Server) parseJWT(tokenString string) (*Claims, error) {
 }
 
 // generateJWT creates a new JWT token for a user
-func (s *Server) generateJWT(user *database.AuthenticatedDiscordUser) (string, error) {
+func (s *Server) generateJWT(user *discord.AuthenticatedUser) (string, error) {
 	claims := &Claims{
 		DiscordID: user.DiscordID,
 		Username:  user.Username,

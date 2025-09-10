@@ -47,7 +47,7 @@ type ActionNetworkEvent struct {
 	BrowserURL string `json:"browser_url"`
 }
 
-func action_network_api_importer(url string, organization string, options map[string]string) ([]event.Event, error) {
+func action_network_api_importer(url string, organization string, options map[string]string) ([]*event.Event, error) {
 	baseURL := "https://actionnetwork.org/api/v2/events"
 	if url != "" {
 		baseURL = url // honestly just keeping this here to match the other importers and for future testing/proofing
@@ -63,13 +63,13 @@ func action_network_api_importer(url string, organization string, options map[st
 		return nil, fmt.Errorf("failed to fetch events from Action Network API: %v", err)
 	}
 
-	var convertedEvents []event.Event
+	var convertedEvents []*event.Event
 	for _, anEvent := range events {
 		e, err := convertActionNetworkEventToEvent(anEvent, organization)
 		if err != nil {
 			return nil, fmt.Errorf("failed to convert event %s: %v", anEvent.Title, err)
 		}
-		convertedEvents = append(convertedEvents, e)
+		convertedEvents = append(convertedEvents, &e)
 	}
 
 	return convertedEvents, nil
@@ -191,19 +191,22 @@ func convertActionNetworkEventToEvent(anEvent ActionNetworkEvent, organization s
 	}
 
 	description := fmt.Sprintf("Register for this event from %s on Action Network: %s", organization, anEvent.BrowserURL)
+	escapedDescription := escape(description)
+	status := strings.ToUpper(anEvent.Status)
+	transparency := "OPAQUE"
 
 	e := event.Event{
 		Organization: organization,
 		UID:          uid,
 		Summary:      anEvent.Title,
-		Description:  escape(description),
-		Location:     location,
+		Description:  &escapedDescription,
+		Location:     &location,
 		StartTime:    startTime,
 		EndTime:      endTime,
-		Created:      createdTime,
-		Modified:     createdTime,
-		Status:       strings.ToUpper(anEvent.Status),
-		Transparency: "OPAQUE",
+		Created:      &createdTime,
+		Modified:     &createdTime,
+		Status:       &status,
+		Transparency: &transparency,
 	}
 
 	return e, nil
