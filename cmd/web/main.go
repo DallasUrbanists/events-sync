@@ -44,5 +44,6 @@ func main() {
 		log.Fatalf("Error creating server: %v", err)
 	}
 
+	log.Printf("Starting server on port %s", *port)
 	log.Fatal(srv.Server.ListenAndServe())
 }

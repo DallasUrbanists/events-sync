@@ -21,6 +21,7 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 	// Protected routes (authentication required)
 
 	ms := middleware.CreateMiddlewareStack(
+		middleware.PanicRecoveryMiddleware,
 		s.AuthMiddleware,
 	)
 
@@ -28,7 +29,10 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 	router.Handle("PATCH /api/events/{uid}", ms(http.HandlerFunc(s.updateEvent)))
 	router.Handle("GET /api/events/stats", ms(http.HandlerFunc(s.getEventStats)))
 
-	return router
+	// Wrap the entire router with panic recovery for public routes too
+	wrappedRouter := http.NewServeMux()
+	wrappedRouter.Handle("/", middleware.PanicRecoveryMiddleware(router))
+	return wrappedRouter
 }
 
 // authRedirect checks if user is authenticated and redirects to login if not
