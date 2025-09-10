@@ -44,7 +44,7 @@ type SanityResponse struct {
 	Result []DBCEvent `json:"result"`
 }
 
-func custom_dallas_bicycle_coalition(url string, organization string, options map[string]string) ([]event.Event, error) {
+func custom_dallas_bicycle_coalition(url string, organization string, options map[string]string) ([]*event.Event, error) {
 	b, err := fetch(url)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func custom_dallas_bicycle_coalition(url string, organization string, options ma
 		return nil, fmt.Errorf("failed to parse JSON: %v", err)
 	}
 
-	converted := []event.Event{}
+	converted := []*event.Event{}
 	for _, e := range sanityResp.Result {
 		converted = append(converted, convertToEvent(e, organization))
 	}
@@ -63,14 +63,14 @@ func custom_dallas_bicycle_coalition(url string, organization string, options ma
 	return converted, nil
 }
 
-func convertToEvent(i DBCEvent, organization string) event.Event {
+func convertToEvent(i DBCEvent, organization string) *event.Event {
 	o := event.Event{
 		Organization: organization,
 		UID:          fmt.Sprintf("dbc_%v", i.ID),
 		Summary:      i.Title,
-		Location:     i.Location,
+		Location:     &i.Location,
 		StartTime:    i.Date.StartDate,
-		Created:      i.CreatedAt,
+		Created:      &i.CreatedAt,
 	}
 
 	o.EndTime = i.Date.EndDate
@@ -78,15 +78,20 @@ func convertToEvent(i DBCEvent, organization string) event.Event {
 		o.EndTime = i.Date.StartDate.Add(1 * time.Hour)
 	}
 
+	description := ""
 	if strings.TrimSpace(i.Excerpt) != "" {
-		o.Description = fmt.Sprintf("%v\\n", escape(i.Excerpt))
+		description += fmt.Sprintf("%v\\n", escape(i.Excerpt))
 	}
 
 	for _, d := range i.Description {
 		for _, c := range d.Children {
-			o.Description += fmt.Sprintf("%v\\n", escape(c.Text))
+			description += fmt.Sprintf("%v\\n", escape(c.Text))
 		}
 	}
 
-	return o
+	if description != "" {
+		o.Description = &description
+	}
+
+	return &o
 }

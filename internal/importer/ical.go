@@ -10,7 +10,7 @@ import (
 	"github.com/dallasurbanists/events-sync/pkg/event"
 )
 
-func ical_importer(url string, organization string, options map[string]string) ([]event.Event, error) {
+func ical_importer(url string, organization string, options map[string]string) ([]*event.Event, error) {
 	fmt.Printf("Fetching ICS file from: %s\n", url)
 
 	content, err := fetchICS(url)
@@ -60,8 +60,8 @@ type parseUtils struct {
 	defaultLoc *time.Location
 }
 
-func ParseICS(content string, organization string) ([]event.Event, error) {
-	var events []event.Event
+func ParseICS(content string, organization string) ([]*event.Event, error) {
+	var events []*event.Event
 
 	defaultLoc, err := time.LoadLocation("America/Chicago")
 	if err != nil {
@@ -114,7 +114,7 @@ func ParseICS(content string, organization string) ([]event.Event, error) {
 				if currentKey != "" {
 					processEventField(currentEvent, u, currentKey, currentValue)
 				}
-				events = append(events, *currentEvent)
+				events = append(events, currentEvent)
 				currentEvent = nil
 			}
 			currentKey = ""
@@ -167,9 +167,9 @@ func processEventField(event *event.Event, u parseUtils, key, value string) {
 	case "SUMMARY":
 		event.Summary = value
 	case "DESCRIPTION":
-		event.Description = value
+		event.Description = &value
 	case "LOCATION":
-		event.Location = value
+		event.Location = &value
 	case "DTSTART":
 		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
 			event.StartTime = t
@@ -180,28 +180,28 @@ func processEventField(event *event.Event, u parseUtils, key, value string) {
 		}
 	case "CREATED":
 		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
-			event.Created = t
+			event.Created = &t
 		}
 	case "LAST-MODIFIED":
 		if t, err := parseDateTime(value, u, keyParts[1:]); err == nil {
-			event.Modified = t
+			event.Modified = &t
 		}
 	case "STATUS":
-		event.Status = value
+		event.Status = &value
 	case "TRANSP":
-		event.Transparency = value
+		event.Transparency = &value
 	case "SEQUENCE":
 		if seq, err := parseSequence(value); err == nil {
 			event.Sequence = seq
 		}
 	case "RECURRENCE-ID":
-		event.RecurrenceID = value
+		event.RecurrenceID = &value
 	case "RRULE":
-		event.RRule = value
+		event.RRule = &value
 	case "RDATE":
-		event.RDate = value
+		event.RDate = &value
 	case "EXDATE":
-		event.ExDate = value
+		event.ExDate = &value
 	}
 }
 

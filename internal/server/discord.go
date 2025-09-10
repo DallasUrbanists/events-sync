@@ -51,22 +51,13 @@ func (s *Server) discordHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check if the user is authenticated in our database
-	authenticated, err := s.db.IsDiscordUserAuthenticated(discordUser.ID)
+	user, err := s.db.AuthenticatedDiscordUsers.GetDiscordUserByID(discordUser.ID)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Database error: %v", err), http.StatusInternalServerError)
 		return
 	}
-
-	if !authenticated {
+	if user == nil {
 		http.Error(w, "User not authorized to access this application", http.StatusForbidden)
-		return
-	}
-
-	// Get the user from our database
-	user, err := s.db.GetDiscordUserByID(discordUser.ID)
-	if err != nil {
-		// User doesn't exist in database, they are unauthorized
-		http.Error(w, "User not found in database - unauthorized", http.StatusForbidden)
 		return
 	}
 

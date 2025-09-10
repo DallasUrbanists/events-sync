@@ -12,8 +12,8 @@ import (
 
 func main() {
 	var (
-		port           = flag.String("port", "8080", "Port to run the server on")
-		dbURL          = flag.String("database", "", "Database connection URL")
+		port  = flag.String("port", "8080", "Port to run the server on")
+		dbURL = flag.String("database", "", "Database connection URL")
 	)
 	flag.Parse()
 

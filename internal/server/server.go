@@ -9,13 +9,13 @@ import (
 )
 
 type Server struct {
-	db           *database.DB
-	config       *config.Config
+	db            *database.Store
+	config        *config.Config
 	discordConfig *config.DiscordConfig
-	jwtConfig    *config.JWTConfig
-	host         string
-	port         string
-	Server       http.Server
+	jwtConfig     *config.JWTConfig
+	host          string
+	port          string
+	Server        http.Server
 }
 
 type NewAppOpts struct {
@@ -24,7 +24,7 @@ type NewAppOpts struct {
 	Config *config.Config
 }
 
-func NewServer(db *database.DB, o NewAppOpts) (*Server, error) {
+func NewServer(db *database.Store, o NewAppOpts) (*Server, error) {
 	// Load Discord configuration from environment variables
 	discordConfig, err := config.LoadDiscordConfig()
 	if err != nil {
