@@ -135,12 +135,12 @@ func (db *EventRepository) GetEvent(i *event.GetEventInput) (*event.Event, error
 	existing := &Event{}
 
 	empty := ""
-	recurrenceID := &empty
+	recurrenceID := empty
 	if i.RecurrenceID != nil {
-		recurrenceID = i.RecurrenceID
+		recurrenceID = *i.RecurrenceID
 	}
 
-	err := db.Get(existing, getEventQuery, i.UID, *recurrenceID)
+	err := db.Get(existing, getEventQuery, i.UID, recurrenceID)
 	if err == sql.ErrNoRows {
 		return nil, event.NewNoEventsError(err)
 	} else if err != nil {
@@ -199,7 +199,6 @@ func (db *EventRepository) GetEvents(i *event.GetEventsInput) ([]*event.Event, e
 
 func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEventInput) error {
 	updateQuery := "UPDATE events SET "
-	idx := 0
 	args := []interface{}{}
 
 	if pi == nil {
@@ -207,26 +206,24 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 	}
 
 	if pi.Organization != nil {
-		idx++
-		updateQuery += fmt.Sprintf("organization = $%d ", idx)
 		args = append(args, *pi.Organization)
+		updateQuery += fmt.Sprintf("organization = $%d ", len(args))
 	}
 
 	if pi.Rejected != nil {
-		idx++
-		updateQuery += fmt.Sprintf("rejected = $%d ", idx)
 		args = append(args, *pi.Rejected)
+		updateQuery += fmt.Sprintf("rejected = $%d ", len(args))
 	}
 
-	idx++
-	updateQuery += fmt.Sprintf("WHERE uid = $%d ", idx)
 	args = append(args, gi.UID)
+	updateQuery += fmt.Sprintf("WHERE uid = $%d ", len(args))
 
 	if gi.RecurrenceID != nil {
-		idx++
-		updateQuery += fmt.Sprintf("AND recurrence_id = $%d ", idx)
 		args = append(args, *gi.RecurrenceID)
+	} else {
+		args = append(args, "")
 	}
+	updateQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args))
 
 	_, err := db.Exec(updateQuery, args...)
 	return err
@@ -234,104 +231,91 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 
 func (db *EventRepository) SyncEvent(gi *event.GetEventInput, si *event.SyncEventInput) error {
 	updateQuery := "UPDATE events SET "
-	idx := 0
 	args := []interface{}{}
 
 	updatePrefix := ""
 
 	if si.Summary != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v summary = $%d ", updatePrefix, idx)
 		args = append(args, si.Summary)
+		updateQuery += fmt.Sprintf("%v summary = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Description != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v description = $%d ", updatePrefix, idx)
 		args = append(args, si.Description)
+		updateQuery += fmt.Sprintf("%v description = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Location != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v location = $%d ", updatePrefix, idx)
 		args = append(args, si.Location)
+		updateQuery += fmt.Sprintf("%v location = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.StartTime != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v start_time = $%d ", updatePrefix, idx)
 		args = append(args, si.StartTime)
+		updateQuery += fmt.Sprintf("%v start_time = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.EndTime != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v end_time = $%d ", updatePrefix, idx)
 		args = append(args, si.EndTime)
+		updateQuery += fmt.Sprintf("%v end_time = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Rejected != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v rejected = $%d ", updatePrefix, idx)
 		args = append(args, si.Rejected)
+		updateQuery += fmt.Sprintf("%v rejected = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Status != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v status = $%d ", updatePrefix, idx)
 		args = append(args, si.Status)
+		updateQuery += fmt.Sprintf("%v status = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Transparency != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v transparency = $%d ", updatePrefix, idx)
 		args = append(args, si.Transparency)
+		updateQuery += fmt.Sprintf("%v transparency = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.Sequence != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v sequence = $%d ", updatePrefix, idx)
 		args = append(args, si.Sequence)
+		updateQuery += fmt.Sprintf("%v sequence = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.RRule != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v rrule = $%d ", updatePrefix, idx)
 		args = append(args, si.RRule)
+		updateQuery += fmt.Sprintf("%v rrule = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.RDate != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v rdate = $%d ", updatePrefix, idx)
 		args = append(args, si.RDate)
+		updateQuery += fmt.Sprintf("%v rdate = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
 	if si.ExDate != nil {
-		idx++
-		updateQuery += fmt.Sprintf("%v exdate = $%d ", updatePrefix, idx)
 		args = append(args, si.ExDate)
+		updateQuery += fmt.Sprintf("%v exdate = $%d ", updatePrefix, len(args))
 		updatePrefix = ","
 	}
 
-	idx++
-	updateQuery += fmt.Sprintf("WHERE uid = $%d ", idx)
 	args = append(args, gi.UID)
+	updateQuery += fmt.Sprintf("WHERE uid = $%d ", len(args))
 
 	if gi.RecurrenceID != nil {
-		idx++
-		updateQuery += fmt.Sprintf("AND recurrence_id = $%d ", idx)
 		args = append(args, gi.RecurrenceID)
+	} else {
+		args = append(args, "")
 	}
+	updateQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args))
 
 	_, err := db.Exec(updateQuery, args...)
 	return err
@@ -388,10 +372,12 @@ func (db *EventRepository) PruneOrganizationEvents(pi *event.PruneOrganizationEv
 			deleteQuery := "DELETE FROM events WHERE uid = $1 AND organization = $2 "
 			args := []interface{}{dbEvent.UID, dbEvent.Organization}
 
-			if dbEvent.RecurrenceID != nil && *dbEvent.RecurrenceID != "" {
-				deleteQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args)+1)
+			if dbEvent.RecurrenceID != nil {
 				args = append(args, dbEvent.RecurrenceID)
+			} else {
+				args = append(args, "")
 			}
+			deleteQuery += fmt.Sprintf("AND recurrence_id = $%d ", len(args))
 
 			_, err := db.Exec(deleteQuery, args...)
 			if err != nil {

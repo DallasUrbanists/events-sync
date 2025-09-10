@@ -20,6 +20,9 @@ type EventResponse struct {
 	EndTime      time.Time  `json:"end_time"`
 	Rejected     bool       `json:"rejected"`
 	RecurrenceID *string    `json:"recurrence_id"`
+	RRule        *string    `json:"rrule"`
+	RDate        *string    `json:"rdate"`
+	ExDate       *string    `json:"exdate"`
 	Created      *time.Time `json:"created"`
 	Modified     *time.Time `json:"modified"`
 }
@@ -50,6 +53,9 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			EndTime:      event.EndTime,
 			Rejected:     event.Rejected,
 			RecurrenceID: event.RecurrenceID,
+			RRule:        event.RRule,
+			RDate:        event.RDate,
+			ExDate:       event.ExDate,
 			Created:      event.Created,
 			Modified:     event.Modified,
 		}
@@ -261,8 +267,12 @@ func generateICalContent(events []*event.Event) string {
 		}
 
 		// Add created and modified times if available
-		builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.Created.UTC().Format("20060102T150405Z")))
-		builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.Modified.UTC().Format("20060102T150405Z")))
+		if event.Created != nil {
+			builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.Created.UTC().Format("20060102T150405Z")))
+		}
+		if event.Modified != nil {
+			builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.Modified.UTC().Format("20060102T150405Z")))
+		}
 
 		builder.WriteString("END:VEVENT\r\n")
 	}
