@@ -38,6 +38,7 @@ type Event struct {
 	RRule        *string    `db:"rrule"`
 	RDate        *string    `db:"rdate"`
 	ExDate       *string    `db:"exdate"`
+	Type         string     `db:"type"`
 }
 
 func marshal(d *Event) *event.Event {
@@ -59,6 +60,7 @@ func marshal(d *Event) *event.Event {
 		RRule:        d.RRule,
 		RDate:        d.RDate,
 		ExDate:       d.ExDate,
+		Type:         d.Type,
 	}
 
 	return &e
@@ -83,6 +85,7 @@ func unmarshal(e *event.Event) *Event {
 		RDate:        e.RDate,
 		ExDate:       e.ExDate,
 		Rejected:     e.Rejected,
+		Type:         e.Type,
 	}
 
 	empty := ""
@@ -101,7 +104,7 @@ const insertEventQuery = `
     created_time, modified_time,
     status, transparency, sequence,
     recurrence_id, rrule, rdate, exdate,
-    rejected
+    rejected, type
   ) VALUES (
     :uid, :organization,
     :summary, :description,
@@ -109,7 +112,7 @@ const insertEventQuery = `
     :created_time, :modified_time,
     :status, :transparency, :sequence,
     :recurrence_id, :rrule, :rdate, :exdate,
-    :rejected
+    :rejected, :type
   )
 `
 
@@ -174,6 +177,13 @@ func (db *EventRepository) GetEvents(i *event.GetEventsInput) ([]*event.Event, e
 			filterPrefix = "AND"
 		}
 
+		if i.Type != nil {
+			idx++
+			getEventQuery += fmt.Sprintf("%v type = $%d ", filterPrefix, idx)
+			args = append(args, i.Type)
+			filterPrefix = "AND"
+		}
+
 		if i.UpcomingOnly {
 			getEventQuery += fmt.Sprintf("%v start_time > NOW() ", filterPrefix)
 			filterPrefix = "AND"
@@ -213,6 +223,11 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 	if pi.Rejected != nil {
 		args = append(args, *pi.Rejected)
 		updateQuery += fmt.Sprintf("rejected = $%d ", len(args))
+	}
+
+	if pi.Type != nil {
+		args = append(args, *pi.Type)
+		updateQuery += fmt.Sprintf("type = $%d ", len(args))
 	}
 
 	args = append(args, gi.UID)

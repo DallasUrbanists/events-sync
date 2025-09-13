@@ -6,6 +6,20 @@ import (
 	_ "time/tzdata"
 )
 
+// EventType constants
+const (
+	EventTypeCivicMeeting   = "civic_meeting"
+	EventTypeSocialGathering = "social_gathering"
+	EventTypeVolunteerAction = "volunteer_action"
+)
+
+// EventTypeDisplayName maps event type keys to their display names
+var EventTypeDisplayName = map[string]string{
+	EventTypeCivicMeeting:   "Civic Meeting",
+	EventTypeSocialGathering: "Social Gathering",
+	EventTypeVolunteerAction: "Volunteer Action",
+}
+
 type Event struct {
 	UID          string     `json:"uid"`
 	Organization string     `json:"organization"`
@@ -24,6 +38,7 @@ type Event struct {
 	RRule        *string    `json:"rrule"`
 	RDate        *string    `json:"rdate"`
 	ExDate       *string    `json:"exdate"`
+	Type         string     `json:"type"`
 }
 
 type GetEventInput struct {
@@ -35,6 +50,7 @@ type GetEventsInput struct {
 	Rejected     *bool
 	Organization *string
 	UpcomingOnly bool
+	Type         *string
 }
 
 type NoEventsError struct {
@@ -50,6 +66,7 @@ func NewNoEventsError(o error) NoEventsError { return NoEventsError{o} }
 type PatchEventInput struct {
 	Organization *string
 	Rejected     *bool
+	Type         *string
 }
 
 type SyncEventInput struct {
