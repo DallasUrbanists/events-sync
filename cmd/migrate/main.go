@@ -15,7 +15,8 @@ func main() {
 	var (
 		dbURL         = flag.String("database", "", "Database connection URL")
 		migrationsDir = flag.String("migrations", "migrations", "Path to migrations directory")
-		action        = flag.String("action", "up", "Migration action: up, version")
+		action        = flag.String("action", "up", "Migration action: up, down, version")
+		steps         = flag.Int("steps", 1, "Number of migration steps (for down action)")
 	)
 	flag.Parse()
 
@@ -44,6 +45,16 @@ func main() {
 		}
 		fmt.Println("Migrations completed successfully")
 
+	case "down":
+		if *steps <= 0 {
+			log.Fatalf("Steps must be a positive number, got: %d", *steps)
+		}
+		fmt.Printf("Rolling back %d migration(s)...\n", *steps)
+		if err := migration.RunMigrationsDown(db, *migrationsDir, *steps); err != nil {
+			log.Fatalf("Failed to rollback migrations: %v", err)
+		}
+		fmt.Println("Migration rollback completed successfully")
+
 	case "version":
 		version, err := migration.GetMigrationVersion(db, *migrationsDir)
 		if err != nil {
@@ -52,6 +63,6 @@ func main() {
 		fmt.Printf("Current migration version: %d\n", version)
 
 	default:
-		log.Fatalf("Unknown action: %s. Use 'up' or 'version'", *action)
+		log.Fatalf("Unknown action: %s. Use 'up', 'down', or 'version'", *action)
 	}
 }

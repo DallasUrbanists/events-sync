@@ -40,6 +40,15 @@ migrate:
 migrate-version:
 	go run ./cmd/migrate -action=version
 
+.PHONY: migrate-down
+migrate-down:
+	@if [ -z "$(STEPS)" ]; then \
+		echo "Usage: make migrate-down STEPS=N"; \
+		echo "Example: make migrate-down STEPS=2"; \
+		exit 1; \
+	fi
+	go run ./cmd/migrate -action=down -steps=$(STEPS)
+
 .PHONY: migrate-create
 migrate-create:
 	@read -p "Enter migration name: " name; \

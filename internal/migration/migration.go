@@ -39,6 +39,35 @@ func RunMigrations(db *sql.DB, migrationsPath string) error {
 	return nil
 }
 
+// RunMigrationsDown runs down migrations by a specific number of steps
+func RunMigrationsDown(db *sql.DB, migrationsPath string, steps int) error {
+	driver, err := postgres.WithInstance(db, &postgres.Config{})
+	if err != nil {
+		return fmt.Errorf("failed to create postgres driver: %w", err)
+	}
+
+	m, err := migrate.NewWithDatabaseInstance(
+		fmt.Sprintf("file://%s", migrationsPath),
+		"postgres", driver)
+	if err != nil {
+		return fmt.Errorf("failed to create migrate instance: %w", err)
+	}
+	defer m.Close()
+
+	// Run down migrations by the specified number of steps
+	if err := m.Steps(-steps); err != nil && err != migrate.ErrNoChange {
+		return fmt.Errorf("failed to run down migrations: %w", err)
+	}
+
+	if err == migrate.ErrNoChange {
+		log.Printf("No migrations to rollback (already at version 0 or no migrations applied)")
+	} else {
+		log.Printf("Successfully rolled back %d migration(s)", steps)
+	}
+
+	return nil
+}
+
 // GetMigrationVersion returns the current migration version
 func GetMigrationVersion(db *sql.DB, migrationsPath string) (uint, error) {
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
