@@ -104,7 +104,7 @@ func ParseICS(content string, organization string) ([]*event.Event, error) {
 		}
 
 		if strings.TrimSpace(line) == "BEGIN:VEVENT" {
-			currentEvent = &event.Event{Organization: organization}
+			currentEvent = &event.Event{Organization: organization, Type: event.EventTypeSocialGathering}
 			continue
 		}
 
