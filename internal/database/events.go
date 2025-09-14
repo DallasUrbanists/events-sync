@@ -38,6 +38,8 @@ type Event struct {
 	RRule        *string    `db:"rrule"`
 	RDate        *string    `db:"rdate"`
 	ExDate       *string    `db:"exdate"`
+	ExDateManual *string    `db:"exdate_manual"`
+	Type         string     `db:"type"`
 }
 
 func marshal(d *Event) *event.Event {
@@ -59,6 +61,8 @@ func marshal(d *Event) *event.Event {
 		RRule:        d.RRule,
 		RDate:        d.RDate,
 		ExDate:       d.ExDate,
+		ExDateManual: d.ExDateManual,
+		Type:         d.Type,
 	}
 
 	return &e
@@ -82,7 +86,9 @@ func unmarshal(e *event.Event) *Event {
 		RRule:        e.RRule,
 		RDate:        e.RDate,
 		ExDate:       e.ExDate,
+		ExDateManual: e.ExDateManual,
 		Rejected:     e.Rejected,
+		Type:         e.Type,
 	}
 
 	empty := ""
@@ -100,16 +106,16 @@ const insertEventQuery = `
     location, start_time, end_time,
     created_time, modified_time,
     status, transparency, sequence,
-    recurrence_id, rrule, rdate, exdate,
-    rejected
+    recurrence_id, rrule, rdate, exdate, exdate_manual,
+    rejected, type
   ) VALUES (
     :uid, :organization,
     :summary, :description,
     :location, :start_time, :end_time,
     :created_time, :modified_time,
     :status, :transparency, :sequence,
-    :recurrence_id, :rrule, :rdate, :exdate,
-    :rejected
+    :recurrence_id, :rrule, :rdate, :exdate, :exdate_manual,
+    :rejected, :type
   )
 `
 
@@ -160,6 +166,13 @@ func (db *EventRepository) GetEvents(i *event.GetEventsInput) ([]*event.Event, e
 	if i != nil {
 		filterPrefix := "WHERE"
 
+		if i.UID != nil {
+			idx++
+			getEventQuery += fmt.Sprintf("%v uid = $%d ", filterPrefix, idx)
+			args = append(args, i.UID)
+			filterPrefix = "AND"
+		}
+
 		if i.Rejected != nil {
 			idx++
 			getEventQuery += fmt.Sprintf("%v rejected = $%d ", filterPrefix, idx)
@@ -171,6 +184,13 @@ func (db *EventRepository) GetEvents(i *event.GetEventsInput) ([]*event.Event, e
 			idx++
 			getEventQuery += fmt.Sprintf("%v organization = $%d ", filterPrefix, idx)
 			args = append(args, i.Organization)
+			filterPrefix = "AND"
+		}
+
+		if i.Type != nil {
+			idx++
+			getEventQuery += fmt.Sprintf("%v type = $%d ", filterPrefix, idx)
+			args = append(args, i.Type)
 			filterPrefix = "AND"
 		}
 
@@ -213,6 +233,16 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 	if pi.Rejected != nil {
 		args = append(args, *pi.Rejected)
 		updateQuery += fmt.Sprintf("rejected = $%d ", len(args))
+	}
+
+	if pi.Type != nil {
+		args = append(args, *pi.Type)
+		updateQuery += fmt.Sprintf("type = $%d ", len(args))
+	}
+
+	if pi.ExDateManual != nil {
+		args = append(args, *pi.ExDateManual)
+		updateQuery += fmt.Sprintf("exdate_manual = $%d ", len(args))
 	}
 
 	args = append(args, gi.UID)

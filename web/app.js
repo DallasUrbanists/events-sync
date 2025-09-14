@@ -16,6 +16,13 @@ function eventManager() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 this.events = await response.json();
+
+                // Initialize editing properties for each event
+                this.events.forEach(event => {
+                    event.editingOrganization = false;
+                    event.editingType = false;
+                });
+
                 this.filterEvents();
             } catch (error) {
                 console.error('Error loading events:', error);
@@ -115,7 +122,7 @@ function eventManager() {
 
                 // Update the event in our local data
                 this.events.forEach(event => {
-                    if (event.uid === uid) {
+                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
                         event.rejected = rejected;
                     }
                 });
@@ -151,7 +158,7 @@ function eventManager() {
 
                 // Update the event in our local data
                 this.events.forEach(event => {
-                    if (event.uid === uid) {
+                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
                         event.organization = organization;
                     }
                 });
@@ -177,6 +184,53 @@ function eventManager() {
             // Revert to original value and exit edit mode
             event.organization = event.originalOrganization;
             event.editingOrganization = false;
+        },
+
+        async updateEventType(uid, recurrenceID, eventType) {
+            try {
+                const response = await fetch(`/api/events/${uid}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        recurrence_id: recurrenceID || '',
+                        type: eventType
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Update ALL events with the same UID (matching backend behavior)
+                this.events.forEach(event => {
+                    if (event.uid === uid) {
+                        event.type = eventType;
+                    }
+                });
+
+                // Re-filter
+                this.filterEvents();
+
+                // Show success message
+                this.showNotification('Event type updated successfully!', 'success');
+            } catch (error) {
+                console.error('Error updating event type:', error);
+                this.showNotification('Failed to update event type. Please try again.', 'error');
+            }
+        },
+
+        async saveTypeChange(event) {
+            // Save the change and exit edit mode
+            await this.updateEventType(event.uid, event.recurrence_id || '', event.type);
+            event.editingType = false;
+        },
+
+        cancelTypeChange(event) {
+            // Revert to original value and exit edit mode
+            event.type = event.originalType;
+            event.editingType = false;
         },
 
         showNotification(message, type = 'info') {

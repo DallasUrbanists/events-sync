@@ -23,14 +23,17 @@ type EventResponse struct {
 	RRule        *string    `json:"rrule"`
 	RDate        *string    `json:"rdate"`
 	ExDate       *string    `json:"exdate"`
+	ExDateManual *string    `json:"exdate_manual"`
 	Created      *time.Time `json:"created"`
 	Modified     *time.Time `json:"modified"`
+	Type         string     `json:"type"`
 }
 
 type UpdateEventRequest struct {
 	RecurrenceID string  `json:"recurrence_id"`
 	Rejected     *bool   `json:"rejected,omitempty"`
 	Organization *string `json:"organization,omitempty"`
+	Type         *string `json:"type,omitempty"`
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
@@ -56,8 +59,10 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			RRule:        event.RRule,
 			RDate:        event.RDate,
 			ExDate:       event.ExDate,
+			ExDateManual: event.ExDateManual,
 			Created:      event.Created,
 			Modified:     event.Modified,
+			Type:         event.Type,
 		}
 		result = append(result, eventResp)
 	}
@@ -77,7 +82,7 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Validate that only allowed fields are being updated
-	allowedFields := map[string]bool{"recurrence_id": true, "rejected": true, "organization": true}
+	allowedFields := map[string]bool{"recurrence_id": true, "rejected": true, "organization": true, "type": true}
 	for key := range rawData {
 		if !allowedFields[key] {
 			http.Error(w, fmt.Sprintf("Field '%s' is not allowed to be updated", key), http.StatusBadRequest)
@@ -85,19 +90,14 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Validate that at least one updatable field is being updated
-	if _, hasRejected := rawData["rejected"]; !hasRejected {
-		if _, hasOrg := rawData["organization"]; !hasOrg {
-			http.Error(w, "At least one field (rejected or organization) must be provided", http.StatusBadRequest)
-			return
-		}
-	}
-
-	// Now decode to the proper struct
 	var req UpdateEventRequest
-	reqBody, _ := json.Marshal(rawData)
+	reqBody, err := json.Marshal(rawData)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Invalid request body: %v \n %v", reqBody, err), http.StatusBadRequest)
+		return
+	}
 	if err := json.Unmarshal(reqBody, &req); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("Invalid request body: %v \n %v", reqBody, err), http.StatusBadRequest)
 		return
 	}
 
@@ -120,9 +120,42 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 		pi.Organization = req.Organization
 	}
 
+	if req.Type != nil {
+		if *req.Type == "" {
+			http.Error(w, "Event type cannot be empty", http.StatusBadRequest)
+			return
+		}
+		if _, ok := event.EventTypeDisplayName[*req.Type]; !ok {
+			http.Error(w, "Invalid event type", http.StatusBadRequest)
+			return
+		}
+		pi.Type = req.Type
+	}
+
+	if pi.Rejected == nil && pi.Organization == nil && pi.Type == nil {
+		http.Error(w, "At least one field (rejected, organization, or type) must be provided", http.StatusBadRequest)
+		return
+	}
+
 	if err := s.db.Events.PatchEvent(gi, pi); err != nil {
 		http.Error(w, fmt.Sprintf("Failed to update: %v", err), http.StatusInternalServerError)
 		return
+	}
+
+	if pi.Type != nil {
+		err = s.updateEventType(gi, *pi.Type)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Failed to update sibling event types: %v", err), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	if pi.Rejected != nil {
+		err = s.updateRootExdate(gi, *pi.Rejected)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Failed to update root exdate: %v", err), http.StatusInternalServerError)
+			return
+		}
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -155,15 +188,38 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
-	// Get all events from the database
-	events, err := s.db.Events.GetEvents(nil)
+	eventType := r.URL.Query().Get("type")
+
+	var events []*event.Event
+	var err error
+	gi := &event.GetEventsInput{}
+
+	if eventType != "" {
+		if _, ok := event.EventTypeDisplayName[eventType]; !ok {
+			validTypes := ""
+			for k, _ := range event.EventTypeDisplayName {
+				validTypes += k + ", "
+			}
+			validTypes = validTypes[:len(validTypes)-2]
+			http.Error(w, fmt.Sprintf("Invalid event type. Valid values are: %v", validTypes), http.StatusBadRequest)
+			return
+		}
+
+		gi.Type = &eventType
+	}
+
+	events, err = s.db.Events.GetEvents(gi)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Generate iCal content
-	icalContent := generateICalContent(events)
+	icalContent, err := generateICalContent(events)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Failed to write calendar: %v", err), http.StatusInternalServerError)
+		return
+	}
 
 	// Set headers for iCal file download
 	w.Header().Set("Content-Type", "text/calendar; charset=utf-8")
@@ -174,12 +230,12 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(icalContent))
 }
 
-func generateICalContent(events []*event.Event) string {
+func generateICalContent(events []*event.Event) (string, error) {
 	var builder strings.Builder
 
 	loc, err := time.LoadLocation("America/Chicago")
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
 	// Write iCal header
@@ -241,6 +297,8 @@ func generateICalContent(events []*event.Event) string {
 			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", event.Organization))
 		}
 
+		builder.WriteString(fmt.Sprintf("X-EVENT-TYPE:%s\r\n", event.Type))
+
 		// Add rejected status as a custom property
 		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", event.Rejected))
 
@@ -262,8 +320,17 @@ func generateICalContent(events []*event.Event) string {
 			builder.WriteString(fmt.Sprintf("RDATE:%s\r\n", *event.RDate))
 		}
 
+		exdates := []string{}
 		if event.ExDate != nil && *event.ExDate != "" {
-			builder.WriteString(fmt.Sprintf("EXDATE:%s\r\n", *event.ExDate))
+			exdates = append(exdates, strings.Split(*event.ExDate, ",")...)
+		}
+
+		if event.ExDateManual != nil && *event.ExDateManual != "" {
+			exdates = append(exdates, strings.Split(*event.ExDateManual, ",")...)
+		}
+
+		if len(exdates) > 0 {
+			builder.WriteString(fmt.Sprintf("EXDATE:%s\r\n", strings.Join(exdates, ",")))
 		}
 
 		// Add created and modified times if available
@@ -280,5 +347,70 @@ func generateICalContent(events []*event.Event) string {
 	// Write iCal footer
 	builder.WriteString("END:VCALENDAR\r\n")
 
-	return builder.String()
+	return builder.String(), nil
+}
+
+func (s *Server) updateRootExdate(gi *event.GetEventInput, rejected bool) error {
+	rootGi := &event.GetEventInput{UID: gi.UID}
+	rootEvt, err := s.db.Events.GetEvent(rootGi)
+	if err != nil {
+		return fmt.Errorf("failed to find root event: %v", err)
+	}
+
+	loc, err := time.LoadLocation("America/Chicago")
+	if err != nil {
+		return err
+	}
+
+	affectedDateStr := rootEvt.StartTime.In(loc).Format("20060102T150405")
+	if gi.RecurrenceID != nil && *gi.RecurrenceID != "" {
+		affectedDateStr = *gi.RecurrenceID
+	}
+
+	if rejected {
+		if rootEvt.ExDateManual == nil || *rootEvt.ExDateManual == "" {
+			rootEvt.ExDateManual = &affectedDateStr
+		} else {
+			*rootEvt.ExDateManual += fmt.Sprintf(",%v", affectedDateStr)
+		}
+	} else {
+		exdates := strings.Split(*rootEvt.ExDateManual, ",")
+		newExdates := []string{}
+		for _, exdate := range exdates {
+			if exdate != affectedDateStr {
+				newExdates = append(newExdates, exdate)
+			}
+		}
+
+		*rootEvt.ExDateManual = strings.Join(newExdates, ",")
+	}
+
+	rootPi := &event.PatchEventInput{ExDateManual: rootEvt.ExDateManual}
+	err = s.db.Events.PatchEvent(rootGi, rootPi)
+	if err != nil {
+		return fmt.Errorf("failed to patch root event: %v", err)
+	}
+
+	return nil
+}
+
+func (s *Server) updateEventType(gi *event.GetEventInput, eventType string) error {
+	evts, err := s.db.Events.GetEvents(&event.GetEventsInput{UID: &gi.UID})
+	if err != nil {
+		return fmt.Errorf("could not get sibling events: %v", err)
+	}
+
+	for _, evt := range evts {
+		evtGi := &event.GetEventInput{UID: evt.UID}
+		if evt.RecurrenceID != nil && *evt.RecurrenceID != "" {
+			evtGi.RecurrenceID = evt.RecurrenceID
+		}
+
+		err = s.db.Events.PatchEvent(evtGi, &event.PatchEventInput{Type: &eventType})
+		if err != nil {
+			return fmt.Errorf("could not update sibling events: %v", err)
+		}
+	}
+
+	return nil
 }
