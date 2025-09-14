@@ -203,9 +203,9 @@ function eventManager() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                // Update the event in our local data
+                // Update ALL events with the same UID (matching backend behavior)
                 this.events.forEach(event => {
-                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
+                    if (event.uid === uid) {
                         event.type = eventType;
                     }
                 });
