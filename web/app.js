@@ -122,7 +122,7 @@ function eventManager() {
 
                 // Update the event in our local data
                 this.events.forEach(event => {
-                    if (event.uid === uid) {
+                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
                         event.rejected = rejected;
                     }
                 });
@@ -158,7 +158,7 @@ function eventManager() {
 
                 // Update the event in our local data
                 this.events.forEach(event => {
-                    if (event.uid === uid) {
+                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
                         event.organization = organization;
                     }
                 });
@@ -205,7 +205,7 @@ function eventManager() {
 
                 // Update the event in our local data
                 this.events.forEach(event => {
-                    if (event.uid === uid) {
+                    if (event.uid === uid && (event.recurrence_id || '') === (recurrenceID || '')) {
                         event.type = eventType;
                     }
                 });

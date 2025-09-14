@@ -38,6 +38,7 @@ type Event struct {
 	RRule        *string    `json:"rrule"`
 	RDate        *string    `json:"rdate"`
 	ExDate       *string    `json:"exdate"`
+	ExDateManual *string    `json:"exdate_manual"`
 	Type         string     `json:"type"`
 }
 
@@ -47,6 +48,7 @@ type GetEventInput struct {
 }
 
 type GetEventsInput struct {
+	UID          *string
 	Rejected     *bool
 	Organization *string
 	UpcomingOnly bool
@@ -67,6 +69,7 @@ type PatchEventInput struct {
 	Organization *string
 	Rejected     *bool
 	Type         *string
+	ExDateManual *string
 }
 
 type SyncEventInput struct {
