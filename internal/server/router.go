@@ -43,8 +43,6 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 // authRedirect checks if user is authenticated and redirects to login if not
 func (s *Server) authRedirect(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("IN AUTH REDIRECT")
-
 		// Check for auth cookie
 		cookie, err := r.Cookie("auth_token")
 		if err != nil || cookie.Value == "" {
