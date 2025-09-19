@@ -2,10 +2,12 @@ package server
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 
 	"github.com/dallasurbanists/events-sync/internal/config"
 	"github.com/dallasurbanists/events-sync/internal/database"
+	"github.com/dallasurbanists/events-sync/internal/logger"
 )
 
 type Server struct {
@@ -15,6 +17,8 @@ type Server struct {
 	jwtConfig     *config.JWTConfig
 	host          string
 	port          string
+
+	Logger        *slog.Logger
 	Server        http.Server
 }
 
@@ -37,11 +41,14 @@ func NewServer(db *database.Store, o NewAppOpts) (*Server, error) {
 		return nil, fmt.Errorf("failed to load JWT config: %v", err)
 	}
 
+	l := logger.NewLogger()
+
 	s := &Server{
 		db:            db,
 		config:        o.Config,
 		discordConfig: discordConfig,
 		jwtConfig:     jwtConfig,
+		Logger:        l,
 	}
 
 	addr := o.Host

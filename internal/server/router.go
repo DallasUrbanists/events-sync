@@ -11,33 +11,40 @@ import (
 func (s *Server) newConfiguredRouter() *http.ServeMux {
 	router := http.NewServeMux()
 
-	// Public routes (no authentication required)
-	router.Handle("GET /", s.authRedirect(s.serveIndex))
-	router.HandleFunc("GET /login", s.loginHandler)
-	router.HandleFunc("GET /logout", s.logoutHandler)
-	router.HandleFunc("GET /auth/discord/redirect", s.discordHandler)
-	router.HandleFunc("GET /ical", s.generateICal) // Public iCal endpoint
+	open_ms := middleware.CreateMiddlewareStack(
+		s.LoggerMiddleware,
+		s.PanicRecoveryMiddleware,
+	)
 
-	// Protected routes (authentication required)
-
-	ms := middleware.CreateMiddlewareStack(
-		middleware.PanicRecoveryMiddleware,
+	authed_ms :=middleware.CreateMiddlewareStack(
+		open_ms,
 		s.AuthMiddleware,
 	)
 
-	router.Handle("GET /api/events", ms(http.HandlerFunc(s.getUpcomingEvents)))
-	router.Handle("PATCH /api/events/{uid}", ms(http.HandlerFunc(s.updateEvent)))
-	router.Handle("GET /api/events/stats", ms(http.HandlerFunc(s.getEventStats)))
+	// Public routes (no authentication required)
+	router.Handle("GET /", open_ms(s.authRedirect(s.serveIndex)))
+
+	router.Handle("GET /login", open_ms(http.HandlerFunc(s.loginHandler)))
+	router.Handle("GET /logout", open_ms(http.HandlerFunc(s.logoutHandler)))
+	router.Handle("GET /auth/discord/redirect", open_ms(http.HandlerFunc(s.discordHandler)))
+	router.Handle("GET /ical", open_ms(http.HandlerFunc(s.generateICal))) // Public iCal endpoint
+
+	// Protected routes (authentication required)
+	router.Handle("GET /api/events", authed_ms(http.HandlerFunc(s.getUpcomingEvents)))
+	router.Handle("PATCH /api/events/{uid}", authed_ms(http.HandlerFunc(s.updateEvent)))
+	router.Handle("GET /api/events/stats", authed_ms(http.HandlerFunc(s.getEventStats)))
 
 	// Wrap the entire router with panic recovery for public routes too
 	wrappedRouter := http.NewServeMux()
-	wrappedRouter.Handle("/", middleware.PanicRecoveryMiddleware(router))
+	wrappedRouter.Handle("/", s.PanicRecoveryMiddleware(router))
 	return wrappedRouter
 }
 
 // authRedirect checks if user is authenticated and redirects to login if not
 func (s *Server) authRedirect(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("IN AUTH REDIRECT")
+
 		// Check for auth cookie
 		cookie, err := r.Cookie("auth_token")
 		if err != nil || cookie.Value == "" {

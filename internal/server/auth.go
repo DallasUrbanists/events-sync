@@ -21,46 +21,50 @@ type Claims struct {
 // AuthMiddleware wraps an http.Handler and checks for valid JWT authentication
 func (s *Server) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Get the Authorization header
+		l := s.getLogger(r)
+
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
-			// Check for cookie-based auth
+			l.Warn("auth header missing, falling back onto cookie based auth")
 			cookie, err := r.Cookie("auth_token")
 			if err != nil || cookie.Value == "" {
+				l.Error("no auth present, unauthorized")
 				http.Error(w, "Unauthorized", http.StatusUnauthorized)
 				return
 			}
 			authHeader = "Bearer " + cookie.Value
 		}
 
-		// Extract the token
 		if !strings.HasPrefix(authHeader, "Bearer ") {
 			http.Error(w, "Invalid authorization header", http.StatusUnauthorized)
 			return
 		}
 		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
-		// Parse and validate the token
 		claims, err := s.parseJWT(tokenString)
 		if err != nil {
+			l.Error(fmt.Sprintf("failed to parse JWT: %v", err))
 			http.Error(w, "Invalid token", http.StatusUnauthorized)
 			return
 		}
 
-		// Verify the user is still authenticated in the database
 		user, err := s.db.AuthenticatedDiscordUsers.GetDiscordUserByID(claims.DiscordID)
 		if err != nil {
+			l.Error(fmt.Sprintf("DB error while verifying discord user: %v", err))
 			http.Error(w, "Database error", http.StatusInternalServerError)
 			return
 		}
 		if user == nil {
+			l.Error(fmt.Sprintf("user from claim no longer authenticated: %v", err))
 			http.Error(w, "User no longer authenticated", http.StatusUnauthorized)
 			return
 		}
 
-		// Add user info to request context
+		l = l.With("user", user.DiscordID)
+		authed_req := s.setLogger(l, r)
 		ctx := context.WithValue(r.Context(), "user", claims)
-		next.ServeHTTP(w, r.WithContext(ctx))
+
+		next.ServeHTTP(w, authed_req.WithContext(ctx))
 	})
 }
 
