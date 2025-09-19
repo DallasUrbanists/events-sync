@@ -316,7 +316,7 @@ func generateICalContent(events []*event.Event, logger *slog.Logger) (string, er
 
 		identifier := event.UID
 		if event.RecurrenceID != nil {
-			identifier += fmt.Sprintf(" %v", event.RecurrenceID)
+			identifier += fmt.Sprintf(" %v", *event.RecurrenceID)
 		}
 		l.Debug(fmt.Sprintf("writing event %v", identifier))
 
