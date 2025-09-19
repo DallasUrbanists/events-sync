@@ -26,9 +26,11 @@ func (s *Server) AuthMiddleware(next http.Handler) http.Handler {
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
 			l.Warn("auth header missing, falling back onto cookie based auth")
+
 			cookie, err := r.Cookie("auth_token")
 			if err != nil || cookie.Value == "" {
 				l.Error("no auth present, unauthorized")
+
 				http.Error(w, "Unauthorized", http.StatusUnauthorized)
 				return
 			}
@@ -50,12 +52,12 @@ func (s *Server) AuthMiddleware(next http.Handler) http.Handler {
 
 		user, err := s.db.AuthenticatedDiscordUsers.GetDiscordUserByID(claims.DiscordID)
 		if err != nil {
-			l.Error(fmt.Sprintf("DB error while verifying discord user: %v", err))
+			l.Error(fmt.Sprintf("DB error while verifying discord user %v: %v", claims.DiscordID, err))
 			http.Error(w, "Database error", http.StatusInternalServerError)
 			return
 		}
 		if user == nil {
-			l.Error(fmt.Sprintf("user from claim no longer authenticated: %v", err))
+			l.Error(fmt.Sprintf("user %v from claim no longer authenticated: %v", claims.DiscordID, err))
 			http.Error(w, "User no longer authenticated", http.StatusUnauthorized)
 			return
 		}

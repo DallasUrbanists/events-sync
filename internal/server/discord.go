@@ -29,41 +29,54 @@ type DiscordUser struct {
 
 // discordHandler handles the Discord OAuth2 callback
 func (s *Server) discordHandler(w http.ResponseWriter, r *http.Request) {
+	l := s.getLogger(r)
+
 	// Get the authorization code from the URL
 	code := r.URL.Query().Get("code")
 	if code == "" {
+		l.Error("no discord authorization code provided in query")
+
 		http.Error(w, "No authorization code provided", http.StatusBadRequest)
 		return
 	}
 
 	// Exchange the code for an access token
+	l.Debug("exchanging discord authorization code for token")
 	tokenResp, err := s.exchangeCodeForToken(code)
 	if err != nil {
+		l.Error(fmt.Sprintf("failed to exchange discord auth code for token: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to exchange code for token: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Get the user's information from Discord
+	l.Debug("getting discord user using access token")
 	discordUser, err := s.getDiscordUser(tokenResp.AccessToken)
 	if err != nil {
+		l.Error(fmt.Sprintf("failed to get Discord user: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to get Discord user: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Check if the user is authenticated in our database
+	l.Debug("verifying if discord user is authenticated")
 	user, err := s.db.AuthenticatedDiscordUsers.GetDiscordUserByID(discordUser.ID)
 	if err != nil {
+		l.Error(fmt.Sprintf("failed to check if discord user is authenticated: %v", err))
 		http.Error(w, fmt.Sprintf("Database error: %v", err), http.StatusInternalServerError)
 		return
 	}
 	if user == nil {
+		l.Warn(fmt.Sprintf("unauthenticated user: %v - %v", discordUser.ID, discordUser.Username))
 		http.Error(w, "User not authorized to access this application", http.StatusForbidden)
 		return
 	}
+	l.Info(fmt.Sprintf("found user: %v - %v", user.DiscordID, user.Username))
 
 	// Generate JWT token
 	token, err := s.generateJWT(user)
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to generate JWT: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to generate token: %v", err), http.StatusInternalServerError)
 		return
 	}
