@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"strings"
 	"time"
@@ -37,8 +38,12 @@ type UpdateEventRequest struct {
 }
 
 func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
+	l := s.getLogger(r)
+
+	l.Debug("getting upcoming events")
 	events, err := s.db.Events.GetEvents(&event.GetEventsInput{UpcomingOnly: true})
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to get events: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
 	}
@@ -73,10 +78,14 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	uid := r.PathValue("uid")
+	l := s.getLogger(r)
+
+	l.Debug(fmt.Sprintf("updating event %v", uid))
 
 	// First decode to raw data to validate fields
 	var rawData map[string]interface{}
 	if err := json.NewDecoder(r.Body).Decode(&rawData); err != nil {
+		l.Error(fmt.Sprintf("couldn't decode request body to update event %v : %v", uid, err))
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
@@ -93,10 +102,12 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 	var req UpdateEventRequest
 	reqBody, err := json.Marshal(rawData)
 	if err != nil {
+		l.Error(fmt.Sprintf("Invalid request body: %v \n %v", reqBody, err))
 		http.Error(w, fmt.Sprintf("Invalid request body: %v \n %v", reqBody, err), http.StatusBadRequest)
 		return
 	}
 	if err := json.Unmarshal(reqBody, &req); err != nil {
+		l.Error(fmt.Sprintf("Invalid request body, couldn't unmarshal into req: %v \n %v", reqBody, err))
 		http.Error(w, fmt.Sprintf("Invalid request body: %v \n %v", reqBody, err), http.StatusBadRequest)
 		return
 	}
@@ -137,22 +148,27 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	l.Info(fmt.Sprintf("updating event %v - %v", *gi, *pi))
 	if err := s.db.Events.PatchEvent(gi, pi); err != nil {
 		http.Error(w, fmt.Sprintf("Failed to update: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	if pi.Type != nil {
+		l.Info(fmt.Sprintf("updating sibling event types %v - %v", *gi, *pi))
 		err = s.updateEventType(gi, *pi.Type)
 		if err != nil {
+			l.Error(fmt.Sprintf("Failed to update sibling event types %v to %v: %v", gi, pi, err))
 			http.Error(w, fmt.Sprintf("Failed to update sibling event types: %v", err), http.StatusInternalServerError)
 			return
 		}
 	}
 
 	if pi.Rejected != nil {
+		l.Info(fmt.Sprintf("updating parent event rejection status %v - %v", *gi, *pi))
 		err = s.updateRootExdate(gi, *pi.Rejected)
 		if err != nil {
+			l.Error(fmt.Sprintf("Failed to update root exdate for %v to %v: %v", gi, pi, err))
 			http.Error(w, fmt.Sprintf("Failed to update root exdate: %v", err), http.StatusInternalServerError)
 			return
 		}
@@ -164,11 +180,17 @@ func (s *Server) updateEvent(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 	stats := make(map[string]int)
+	l := s.getLogger(r)
+
+	l.Info("getting event stats")
 
 	// Get rejected events
 	t := true
+	l.Debug("getting rejected events")
 	rejectedEvents, err := s.db.Events.GetEvents(&event.GetEventsInput{Rejected: &t})
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to get rejected events: %v", err))
+
 		http.Error(w, fmt.Sprintf("Failed to get rejected events: %v", err), http.StatusInternalServerError)
 		return
 	}
@@ -176,8 +198,11 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 
 	// Get non-rejected events
 	f := false
+	l.Debug("getting non-rejected events")
 	nonRejectedEvents, err := s.db.Events.GetEvents(&event.GetEventsInput{Rejected: &f})
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to get non-rejected events: %v", err))
+
 		http.Error(w, fmt.Sprintf("Failed to get non-rejected events: %v", err), http.StatusInternalServerError)
 		return
 	}
@@ -189,18 +214,24 @@ func (s *Server) getEventStats(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 	eventType := r.URL.Query().Get("type")
+	l := s.getLogger(r)
+
+	l.Info("generating ical")
 
 	var events []*event.Event
 	var err error
 	gi := &event.GetEventsInput{}
 
 	if eventType != "" {
+		l.Info(fmt.Sprintf("generating ical for type %v", eventType))
+
 		if _, ok := event.EventTypeDisplayName[eventType]; !ok {
 			validTypes := ""
 			for k, _ := range event.EventTypeDisplayName {
 				validTypes += k + ", "
 			}
 			validTypes = validTypes[:len(validTypes)-2]
+			l.Error(fmt.Sprintf("invalid event type %v", eventType))
 			http.Error(w, fmt.Sprintf("Invalid event type. Valid values are: %v", validTypes), http.StatusBadRequest)
 			return
 		}
@@ -208,15 +239,19 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 		gi.Type = &eventType
 	}
 
+	l.Info(fmt.Sprintf("getting all events %v", gi))
 	events, err = s.db.Events.GetEvents(gi)
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to get events: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to get events: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Generate iCal content
-	icalContent, err := generateICalContent(events)
+	l.Info("generating ical content")
+	icalContent, err := generateICalContent(events, l)
 	if err != nil {
+		l.Error(fmt.Sprintf("Failed to write calendar: %v", err))
 		http.Error(w, fmt.Sprintf("Failed to write calendar: %v", err), http.StatusInternalServerError)
 		return
 	}
@@ -230,8 +265,13 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(icalContent))
 }
 
-func generateICalContent(events []*event.Event) (string, error) {
+func generateICalContent(events []*event.Event, logger *slog.Logger) (string, error) {
 	var builder strings.Builder
+
+	l := logger
+	if l == nil {
+		l = slog.Default()
+	}
 
 	loc, err := time.LoadLocation("America/Chicago")
 	if err != nil {
@@ -239,6 +279,8 @@ func generateICalContent(events []*event.Event) (string, error) {
 	}
 
 	// Write iCal header
+	l.Debug("writing ical preamble")
+
 	builder.WriteString("BEGIN:VCALENDAR\r\n")
 	builder.WriteString("VERSION:2.0\r\n")
 	builder.WriteString("PRODID:-//Dallas Urbanists//Events Sync//EN\r\n")
@@ -272,8 +314,15 @@ func generateICalContent(events []*event.Event) (string, error) {
 			continue
 		}
 
+		identifier := event.UID
+		if event.RecurrenceID != nil {
+			identifier += fmt.Sprintf(" %v", event.RecurrenceID)
+		}
+		l.Debug(fmt.Sprintf("writing event %v", identifier))
+
 		builder.WriteString("BEGIN:VEVENT\r\n")
 
+		l.Debug(fmt.Sprintf("writing ID and timestamps for %v", identifier))
 		builder.WriteString(fmt.Sprintf("UID:%s\r\n", event.UID))
 		builder.WriteString(fmt.Sprintf("DTSTAMP:%s\r\n", time.Now().UTC().Format("20060102T150405Z")))
 		builder.WriteString(fmt.Sprintf("DTSTART;TZID=America/Chicago:%s\r\n", event.StartTime.In(loc).Format("20060102T150405")))
@@ -281,70 +330,85 @@ func generateICalContent(events []*event.Event) (string, error) {
 
 		// Optional fields
 		if event.Summary != "" {
+			l.Debug(fmt.Sprintf("writing summary for %v", identifier))
 			builder.WriteString(fmt.Sprintf("SUMMARY:%s\r\n", event.Summary))
 		}
 
 		if event.Description != nil && *event.Description != "" {
+			l.Debug(fmt.Sprintf("writing description for %v", identifier))
 			builder.WriteString(fmt.Sprintf("DESCRIPTION:%s\r\n", *event.Description))
 		}
 
 		if event.Location != nil && *event.Location != "" {
+			l.Debug(fmt.Sprintf("writing location for %v", identifier))
 			builder.WriteString(fmt.Sprintf("LOCATION:%s\r\n", *event.Location))
 		}
 
 		if event.Organization != "" {
+			l.Debug(fmt.Sprintf("writing organization for %v", identifier))
 			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", event.Organization))
 			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", event.Organization))
 		}
 
+		l.Debug(fmt.Sprintf("writing custom properties for %v", identifier))
 		builder.WriteString(fmt.Sprintf("X-EVENT-TYPE:%s\r\n", event.Type))
-
-		// Add rejected status as a custom property
 		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", event.Rejected))
 
 		// Add sequence if greater than 0
 		if event.Sequence > 0 {
+			l.Debug(fmt.Sprintf("writing sequence for %v", identifier))
 			builder.WriteString(fmt.Sprintf("SEQUENCE:%d\r\n", event.Sequence))
 		}
 
 		// Add recurrence fields if present
 		if event.RecurrenceID != nil && *event.RecurrenceID != "" {
+			l.Debug(fmt.Sprintf("writing recurrence ID for %v", identifier))
 			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", *event.RecurrenceID))
 		}
 
 		if event.RRule != nil && *event.RRule != "" {
+			l.Debug(fmt.Sprintf("writing rrule for %v", identifier))
 			builder.WriteString(fmt.Sprintf("RRULE:%s\r\n", *event.RRule))
 		}
 
 		if event.RDate != nil && *event.RDate != "" {
+			l.Debug(fmt.Sprintf("writing rdate for %v", identifier))
 			builder.WriteString(fmt.Sprintf("RDATE:%s\r\n", *event.RDate))
 		}
 
+		l.Debug(fmt.Sprintf("compiling exdate info for %v", identifier))
 		exdates := []string{}
 		if event.ExDate != nil && *event.ExDate != "" {
+			l.Debug(fmt.Sprintf("synced exdates found for %v", identifier))
 			exdates = append(exdates, strings.Split(*event.ExDate, ",")...)
 		}
 
 		if event.ExDateManual != nil && *event.ExDateManual != "" {
+			l.Debug(fmt.Sprintf("manual exdates found for %v", identifier))
 			exdates = append(exdates, strings.Split(*event.ExDateManual, ",")...)
 		}
 
 		if len(exdates) > 0 {
+			l.Debug(fmt.Sprintf("combining exdates for %v", identifier))
 			builder.WriteString(fmt.Sprintf("EXDATE:%s\r\n", strings.Join(exdates, ",")))
 		}
 
 		// Add created and modified times if available
 		if event.Created != nil {
+			l.Debug(fmt.Sprintf("getting created date for %v", identifier))
 			builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.Created.UTC().Format("20060102T150405Z")))
 		}
 		if event.Modified != nil {
+			l.Debug(fmt.Sprintf("getting modified date for %v", identifier))
 			builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.Modified.UTC().Format("20060102T150405Z")))
 		}
 
+		l.Debug(fmt.Sprintf("ending writing event for %v", identifier))
 		builder.WriteString("END:VEVENT\r\n")
 	}
 
 	// Write iCal footer
+	l.Debug("completing ical write")
 	builder.WriteString("END:VCALENDAR\r\n")
 
 	return builder.String(), nil
