@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"time"
@@ -40,6 +41,7 @@ type Event struct {
 	ExDate       *string    `db:"exdate"`
 	ExDateManual *string    `db:"exdate_manual"`
 	Type         string     `db:"type"`
+	Overlay      *string    `db:"overlay"`
 }
 
 func marshal(d *Event) *event.Event {
@@ -63,6 +65,14 @@ func marshal(d *Event) *event.Event {
 		ExDate:       d.ExDate,
 		ExDateManual: d.ExDateManual,
 		Type:         d.Type,
+	}
+
+	// Handle overlay JSON conversion
+	if d.Overlay != nil && *d.Overlay != "" {
+		var overlay map[string]event.EventOverlay
+		if err := json.Unmarshal([]byte(*d.Overlay), &overlay); err == nil {
+			e.Overlay = overlay
+		}
 	}
 
 	return &e
@@ -96,6 +106,15 @@ func unmarshal(e *event.Event) *Event {
 		d.RecurrenceID = &empty
 	}
 
+	// Handle overlay JSON conversion
+	if len(e.Overlay) > 0 {
+		overlayJSON, err := json.Marshal(e.Overlay)
+		if err == nil {
+			overlayStr := string(overlayJSON)
+			d.Overlay = &overlayStr
+		}
+	}
+
 	return &d
 }
 
@@ -107,7 +126,7 @@ const insertEventQuery = `
     created_time, modified_time,
     status, transparency, sequence,
     recurrence_id, rrule, rdate, exdate, exdate_manual,
-    rejected, type
+    rejected, type, overlay
   ) VALUES (
     :uid, :organization,
     :summary, :description,
@@ -115,7 +134,7 @@ const insertEventQuery = `
     :created_time, :modified_time,
     :status, :transparency, :sequence,
     :recurrence_id, :rrule, :rdate, :exdate, :exdate_manual,
-    :rejected, :type
+    :rejected, :type, :overlay
   )
 `
 
@@ -243,6 +262,15 @@ func (db *EventRepository) PatchEvent(gi *event.GetEventInput, pi *event.PatchEv
 	if pi.ExDateManual != nil {
 		args = append(args, *pi.ExDateManual)
 		updateQuery += fmt.Sprintf("exdate_manual = $%d ", len(args))
+	}
+
+	if pi.Overlay != nil {
+		overlayJSON, err := json.Marshal(pi.Overlay)
+		if err != nil {
+			return fmt.Errorf("failed to marshal overlay: %v", err)
+		}
+		args = append(args, string(overlayJSON))
+		updateQuery += fmt.Sprintf("overlay = $%d ", len(args))
 	}
 
 	args = append(args, gi.UID)

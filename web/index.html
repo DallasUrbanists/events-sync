@@ -209,9 +209,56 @@
                                                 </div>
                                             </p>
                                             <p><strong>Time:</strong> <span x-text="formatTime(event.start_time)"></span> - <span x-text="formatTime(event.end_time)"></span></p>
-                                            <template x-if="event.location">
-                                                <p><strong>Location:</strong> <span x-text="event.location"></span></p>
-                                            </template>
+                                            <p>
+                                                <strong>Location:</strong>
+                                                    <div class="inline-flex items-center gap-2">
+                                                        <!-- Read-only state with pencil icon -->
+                                                        <div x-show="!event.editingLocation" class="flex items-center gap-2">
+                                                            <span x-text="event.overlay?.location?.value || event.location || 'No location'"
+                                                                  :class="{ 'text-blue-600 font-medium': event.overlay?.location }"
+                                                                  class="text-sm"></span>
+                                                            <button @click="event.editingLocation = true; event.originalLocation = event.overlay?.location?.value || event.location || ''; event.editingLocationValue = event.overlay?.location?.value || event.location || ''"
+                                                                    class="text-gray-400 hover:text-blue-600 transition-colors">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                                </svg>
+                                                            </button>
+                                                            <template x-if="event.overlay?.location">
+                                                                <button @click="removeLocationOverlay(event.uid, event.recurrence_id || '')"
+                                                                        class="text-red-400 hover:text-red-600 transition-colors"
+                                                                        title="Remove location overlay">
+                                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </template>
+                                                        </div>
+
+                                                        <!-- Editable state with check/cancel buttons -->
+                                                        <div x-show="event.editingLocation" class="flex items-center gap-2">
+                                                            <input type="text"
+                                                                   x-model="event.editingLocationValue"
+                                                                   @keyup.enter="saveLocationChange(event)"
+                                                                   @keyup.escape="cancelLocationChange(event)"
+                                                                   class="px-2 py-1 text-sm border border-blue-300 bg-white rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                                   style="min-width: 200px; max-width: 400px;"
+                                                                   x-ref="locationInput"
+                                                                   autofocus>
+                                                            <button @click="saveLocationChange(event)"
+                                                                    class="text-green-600 hover:text-green-800 transition-colors">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                            </button>
+                                                            <button @click="cancelLocationChange(event)"
+                                                                    class="text-red-600 hover:text-red-800 transition-colors">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </p>
                                             <template x-if="event.description">
                                                 <p><strong>Description:</strong> <span x-text="event.description"></span></p>
                                             </template>
