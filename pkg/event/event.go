@@ -40,6 +40,15 @@ type Event struct {
 	ExDate       *string    `json:"exdate"`
 	ExDateManual *string    `json:"exdate_manual"`
 	Type         string     `json:"type"`
+	Overlay      map[string]EventOverlay `json:"overlay,omitempty"`
+}
+
+type EventOverlay struct {
+	Value      interface{} `json:"value"`
+	MergeLogic string      `json:"mergeLogic"`
+	Source     string      `json:"source"`
+	Timestamp  string      `json:"timestamp"`
+	Reason     string      `json:"reason,omitempty"`
 }
 
 type GetEventInput struct {
@@ -70,6 +79,7 @@ type PatchEventInput struct {
 	Rejected     *bool
 	Type         *string
 	ExDateManual *string
+	Overlay      map[string]EventOverlay
 }
 
 type SyncEventInput struct {

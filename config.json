@@ -8,6 +8,10 @@
       "url": "https://calendar.google.com/calendar/ical/c_b84185fb0c5798bfc8d926ac5013d4ed1fdbd0c3fb79a960686fbb9250037595%40group.calendar.google.com/public/basic.ics",
       "importer": "ical"
     },
+    "Dallas Housing Coalition": {
+      "url": "https://www.meetup.com/dallas-affordable-housing-meetup-group/events/ical/",
+      "importer": "ical"
+    },
     "Dallas Neighbors For Housing": {
       "importer": "action_network_api"
     },

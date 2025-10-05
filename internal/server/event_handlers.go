@@ -28,6 +28,7 @@ type EventResponse struct {
 	Created      *time.Time `json:"created"`
 	Modified     *time.Time `json:"modified"`
 	Type         string     `json:"type"`
+	Overlay      map[string]event.EventOverlay `json:"overlay,omitempty"`
 }
 
 type UpdateEventRequest struct {
@@ -68,6 +69,7 @@ func (s *Server) getUpcomingEvents(w http.ResponseWriter, r *http.Request) {
 			Created:      event.Created,
 			Modified:     event.Modified,
 			Type:         event.Type,
+			Overlay:      event.Overlay,
 		}
 		result = append(result, eventResp)
 	}
@@ -227,7 +229,7 @@ func (s *Server) generateICal(w http.ResponseWriter, r *http.Request) {
 
 		if _, ok := event.EventTypeDisplayName[eventType]; !ok {
 			validTypes := ""
-			for k, _ := range event.EventTypeDisplayName {
+			for k := range event.EventTypeDisplayName {
 				validTypes += k + ", "
 			}
 			validTypes = validTypes[:len(validTypes)-2]
@@ -314,78 +316,81 @@ func generateICalContent(events []*event.Event, logger *slog.Logger) (string, er
 			continue
 		}
 
-		identifier := event.UID
-		if event.RecurrenceID != nil {
-			identifier += fmt.Sprintf(" %v", *event.RecurrenceID)
+		// Apply overlays before generating ICAL
+		eventWithOverlay := applyOverlays(event)
+
+		identifier := eventWithOverlay.UID
+		if eventWithOverlay.RecurrenceID != nil {
+			identifier += fmt.Sprintf(" %v", *eventWithOverlay.RecurrenceID)
 		}
 		l.Debug(fmt.Sprintf("writing event %v", identifier))
 
 		builder.WriteString("BEGIN:VEVENT\r\n")
 
 		l.Debug(fmt.Sprintf("writing ID and timestamps for %v", identifier))
-		builder.WriteString(fmt.Sprintf("UID:%s\r\n", event.UID))
+		builder.WriteString(fmt.Sprintf("UID:%s\r\n", eventWithOverlay.UID))
 		builder.WriteString(fmt.Sprintf("DTSTAMP:%s\r\n", time.Now().UTC().Format("20060102T150405Z")))
-		builder.WriteString(fmt.Sprintf("DTSTART;TZID=America/Chicago:%s\r\n", event.StartTime.In(loc).Format("20060102T150405")))
-		builder.WriteString(fmt.Sprintf("DTEND;TZID=America/Chicago:%s\r\n", event.EndTime.In(loc).Format("20060102T150405")))
+		builder.WriteString(fmt.Sprintf("DTSTART;TZID=America/Chicago:%s\r\n", eventWithOverlay.StartTime.In(loc).Format("20060102T150405")))
+		builder.WriteString(fmt.Sprintf("DTEND;TZID=America/Chicago:%s\r\n", eventWithOverlay.EndTime.In(loc).Format("20060102T150405")))
 
 		// Optional fields
-		if event.Summary != "" {
+		if eventWithOverlay.Summary != "" {
 			l.Debug(fmt.Sprintf("writing summary for %v", identifier))
-			builder.WriteString(fmt.Sprintf("SUMMARY:%s\r\n", event.Summary))
+			builder.WriteString(fmt.Sprintf("SUMMARY:%s\r\n", eventWithOverlay.Summary))
 		}
 
-		if event.Description != nil && *event.Description != "" {
+		if eventWithOverlay.Description != nil && *eventWithOverlay.Description != "" {
 			l.Debug(fmt.Sprintf("writing description for %v", identifier))
-			builder.WriteString(fmt.Sprintf("DESCRIPTION:%s\r\n", *event.Description))
+			builder.WriteString(fmt.Sprintf("DESCRIPTION:%s\r\n", *eventWithOverlay.Description))
 		}
 
-		if event.Location != nil && *event.Location != "" {
+		if eventWithOverlay.Location != nil && *eventWithOverlay.Location != "" {
 			l.Debug(fmt.Sprintf("writing location for %v", identifier))
-			builder.WriteString(fmt.Sprintf("LOCATION:%s\r\n", *event.Location))
+			builder.WriteString(fmt.Sprintf("LOCATION:%s\r\n", *eventWithOverlay.Location))
 		}
 
-		if event.Organization != "" {
+		if eventWithOverlay.Organization != "" {
 			l.Debug(fmt.Sprintf("writing organization for %v", identifier))
-			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", event.Organization))
-			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", event.Organization))
+			builder.WriteString(fmt.Sprintf("X-ORGANIZING-GROUP:%s\r\n", eventWithOverlay.Organization))
+			builder.WriteString(fmt.Sprintf("X-TEAMUP-WHO:%s\r\n", eventWithOverlay.Organization))
 		}
 
 		l.Debug(fmt.Sprintf("writing custom properties for %v", identifier))
-		builder.WriteString(fmt.Sprintf("X-EVENT-TYPE:%s\r\n", event.Type))
-		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", event.Rejected))
+		builder.WriteString(fmt.Sprintf("X-EVENT-TYPE:%s\r\n", eventWithOverlay.Type))
+		builder.WriteString(fmt.Sprintf("X-REJECTED:%t\r\n", eventWithOverlay.Rejected))
 
 		// Add sequence if greater than 0
-		if event.Sequence > 0 {
+		if eventWithOverlay.Sequence > 0 {
 			l.Debug(fmt.Sprintf("writing sequence for %v", identifier))
-			builder.WriteString(fmt.Sprintf("SEQUENCE:%d\r\n", event.Sequence))
+			builder.WriteString(fmt.Sprintf("SEQUENCE:%d\r\n", eventWithOverlay.Sequence))
 		}
 
 		// Add recurrence fields if present
-		if event.RecurrenceID != nil && *event.RecurrenceID != "" {
+		if eventWithOverlay.RecurrenceID != nil && *eventWithOverlay.RecurrenceID != "" {
 			l.Debug(fmt.Sprintf("writing recurrence ID for %v", identifier))
-			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", *event.RecurrenceID))
+			builder.WriteString(fmt.Sprintf("RECURRENCE-ID:%s\r\n", *eventWithOverlay.RecurrenceID))
 		}
 
-		if event.RRule != nil && *event.RRule != "" {
+		if eventWithOverlay.RRule != nil && *eventWithOverlay.RRule != "" {
 			l.Debug(fmt.Sprintf("writing rrule for %v", identifier))
-			builder.WriteString(fmt.Sprintf("RRULE:%s\r\n", *event.RRule))
+			builder.WriteString(fmt.Sprintf("RRULE:%s\r\n", *eventWithOverlay.RRule))
 		}
 
-		if event.RDate != nil && *event.RDate != "" {
+		if eventWithOverlay.RDate != nil && *eventWithOverlay.RDate != "" {
 			l.Debug(fmt.Sprintf("writing rdate for %v", identifier))
-			builder.WriteString(fmt.Sprintf("RDATE:%s\r\n", *event.RDate))
+			builder.WriteString(fmt.Sprintf("RDATE:%s\r\n", *eventWithOverlay.RDate))
 		}
 
 		l.Debug(fmt.Sprintf("compiling exdate info for %v", identifier))
 		exdates := []string{}
-		if event.ExDate != nil && *event.ExDate != "" {
+		if eventWithOverlay.ExDate != nil && *eventWithOverlay.ExDate != "" {
 			l.Debug(fmt.Sprintf("synced exdates found for %v", identifier))
-			exdates = append(exdates, strings.Split(*event.ExDate, ",")...)
+			exdates = append(exdates, strings.Split(*eventWithOverlay.ExDate, ",")...)
 		}
 
-		if event.ExDateManual != nil && *event.ExDateManual != "" {
+		if eventWithOverlay.ExDateManual != nil && *eventWithOverlay.ExDateManual != "" {
 			l.Debug(fmt.Sprintf("manual exdates found for %v", identifier))
-			exdates = append(exdates, strings.Split(*event.ExDateManual, ",")...)
+			exdates = append(exdates, strings.Split(*eventWithOverlay.ExDateManual, ",")...)
 		}
 
 		if len(exdates) > 0 {
@@ -394,13 +399,13 @@ func generateICalContent(events []*event.Event, logger *slog.Logger) (string, er
 		}
 
 		// Add created and modified times if available
-		if event.Created != nil {
+		if eventWithOverlay.Created != nil {
 			l.Debug(fmt.Sprintf("getting created date for %v", identifier))
-			builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", event.Created.UTC().Format("20060102T150405Z")))
+			builder.WriteString(fmt.Sprintf("CREATED:%s\r\n", eventWithOverlay.Created.UTC().Format("20060102T150405Z")))
 		}
-		if event.Modified != nil {
+		if eventWithOverlay.Modified != nil {
 			l.Debug(fmt.Sprintf("getting modified date for %v", identifier))
-			builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", event.Modified.UTC().Format("20060102T150405Z")))
+			builder.WriteString(fmt.Sprintf("LAST-MODIFIED:%s\r\n", eventWithOverlay.Modified.UTC().Format("20060102T150405Z")))
 		}
 
 		l.Debug(fmt.Sprintf("ending writing event for %v", identifier))
@@ -477,4 +482,188 @@ func (s *Server) updateEventType(gi *event.GetEventInput, eventType string) erro
 	}
 
 	return nil
+}
+
+// applyOverlays applies overlay values to event fields based on merge logic
+func applyOverlays(e *event.Event) *event.Event {
+	// Create a copy to avoid modifying the original
+	eventCopy := *e
+
+	// Initialize overlay map if nil
+	if eventCopy.Overlay == nil {
+		eventCopy.Overlay = make(map[string]event.EventOverlay)
+	}
+
+	// Apply overlays for each field
+	for field, overlay := range e.Overlay {
+		switch field {
+		case "location":
+			if shouldApplyOverlay(eventCopy.Location, overlay) {
+				if locationStr, ok := overlay.Value.(string); ok {
+					eventCopy.Location = &locationStr
+				}
+			}
+		case "description":
+			if shouldApplyOverlay(eventCopy.Description, overlay) {
+				if descStr, ok := overlay.Value.(string); ok {
+					eventCopy.Description = &descStr
+				}
+			}
+		case "summary":
+			if overlay.MergeLogic == "overwrite_all" ||
+			   (overlay.MergeLogic == "overwrite_empty" && eventCopy.Summary == "") {
+				if summaryStr, ok := overlay.Value.(string); ok {
+					eventCopy.Summary = summaryStr
+				}
+			}
+		// Add more fields as needed
+		}
+	}
+
+	return &eventCopy
+}
+
+// shouldApplyOverlay determines if an overlay should be applied based on merge logic
+func shouldApplyOverlay(currentValue *string, overlay event.EventOverlay) bool {
+	switch overlay.MergeLogic {
+	case "overwrite_empty":
+		return currentValue == nil || *currentValue == ""
+	case "overwrite_all":
+		return true
+	default:
+		return false
+	}
+}
+
+// setEventOverlay handles setting an overlay for a specific event field
+func (s *Server) setEventOverlay(w http.ResponseWriter, r *http.Request) {
+	uid := r.PathValue("uid")
+	l := s.getLogger(r)
+
+	l.Debug(fmt.Sprintf("setting overlay for event %v", uid))
+
+	var req struct {
+		Field      string      `json:"field"`
+		Value      interface{} `json:"value"`
+		MergeLogic string      `json:"mergeLogic"`
+		Reason     string      `json:"reason,omitempty"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		l.Error(fmt.Sprintf("couldn't decode request body for overlay %v: %v", uid, err))
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	// Validate field name
+	allowedFields := map[string]bool{"location": true, "description": true, "summary": true}
+	if !allowedFields[req.Field] {
+		l.Error(fmt.Sprintf("invalid field '%s' for overlay on event %v", req.Field, uid))
+		http.Error(w, fmt.Sprintf("Field '%s' is not allowed to be overridden", req.Field), http.StatusBadRequest)
+		return
+	}
+
+	// Validate merge logic
+	allowedMergeLogic := map[string]bool{"overwrite_empty": true, "overwrite_all": true}
+	if !allowedMergeLogic[req.MergeLogic] {
+		l.Error(fmt.Sprintf("invalid merge logic '%s' for overlay on event %v", req.MergeLogic, uid))
+		http.Error(w, fmt.Sprintf("Merge logic '%s' is not supported", req.MergeLogic), http.StatusBadRequest)
+		return
+	}
+
+	// Get the event
+	gi := &event.GetEventInput{UID: uid}
+	existingEvent, err := s.db.Events.GetEvent(gi)
+	if err != nil {
+		l.Error(fmt.Sprintf("failed to get event %v: %v", uid, err))
+		http.Error(w, "Event not found", http.StatusNotFound)
+		return
+	}
+
+	// Initialize overlay if nil
+	if existingEvent.Overlay == nil {
+		existingEvent.Overlay = make(map[string]event.EventOverlay)
+	}
+
+	// Create overlay entry
+	overlay := event.EventOverlay{
+		Value:      req.Value,
+		MergeLogic: req.MergeLogic,
+		Source:     "manual",
+		Timestamp:  time.Now().Format(time.RFC3339),
+		Reason:     req.Reason,
+	}
+
+	// Set the overlay
+	existingEvent.Overlay[req.Field] = overlay
+
+	// Update the event in database using PatchEvent
+	pi := &event.PatchEventInput{
+		Overlay: existingEvent.Overlay,
+	}
+
+	err = s.db.Events.PatchEvent(gi, pi)
+	if err != nil {
+		l.Error(fmt.Sprintf("failed to update overlay for event %v: %v", uid, err))
+		http.Error(w, "Failed to update overlay", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"success": true,
+		"message": fmt.Sprintf("Overlay set for field '%s'", req.Field),
+	})
+}
+
+// removeEventOverlay handles removing an overlay for a specific event field
+func (s *Server) removeEventOverlay(w http.ResponseWriter, r *http.Request) {
+	uid := r.PathValue("uid")
+	field := r.PathValue("field")
+	l := s.getLogger(r)
+
+	l.Debug(fmt.Sprintf("removing overlay for event %v field %v", uid, field))
+
+	// Get the event
+	gi := &event.GetEventInput{UID: uid}
+	existingEvent, err := s.db.Events.GetEvent(gi)
+	if err != nil {
+		l.Error(fmt.Sprintf("failed to get event %v: %v", uid, err))
+		http.Error(w, "Event not found", http.StatusNotFound)
+		return
+	}
+
+	// Check if overlay exists
+	if existingEvent.Overlay == nil {
+		l.Error(fmt.Sprintf("no overlay found for event %v when trying to remove field %v", uid, field))
+		http.Error(w, "No overlay found for this event", http.StatusNotFound)
+		return
+	}
+
+	if _, exists := existingEvent.Overlay[field]; !exists {
+		l.Error(fmt.Sprintf("no overlay found for field '%s' on event %v", field, uid))
+		http.Error(w, fmt.Sprintf("No overlay found for field '%s'", field), http.StatusNotFound)
+		return
+	}
+
+	// Remove the overlay
+	delete(existingEvent.Overlay, field)
+
+	// Update the event in database using PatchEvent
+	pi := &event.PatchEventInput{
+		Overlay: existingEvent.Overlay,
+	}
+
+	err = s.db.Events.PatchEvent(gi, pi)
+	if err != nil {
+		l.Error(fmt.Sprintf("failed to remove overlay for event %v: %v", uid, err))
+		http.Error(w, "Failed to remove overlay", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"success": true,
+		"message": fmt.Sprintf("Overlay removed for field '%s'", field),
+	})
 }
