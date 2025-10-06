@@ -20,19 +20,19 @@ services:
     sync: false
   region: ohio
   dockerCommand: /root/bin/web 2>&1
-  dockerContext: .
-  dockerfilePath: ./Dockerfile
-  registryCredential:
-    fromRegistryCreds:
-      name: dockerhub domjdfw
   autoDeployTrigger: commit
   buildFilter:
     ignoredPaths:
     - static/*
-  # NEW RUNTIME
+  # # NEW RUNTIME
   runtime: image
   image:
     url: docker.io/domjdfw/events-sync:latest
-  # OLD RUNTIME
+  # # OLD RUNTIME
   # runtime: docker
   # repo: https://github.com/DallasUrbanists/events-sync
+  # dockerContext: .
+  # dockerfilePath: ./Dockerfile
+  # registryCredential:
+  #   fromRegistryCreds:
+  #     name: dockerhub domjdfw
