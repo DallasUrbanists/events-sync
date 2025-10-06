@@ -28,6 +28,9 @@ services:
   runtime: image
   image:
     url: docker.io/domjdfw/events-sync:latest
+    creds:
+      fromRegistryCreds:
+        name: dockerhub domjdfw
   # # OLD RUNTIME
   # runtime: docker
   # repo: https://github.com/DallasUrbanists/events-sync
