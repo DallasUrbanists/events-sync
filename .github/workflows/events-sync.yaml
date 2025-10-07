@@ -3,15 +3,13 @@ name: Scheduled Events Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 */2 * * *'  # 6 AM and 6 PM UTC
 
 jobs:
   sync-events:
     runs-on: ubuntu-latest
 
     steps:
-      - name: break lol
-        run: exit 1
       - name: Checkout code
         uses: actions/checkout@v4
 
