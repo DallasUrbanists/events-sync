@@ -13,11 +13,12 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <div x-data="eventManager()" x-init="loadEvents(); loadStats()" class="container mx-auto px-4 py-8">
+    <div x-data="eventManager()" x-init="loadEvents(); loadStats(); loadVersion()" class="container mx-auto px-4 py-8">
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Events Sync Manager</h1>
             <p class="text-gray-600">Manage and review future events from multiple organizations</p>
+            <p class="text-sm text-gray-500 mt-1">Version: <span x-text="version || 'Loading...'"></span></p>
         </div>
 
         <!-- Stats Cards -->

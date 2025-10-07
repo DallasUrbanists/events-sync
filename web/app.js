@@ -7,6 +7,7 @@ function eventManager() {
         loading: false,
         statusFilter: '',
         hideSingleEvents: false,
+        version: '',
 
         async loadEvents() {
             this.loading = true;
@@ -42,6 +43,20 @@ function eventManager() {
                 this.stats = await response.json();
             } catch (error) {
                 console.error('Error loading stats:', error);
+            }
+        },
+
+        async loadVersion() {
+            try {
+                const response = await fetch('/api/version');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                this.version = data.version;
+            } catch (error) {
+                console.error('Error loading version:', error);
+                this.version = 'Unknown';
             }
         },
 

@@ -17,15 +17,17 @@ type Server struct {
 	jwtConfig     *config.JWTConfig
 	host          string
 	port          string
+	gitCommit     string
 
 	Logger        *slog.Logger
 	Server        http.Server
 }
 
 type NewAppOpts struct {
-	Host   string
-	Port   string
-	Config *config.Config
+	Host       string
+	Port       string
+	Config     *config.Config
+	GitCommit  string
 }
 
 func NewServer(db *database.Store, o NewAppOpts) (*Server, error) {
@@ -48,6 +50,7 @@ func NewServer(db *database.Store, o NewAppOpts) (*Server, error) {
 		config:        o.Config,
 		discordConfig: discordConfig,
 		jwtConfig:     jwtConfig,
+		gitCommit:     o.GitCommit,
 		Logger:        l,
 	}
 

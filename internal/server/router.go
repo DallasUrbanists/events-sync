@@ -35,6 +35,7 @@ func (s *Server) newConfiguredRouter() *http.ServeMux {
 	router.Handle("GET /api/events/stats", authed_ms(http.HandlerFunc(s.getEventStats)))
 	router.Handle("POST /api/events/{uid}/overlay", authed_ms(http.HandlerFunc(s.setEventOverlay)))
 	router.Handle("DELETE /api/events/{uid}/overlay/{field}", authed_ms(http.HandlerFunc(s.removeEventOverlay)))
+	router.Handle("GET /api/version", open_ms(http.HandlerFunc(s.getVersion)))
 
 	// Wrap the entire router with panic recovery for public routes too
 	wrappedRouter := http.NewServeMux()

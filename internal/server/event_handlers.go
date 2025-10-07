@@ -667,3 +667,10 @@ func (s *Server) removeEventOverlay(w http.ResponseWriter, r *http.Request) {
 		"message": fmt.Sprintf("Overlay removed for field '%s'", field),
 	})
 }
+
+func (s *Server) getVersion(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"version": s.gitCommit,
+	})
+}

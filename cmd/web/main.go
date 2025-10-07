@@ -10,6 +10,8 @@ import (
 	"github.com/dallasurbanists/events-sync/internal/server"
 )
 
+var GitCommit string
+
 func main() {
 	var (
 		port  = flag.String("port", "8080", "Port to run the server on")
@@ -37,8 +39,9 @@ func main() {
 	}
 
 	srv, err := server.NewServer(db, server.NewAppOpts{
-		Port:   *port,
-		Config: cfg,
+		Port:      *port,
+		Config:    cfg,
+		GitCommit: GitCommit,
 	})
 	if err != nil {
 		log.Fatalf("Error creating server: %v", err)

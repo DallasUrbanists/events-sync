@@ -14,7 +14,8 @@ FROM builder AS migrate-build
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./bin/migrate ./cmd/migrate
 
 FROM builder AS web-build
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./bin/web ./cmd/web
+ARG GIT_COMMIT
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.GitCommit=${GIT_COMMIT}" -o ./bin/web ./cmd/web
 
 FROM alpine:latest AS runner
 RUN apk --no-cache add ca-certificates
