@@ -18,6 +18,10 @@
     "Dallas Urbanists STLC": {
       "url": "https://www.meetup.com/dallasurbanists/events/ical/",
       "importer": "ical"
+    },
+    "Keep DART in Plano": {
+      "url": "https://calendar.google.com/calendar/ical/c_06a06d3a09a81529047f7c464da4888632f75b8bfb4c24f19461f7630dcaa402@group.calendar.google.com/public/basic.ics",
+      "importer": "ical"
     }
   }
 }
